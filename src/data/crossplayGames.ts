@@ -26,6 +26,13 @@ const PLATFORMS_TO_KEEP = [
   "Switch",
 ];
 
+const PlATFORM_DEFAULTS = {
+  ...PLATFORMS_TO_KEEP.reduce((acc, platform) => {
+    acc[platform] = false;
+    return acc;
+  }, {}),
+};
+
 // Get all the plaforms as a boolean map
 const getPlatformsFromRow = (row: HTMLTableRowElement) =>
   Array.from(row.querySelectorAll("td.table-yes"))
@@ -51,7 +58,10 @@ export const getCrossplayGames = async () => {
 
   const games = gameRows.map((row) => ({
     title: getTitleFromRow(row),
-    platforms: getPlatformsFromRow(row),
+    platforms: {
+      ...PlATFORM_DEFAULTS,
+      ...getPlatformsFromRow(row),
+    },
   }));
 
   return games;
