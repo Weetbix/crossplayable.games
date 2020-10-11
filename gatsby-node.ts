@@ -1,21 +1,44 @@
 import { GatsbyNode } from "gatsby";
-import { getGames } from "./src/data/crossplaySupport";
+import { getCrossplayGames } from "./src/data/crossplayGames";
+import { getGamePassGames } from "./src/data/gamepassGames";
 
-export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
+const sourceCrossplayGameNodes: GatsbyNode["sourceNodes"] = async ({
   actions: { createNode },
   createNodeId,
   createContentDigest,
 }) => {
-  const games = await getGames();
-
-  return games.map((game) =>
+  const games = await getCrossplayGames();
+  games.map((game) =>
     createNode({
       ...game,
       id: createNodeId(game.name),
       internal: {
-        type: `Game`,
+        type: `CrossplayGame`,
         contentDigest: createContentDigest(game),
       },
     })
   );
+};
+
+const sourceGamePassGameNodes: GatsbyNode["sourceNodes"] = async ({
+  actions: { createNode },
+  createNodeId,
+  createContentDigest,
+}) => {
+  const games = await getGamePassGames();
+  games.map((game) =>
+    createNode({
+      ...game,
+      id: createNodeId(game.ProductId),
+      internal: {
+        type: `GamePassGame`,
+        contentDigest: createContentDigest(game),
+      },
+    })
+  );
+};
+
+export const sourceNodes: GatsbyNode["sourceNodes"] = async (args, options) => {
+  await sourceCrossplayGameNodes(args, options);
+  await sourceGamePassGameNodes(args, options);
 };

@@ -41,7 +41,7 @@ const getPlatformsFromRow = (row: HTMLTableRowElement) =>
       {}
     );
 
-export const getGames = async () => {
+export const getCrossplayGames = async () => {
   const result = await fetch(CROSSPLAY_ARTICLE_URL);
   const document = new JSDOM(await result.text()).window.document;
 
