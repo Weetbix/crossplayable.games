@@ -3,83 +3,34 @@ import { getCrossplayGames } from "./src/data/crossplayGames";
 import { getGamePassGames } from "./src/data/gamepassGames";
 import { getPlaystationNowGames } from "./src/data/playstationNowGames";
 
-const sourceCrossplayGameNodes: GatsbyNode["sourceNodes"] = async ({
+const sourceGameNodes: GatsbyNode["sourceNodes"] = async ({
   actions: { createNode },
   createNodeId,
   createContentDigest,
+  cache,
 }) => {
-  const games = await getCrossplayGames();
-  games.map((game) =>
-    createNode({
-      ...game,
-      id: createNodeId(game.name),
-      internal: {
-        type: `CrossplayGame`,
-        contentDigest: createContentDigest(game),
-      },
-    })
-  );
-};
+  const crossplayGames = await getCrossplayGames();
+  const gamePassGames = await getGamePassGames();
+  const PSNowGames = await getPlaystationNowGames();
+  console.log(gamePassGames);
 
-const sourceGamePassGameNodes: GatsbyNode["sourceNodes"] = async ({
-  actions: { createNode },
-  createNodeId,
-  createContentDigest,
-}) => {
-  const games = await getGamePassGames();
-  games.map((game) =>
+  crossplayGames.map((game) =>
     createNode({
-      ...game,
-      id: createNodeId(game.ProductId),
-      internal: {
-        type: `GamePassGame`,
-        contentDigest: createContentDigest(game),
+      title: game.title,
+      platforms: {
+        ...game.platforms,
+        PSNow: PSNowGames.some((PSNowGame) => PSNowGame.name === game.title),
+        GamePass: gamePassGames.some((GPGame) => GPGame.title === game.title),
       },
-    })
-  );
-};
-
-const sourcePlaystationNowGameNodes: GatsbyNode["sourceNodes"] = async ({
-  actions: { createNode },
-  createNodeId,
-  createContentDigest,
-}) => {
-  const games = await getPlaystationNowGames();
-  games.map((game) =>
-    createNode({
-      ...game,
-      id: createNodeId(game.name),
+      id: createNodeId(game.title),
       internal: {
-        type: `PlaystationNowGame`,
-        contentDigest: createContentDigest(game),
+        type: `Game`,
+        contentDigest: createContentDigest(crossplayGames),
       },
     })
   );
 };
 
 export const sourceNodes: GatsbyNode["sourceNodes"] = async (args, options) => {
-  await sourceCrossplayGameNodes(args, options);
-  await sourceGamePassGameNodes(args, options);
-  await sourcePlaystationNowGameNodes(args, options);
-};
-
-const onCreateCrossplayGameNode: GatsbyNode["onCreateNode"] = ({
-  node,
-  getNodesByType,
-  actions: { createNodeField },
-}) => {
-  const { name } = node;
-  const onPlaystationNow = getNodesByType("PlaystationNowGame").some(
-    (node) => node.name === name
-  );
-  createNodeField({
-    node,
-    name: "PSNow",
-    value: onPlaystationNow,
-  });
-};
-
-export const onCreateNode: GatsbyNode["onCreateNode"] = (args) => {
-  const { node } = args;
-  if (node.internal.type === "CrossplayGame") onCreateCrossplayGameNode(args);
+  await sourceGameNodes(args, options);
 };

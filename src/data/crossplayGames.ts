@@ -6,9 +6,9 @@ const CROSSPLAY_ARTICLE_URL =
 
 // Some rows dont have names due to rowspan. Search up
 // util we find the next parent with a name
-const getNameFromRow = (row: HTMLTableRowElement) =>
+const getTitleFromRow = (row: HTMLTableRowElement) =>
   row.querySelector("td i")?.textContent.trim() ??
-  getNameFromRow(row.previousElementSibling as HTMLTableRowElement);
+  getTitleFromRow(row.previousElementSibling as HTMLTableRowElement);
 
 const PLATFORM_MAP = {
   GOG: "Windows",
@@ -50,7 +50,7 @@ export const getCrossplayGames = async () => {
   );
 
   const games = gameRows.map((row) => ({
-    name: getNameFromRow(row),
+    title: getTitleFromRow(row),
     platforms: getPlatformsFromRow(row),
   }));
 

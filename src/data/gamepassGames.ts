@@ -42,5 +42,7 @@ export const getGamePassGames = async () => {
   for (let i = 0; i < IdChunks.length; i++) {
     games = [...games, ...(await getGameDetails(IdChunks[i]))];
   }
-  return games;
+  return games.map((game) => ({
+    title: game.LocalizedProperties[0].ProductTitle,
+  }));
 };
