@@ -1,51 +1,21 @@
-import { GatsbyNode } from "gatsby"
+import { GatsbyNode } from "gatsby";
+import { getGames } from "./src/data/crossplaySupport";
 
 export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
   actions: { createNode },
   createNodeId,
   createContentDigest,
 }) => {
-  const avengers = [
-    {
-      firstName: "Tony",
-      lastName: "Stark",
-      name: "Iron Man",
-    },
-    {
-      firstName: "Bruce",
-      lastName: "Banner",
-      name: "Hulk",
-    },
-    {
-      firstName: "Thor",
-      lastName: "Odinson",
-      name: "Thor",
-    },
-    {
-      firstName: "Steve",
-      lastName: "Rogers",
-      name: "Captain America",
-    },
-    {
-      firstName: "Natasha",
-      lastName: "Romanoff",
-      name: "Black Widow",
-    },
-    {
-      firstName: "Clint",
-      lastName: "Barton",
-      name: "Hawkeye",
-    },
-  ]
+  const games = await getGames();
 
-  return avengers.map(avenger =>
+  return games.map((game) =>
     createNode({
-      ...avenger,
-      id: createNodeId(avenger.name),
+      ...game,
+      id: createNodeId(game.name),
       internal: {
-        type: `Avenger`,
-        contentDigest: createContentDigest(avenger),
+        type: `Game`,
+        contentDigest: createContentDigest(game),
       },
     })
-  )
-}
+  );
+};
