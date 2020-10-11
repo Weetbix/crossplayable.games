@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
+import { useLocation } from "@reach/router";
 
 import { FilterPageQuery } from "../../graphql-types";
 
@@ -7,7 +8,15 @@ type FilterPageProps = {
   data: FilterPageQuery;
 };
 const FilterPage = (props: FilterPageProps) => {
-  return [props.data.allGame.nodes.map((node) => <p>{node.title}</p>)];
+  const { pathname } = useLocation();
+  return (
+    <>
+      <h1>{pathname}</h1>
+      {props.data.allGame.nodes.map((node) => (
+        <p>{node.title}</p>
+      ))}
+    </>
+  );
 };
 export default FilterPage;
 
