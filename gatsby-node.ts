@@ -38,18 +38,20 @@ const sourceGameNodes: GatsbyNode["sourceNodes"] = async ({
 };
 
 const createFilterPages: GatsbyNode["createPages"] = async ({ actions }) => {
-  allFilters.forEach((filter) => {
-    actions.createPage({
-      path: urlFromFilter(filter),
-      component: path.resolve(`./src/templates/FilterPage.tsx`),
-      context: {
-        // Data passed to context is available
-        // in page queries as GraphQL variables.
-        filter,
-        ...inVariablesFromFilter(filter),
-      },
+  allFilters
+    .filter((filter) => filter.length)
+    .forEach((filter) => {
+      actions.createPage({
+        path: urlFromFilter(filter),
+        component: path.resolve(`./src/templates/FilterPage.tsx`),
+        context: {
+          // Data passed to context is available
+          // in page queries as GraphQL variables.
+          filter,
+          ...inVariablesFromFilter(filter),
+        },
+      });
     });
-  });
 };
 
 export const sourceNodes: GatsbyNode["sourceNodes"] = async (args, options) => {

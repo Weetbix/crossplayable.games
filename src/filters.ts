@@ -60,5 +60,5 @@ export const togglePlatform = (filter: Filter, platform: string): Filter => {
     ? filter.filter((f) => f !== platform)
     : [...filter, platform];
 
-  return target.length ? findFilter(target) : filter;
+  return findFilter(target);
 };

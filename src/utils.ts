@@ -13,9 +13,7 @@ export function chunk<T>(
 // Returns all unique combinations of an array
 // Modified from https://stackoverflow.com/a/47147597
 export const combinations = <T>(array: T[]): T[][] =>
-  array
-    .reduce(
-      (subsets, value) => subsets.concat(subsets.map((set) => [value, ...set])),
-      [[]]
-    )
-    .filter((set) => set.length);
+  array.reduce(
+    (subsets, value) => subsets.concat(subsets.map((set) => [value, ...set])),
+    [[]]
+  );

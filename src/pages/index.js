@@ -1,5 +1,11 @@
-import React from "react"
+import React from "react";
+import { PlatformSelector } from "../components/PlatformSelector";
 
 export default function Home() {
-  return <div>Hello world!</div>
+  return (
+    <>
+      <PlatformSelector />
+      <div>Hello world!</div>
+    </>
+  );
 }
