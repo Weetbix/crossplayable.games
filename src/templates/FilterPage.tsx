@@ -1,17 +1,38 @@
 import React from "react";
 import { graphql } from "gatsby";
+import { Link } from "gatsby";
 import { useLocation } from "@reach/router";
-
+import {
+  togglePlatform,
+  urlFromFilter,
+  filterFromUrl,
+  PLATFORMS,
+} from "../filters";
 import { FilterPageQuery } from "../../graphql-types";
+
+const Header = () => {
+  const { pathname } = useLocation();
+  const currentFilter = filterFromUrl(pathname);
+  return (
+    <ul>
+      {PLATFORMS.map((platform) => (
+        <li>
+          <Link to={urlFromFilter(togglePlatform(currentFilter, platform))}>
+            {platform}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 type FilterPageProps = {
   data: FilterPageQuery;
 };
 const FilterPage = (props: FilterPageProps) => {
-  const { pathname } = useLocation();
   return (
     <>
-      <h1>{pathname}</h1>
+      <Header />
       {props.data.allGame.nodes.map((node) => (
         <p>{node.title}</p>
       ))}

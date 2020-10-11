@@ -35,5 +35,30 @@ export const inVariablesFromFilter = (filter: Filter) =>
     return acc;
   }, {});
 
+// The target does not neccesarily match one from our filter list, as the order
+// or permutations could be different. So now we must match against that.
+const findFilter = (target: Filter): Filter =>
+  allFilters.find(
+    (filter) =>
+      filter.length === target.length &&
+      filter.every((platform) =>
+        target.map((t) => t.toLowerCase()).includes(platform.toLowerCase())
+      )
+  );
+
+export const filterFromUrl = (url: string): Filter =>
+  findFilter(url.split("/").filter((platform) => platform.length));
+
 export const urlFromFilter = (filter: Filter) =>
-  filter.map((f) => f.toLowerCase()).join("/");
+  "/" + filter.map((f) => f.toLowerCase()).join("/");
+
+// Returns a new filter, with our without the platform value depending on
+// if that platform was already included.
+export const togglePlatform = (filter: Filter, platform: string): Filter => {
+  // Create the target
+  const target = filter.includes(platform)
+    ? filter.filter((f) => f !== platform)
+    : [...filter, platform];
+
+  return target.length ? findFilter(target) : filter;
+};
