@@ -1,9 +1,13 @@
 import React from "react";
 import { graphql } from "gatsby";
 
-const FilterPage = (props: any) => {
-  console.log(props);
-  return <span>here</span>;
+import { FilterPageQuery } from "../../graphql-types";
+
+type FilterPageProps = {
+  data: FilterPageQuery;
+};
+const FilterPage = (props: FilterPageProps) => {
+  return [props.data.allGame.nodes.map((node) => <p>{node.title}</p>)];
 };
 export default FilterPage;
 
