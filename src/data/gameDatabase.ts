@@ -6,7 +6,7 @@ const WIKIPEDIA_GAMES_TO_EXCLUDE = ["Need for Speed: Hot Pursuit Remastered"];
 
 // Games titles on the wiki article do not neccessarily match those
 // on the IGDB, so here we provide conversion maps for the few that dont.
-const WIKI_NAME_TO_IGDB_NAME_MAP = {
+const WIKI_NAME_TO_IGDB_NAME_MAP: Record<string, string> = {
   "Digimon Story: Cyber Sleuth": "Digimon Story Cyber Sleuth",
   "Digimon Story: Cyber Sleuth – Hacker's Memory": `Digimon Story: Cyber Sleuth - Hacker's Memory`,
   "Duke Nukem 3D Megaton Edition": "Duke Nukem 3D: Megaton Edition",
@@ -27,12 +27,18 @@ const WIKI_NAME_TO_IGDB_NAME_MAP = {
   "Yakuza: Ishin": "Ryuu ga Gotoku Ishin!",
   "Zombie Tycoon 2": `Zombie Tycoon 2: Brainhov's Revenge`,
 };
-const IGDB_NAME_TO_WIKI_NAME_MAP = Object.keys(
+
+const toIGDBName = (wikiName: string) =>
+  WIKI_NAME_TO_IGDB_NAME_MAP[wikiName] ?? wikiName;
+
+const IGDB_NAME_TO_WIKI_NAME_MAP: Record<string, string> = Object.keys(
   WIKI_NAME_TO_IGDB_NAME_MAP
 ).reduce((map, key) => {
-  map[WIKI_NAME_TO_IGDB_NAME_MAP[key]] = key;
+  map[toIGDBName(key)] = key;
   return map;
 }, {});
+const toWikiName = (IGDBName: string) =>
+  IGDB_NAME_TO_WIKI_NAME_MAP[IGDBName] ?? IGDBName;
 
 const getAccessToken = async () => {
   const { TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET } = process.env;
@@ -44,18 +50,45 @@ const getAccessToken = async () => {
   return result.access_token;
 };
 
-type GameResponse = {
+type IGDBGame = {
   name: string;
+  rating: number;
+  rating_count: number;
+  total_rating: number;
+  total_rating_count: number;
+  storyline: string;
+  summary: string;
+  websites: Array<{
+    url: string;
+    category: number;
+  }>;
+  cover: {
+    image_id: string;
+  };
+  genres: Array<{
+    name: string;
+  }>;
 };
 const getBatchOfGameDetals = async (titles: string[], token: string) => {
   const titleFilters = titles
-    .map((t) => WIKI_NAME_TO_IGDB_NAME_MAP[t] ?? t)
+    .map(toIGDBName)
     .map((t) => `(name ~ "${t}")`)
     .join("|");
 
   const query = `
     limit ${titles.length};
-    fields name;
+    fields
+        name,
+        rating,
+        rating_count,
+        total_rating,
+        total_rating_count,
+        storyline,
+        summary,
+        websites.url,
+        websites.category,
+        cover.image_id,
+        genres.name;
     where ${titleFilters};
     `;
 
@@ -68,31 +101,42 @@ const getBatchOfGameDetals = async (titles: string[], token: string) => {
     },
     body: query,
   });
-  const result = await response.json();
-  return (result as Array<GameResponse>).map((game) => ({
-    title: game.name,
-  }));
+  if (response.status !== 200) {
+    throw new Error(
+      JSON.stringify(
+        {
+          message: "IGDB Query failed",
+          status: response.status,
+          response: await response.json(),
+        },
+        null,
+        2
+      )
+    );
+  }
+  return await response.json();
+};
+
+const mapIGDBData = (apiResult: any) => {
+  const game = apiResult as IGDBGame;
+  return {
+    ...game,
+    title: toWikiName(game.name),
+  };
 };
 
 // Max items to return https://api-docs.igdb.com/#pagination
 const MAX_ITEM_LIMIT = 500;
 
-export const getGameDetails = async (titles: string[]) => {
+export const getGameDetailsMap = async (titles: string[]) => {
   const token = await getAccessToken();
   const games = await executeInChunks(MAX_ITEM_LIMIT, titles, (titles) =>
     getBatchOfGameDetals(titles, token)
   );
-
-  console.log(
-    titles.filter(
-      (t) =>
-        !games
-          .map((g) => g.title)
-          .map((t) => IGDB_NAME_TO_WIKI_NAME_MAP[t] ?? t)
-          .map((t) => t.toLowerCase())
-          .includes(t.toLowerCase())
-    )
-  );
-
-  return games;
+  return games
+    .map(mapIGDBData)
+    .reduce<Record<string, ReturnType<typeof mapIGDBData>>>((map, game) => {
+      map[game.title] = game;
+      return map;
+    }, {});
 };

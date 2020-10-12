@@ -3,7 +3,7 @@ import { GatsbyNode } from "gatsby";
 import { getCrossplayGames } from "./src/data/crossplayGames";
 import { getGamePassGames } from "./src/data/gamepassGames";
 import { getPlaystationNowGames } from "./src/data/playstationNowGames";
-import { getGameDetails } from "./src/data/gameDatabase";
+import { getGameDetailsMap } from "./src/data/gameDatabase";
 
 import {
   allFilters,
@@ -24,13 +24,14 @@ const sourceGameNodes: GatsbyNode["sourceNodes"] = async ({
   const crossplayGames = await getCrossplayGames();
   const gamePassGames = await getGamePassGames();
   const PSNowGames = await getPlaystationNowGames();
-  const extraGameData = await getGameDetails(
+  const extraGameData = await getGameDetailsMap(
     crossplayGames.map((game) => game.title)
   );
 
   crossplayGames.map((game) =>
     createNode({
       title: game.title,
+      ...(extraGameData[game.title] ?? {}),
       platforms: {
         ...game.platforms,
         PSNow: PSNowGames.some((PSNowGame) => PSNowGame.name === game.title),
