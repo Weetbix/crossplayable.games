@@ -18,7 +18,7 @@ export async function executeInChunks<T, R>(
   operation: (i: Array<T>) => Promise<Array<R>>
 ) {
   let chunks = chunk(items, chunkLength);
-  let results = [];
+  let results: R[] = [];
   for (let i = 0; i < chunks.length; i++) {
     results = [...results, ...(await operation(chunks[i]))];
   }

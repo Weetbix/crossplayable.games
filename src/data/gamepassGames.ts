@@ -23,6 +23,11 @@ const getGameIds = async () => {
   );
 };
 
+type Product = {
+  LocalizedProperties: Array<{
+    ProductTitle: string;
+  }>;
+};
 const getGameDetails = async (gameIds: string[]) => {
   const DETAILS_URL = `https://displaycatalog.mp.microsoft.com/v7.0/products?bigIds=${gameIds.join(
     ","
@@ -30,7 +35,7 @@ const getGameDetails = async (gameIds: string[]) => {
 
   const response = await fetch(DETAILS_URL);
   const result = await response.json();
-  return result.Products;
+  return result.Products as Array<Product>;
 };
 
 export const getGamePassGames = async () => {

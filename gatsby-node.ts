@@ -3,6 +3,8 @@ import { GatsbyNode } from "gatsby";
 import { getCrossplayGames } from "./src/data/crossplayGames";
 import { getGamePassGames } from "./src/data/gamepassGames";
 import { getPlaystationNowGames } from "./src/data/playstationNowGames";
+import { getGameDetails } from "./src/data/gameDatabase";
+
 import {
   allFilters,
   inVariablesFromFilter,
@@ -22,6 +24,9 @@ const sourceGameNodes: GatsbyNode["sourceNodes"] = async ({
   const crossplayGames = await getCrossplayGames();
   const gamePassGames = await getGamePassGames();
   const PSNowGames = await getPlaystationNowGames();
+  const extraGameData = await getGameDetails(
+    crossplayGames.map((game) => game.title)
+  );
 
   crossplayGames.map((game) =>
     createNode({
