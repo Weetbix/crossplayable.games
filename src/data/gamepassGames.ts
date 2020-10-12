@@ -1,6 +1,4 @@
-import { GatsbyNode } from "gatsby";
 import fetch from "node-fetch";
-import { JSDOM } from "jsdom";
 import { chunk } from "../utils";
 
 const getGameIds = async () => {

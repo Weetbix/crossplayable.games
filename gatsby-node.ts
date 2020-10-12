@@ -1,14 +1,18 @@
 const path = require("path");
 import { GatsbyNode } from "gatsby";
+import dotenv from "dotenv";
 import { getCrossplayGames } from "./src/data/crossplayGames";
 import { getGamePassGames } from "./src/data/gamepassGames";
 import { getPlaystationNowGames } from "./src/data/playstationNowGames";
-import { combinations } from "./src/utils";
 import {
   allFilters,
   inVariablesFromFilter,
   urlFromFilter,
 } from "./src/filters";
+
+dotenv.config({
+  path: `.env.build`,
+});
 
 const sourceGameNodes: GatsbyNode["sourceNodes"] = async ({
   actions: { createNode },
