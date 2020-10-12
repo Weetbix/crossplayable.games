@@ -1,6 +1,5 @@
 const path = require("path");
 import { GatsbyNode } from "gatsby";
-import dotenv from "dotenv";
 import { getCrossplayGames } from "./src/data/crossplayGames";
 import { getGamePassGames } from "./src/data/gamepassGames";
 import { getPlaystationNowGames } from "./src/data/playstationNowGames";
@@ -10,7 +9,7 @@ import {
   urlFromFilter,
 } from "./src/filters";
 
-dotenv.config({
+require("dotenv").config({
   path: `.env.build`,
 });
 

@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { chunk } from "../utils";
+import { executeInChunks } from "../utils";
 
 const getAccessToken = async () => {
   const { TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET } = process.env;
@@ -37,10 +37,7 @@ const MAX_ITEM_LIMIT = 500;
 
 export const getGameDetails = async (titles: string[]) => {
   const token = await getAccessToken();
-  const gameChunks = chunk(titles, MAX_ITEM_LIMIT);
-  let games = [];
-  for (let i = 0; i < gameChunks.length; i++) {
-    games = [...games, ...(await getBatchOfGameDetals(gameChunks[i], token))];
-  }
-  return games;
+  const games = await executeInChunks(MAX_ITEM_LIMIT, titles, (titles) =>
+    getBatchOfGameDetals(titles, token)
+  );
 };

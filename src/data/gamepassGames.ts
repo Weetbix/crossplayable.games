@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { chunk } from "../utils";
+import { executeInChunks } from "../utils";
 
 const getGameIds = async () => {
   const ALL_PC_GAMES_URL =
@@ -35,11 +35,7 @@ const getGameDetails = async (gameIds: string[]) => {
 
 export const getGamePassGames = async () => {
   const AllIds = await getGameIds();
-  const IdChunks = chunk(AllIds, 20);
-  let games = [];
-  for (let i = 0; i < IdChunks.length; i++) {
-    games = [...games, ...(await getGameDetails(IdChunks[i]))];
-  }
+  const games = await executeInChunks(20, AllIds, (ids) => getGameDetails(ids));
   return games.map((game) => ({
     title: game.LocalizedProperties[0].ProductTitle,
   }));
