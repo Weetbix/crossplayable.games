@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
+import Img from "gatsby-image";
 import { FilterPageQuery } from "../../graphql-types";
 import { PlatformSelector } from "../components/PlatformSelector";
 
@@ -11,7 +12,12 @@ const FilterPage = (props: FilterPageProps) => {
     <>
       <PlatformSelector />
       {props.data.allGame.nodes.map((node) => (
-        <p>{node.title}</p>
+        <p>
+          {node.coverImage?.childImageSharp.fixed && (
+            <Img fixed={node.coverImage.childImageSharp.fixed} />
+          )}
+          {node.title}
+        </p>
       ))}
     </>
   );
@@ -48,6 +54,13 @@ export const query = graphql`
       nodes {
         id
         title
+        coverImage {
+          childImageSharp {
+            fixed(width: 200) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
       }
     }
   }

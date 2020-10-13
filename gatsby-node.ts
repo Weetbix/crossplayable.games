@@ -1,5 +1,6 @@
 const path = require("path");
 import { GatsbyNode } from "gatsby";
+import { createRemoteFileNode } from "gatsby-source-filesystem";
 import { getCrossplayGames } from "./src/data/crossplayGames";
 import { getGamePassGames } from "./src/data/gamepassGames";
 import { getPlaystationNowGames } from "./src/data/playstationNowGames";
@@ -63,10 +64,39 @@ const createFilterPages: GatsbyNode["createPages"] = async ({ actions }) => {
     });
 };
 
+const addImagesToGameNodes: GatsbyNode["onCreateNode"] = async ({
+  node,
+  actions: { createNode },
+  store,
+  cache,
+  createNodeId,
+  reporter,
+}) => {
+  if (node.internal.type === "Game" && node.coverUrl !== null) {
+    let fileNode = await createRemoteFileNode({
+      url: (node as any).coverUrl as string,
+      parentNodeId: node.id,
+      createNode,
+      createNodeId,
+      cache,
+      store,
+      reporter,
+    });
+    // if the file was created, attach the new node to the parent node
+    if (fileNode) {
+      (node as any).coverImage___NODE = fileNode.id;
+    }
+  }
+};
+
 export const sourceNodes: GatsbyNode["sourceNodes"] = async (args, options) => {
   await sourceGameNodes(args, options);
 };
 
 export const createPages: GatsbyNode["createPages"] = async (args) => {
   await createFilterPages(args);
+};
+
+export const onCreateNode: GatsbyNode["onCreateNode"] = async (args) => {
+  await addImagesToGameNodes(args);
 };

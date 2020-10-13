@@ -79,10 +79,16 @@ const getBatchOfGameDetals = async (titles: string[], token: string) => {
 // Map a single API result to an object
 const mapData = (apiResult: any) => {
   const game = apiResult as IGDBGame;
+  const coverUrl = game.cover?.image_id
+    ? `https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${game.cover.image_id}.jpg`
+    : null;
+
   return {
     ...game,
     name: undefined,
+    cover: undefined,
     title: game.name,
+    coverUrl,
   };
 };
 
