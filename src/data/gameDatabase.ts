@@ -37,8 +37,14 @@ const IGDB_NAME_TO_WIKI_NAME_MAP: Record<string, string> = Object.keys(
   map[toIGDBName(key)] = key;
   return map;
 }, {});
-const toWikiName = (IGDBName: string) =>
-  IGDB_NAME_TO_WIKI_NAME_MAP[IGDBName] ?? IGDBName;
+
+// Map an IGDB name back to the name we find on wikipedia
+// Here we should first check the manual override map, if
+// not in there we should find the name in the original titles
+// list so that we can avoid problems with differences in cases.
+const toWikiName = (IGDBName: string, originalTitles: string[]) =>
+  IGDB_NAME_TO_WIKI_NAME_MAP[IGDBName] ??
+  originalTitles.find((t) => t.toLowerCase() === IGDBName.toLowerCase());
 
 const getAccessToken = async () => {
   const { TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET } = process.env;
@@ -50,6 +56,7 @@ const getAccessToken = async () => {
   return result.access_token;
 };
 
+// The expected return type from the API
 type IGDBGame = {
   name: string;
   rating: number;
@@ -117,11 +124,14 @@ const getBatchOfGameDetals = async (titles: string[], token: string) => {
   return await response.json();
 };
 
-const mapIGDBData = (apiResult: any) => {
+// Map a single API result to an object.
+// title is mapped to the original wiki name
+// so that matching can be done more easily
+const mapIGDBData = (apiResult: any, originalTitles: string[]) => {
   const game = apiResult as IGDBGame;
   return {
     ...game,
-    title: toWikiName(game.name),
+    title: toWikiName(game.name, originalTitles),
   };
 };
 
@@ -133,10 +143,18 @@ export const getGameDetailsMap = async (titles: string[]) => {
   const games = await executeInChunks(MAX_ITEM_LIMIT, titles, (titles) =>
     getBatchOfGameDetals(titles, token)
   );
-  return games
-    .map(mapIGDBData)
-    .reduce<Record<string, ReturnType<typeof mapIGDBData>>>((map, game) => {
-      map[game.title] = game;
-      return map;
-    }, {});
+
+  // throw an error if there is a game we could not match. We would
+  // then have to manually add the transformation...
+  type IGDBDataMap = Record<string, ReturnType<typeof mapIGDBData>>;
+  return (
+    games
+      // Map every response item
+      .map((game) => mapIGDBData(game, titles))
+      // convert into a map with the game name as the key
+      .reduce<IGDBDataMap>((map, game) => {
+        map[game.title] = game;
+        return map;
+      }, {})
+  );
 };
