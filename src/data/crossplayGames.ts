@@ -1,6 +1,9 @@
 import fetch from "node-fetch";
 import { JSDOM } from "jsdom";
 
+// This game is not relased, but is listed in the wiki article
+const GAMES_TO_EXCLUDE = ["Need for Speed: Hot Pursuit Remastered"];
+
 const CROSSPLAY_ARTICLE_URL =
   "https://en.wikipedia.org/wiki/List_of_video_games_that_support_cross-platform_play";
 
@@ -56,13 +59,15 @@ export const getCrossplayGames = async () => {
     (row) => row.firstElementChild.tagName !== "TH"
   );
 
-  const games = gameRows.map((row) => ({
-    title: getTitleFromRow(row),
-    platforms: {
-      ...PlATFORM_DEFAULTS,
-      ...getPlatformsFromRow(row),
-    },
-  }));
+  const games = gameRows
+    .map((row) => ({
+      title: getTitleFromRow(row),
+      platforms: {
+        ...PlATFORM_DEFAULTS,
+        ...getPlatformsFromRow(row),
+      },
+    }))
+    .filter((game) => !GAMES_TO_EXCLUDE.includes(game.title));
 
   return games;
 };

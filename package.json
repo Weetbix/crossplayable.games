@@ -23,6 +23,7 @@
   "devDependencies": {
     "@types/jsdom": "^16.2.4",
     "jsdom": "^16.4.0",
+    "lodash": "^4.17.20",
     "node-fetch": "^2.6.1",
     "prettier": "2.1.2",
     "ts-node": "^9.0.0",

@@ -3,7 +3,7 @@ import { GatsbyNode } from "gatsby";
 import { getCrossplayGames } from "./src/data/crossplayGames";
 import { getGamePassGames } from "./src/data/gamepassGames";
 import { getPlaystationNowGames } from "./src/data/playstationNowGames";
-import { getGameDetailsMap } from "./src/data/gameDatabase";
+import { getGameDetailsMap } from "./src/data/wikiToIGDB";
 
 import {
   allFilters,
