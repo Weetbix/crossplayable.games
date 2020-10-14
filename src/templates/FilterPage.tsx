@@ -2,15 +2,14 @@ import React from "react";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import { FilterPageQuery } from "../../graphql-types";
-import { PlatformSelector } from "../components/PlatformSelector";
+import { Page } from "../components/Page";
 
 type FilterPageProps = {
   data: FilterPageQuery;
 };
 const FilterPage = (props: FilterPageProps) => {
   return (
-    <>
-      <PlatformSelector />
+    <Page>
       {props.data.allGame.nodes.map((node) => (
         <p>
           {node.coverImage?.childImageSharp.fixed && (
@@ -19,7 +18,7 @@ const FilterPage = (props: FilterPageProps) => {
           {node.title}
         </p>
       ))}
-    </>
+    </Page>
   );
 };
 export default FilterPage;
