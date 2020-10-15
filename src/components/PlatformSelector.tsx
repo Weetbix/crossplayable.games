@@ -12,6 +12,7 @@ const NavBar = styled.ul`
   justify-items: center;
   justify-content: center;
   text-align: center;
+  margin-bottom: 32px;
 `;
 
 const NavBarItem = styled.li`

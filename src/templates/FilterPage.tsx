@@ -1,23 +1,37 @@
 import React from "react";
 import { graphql } from "gatsby";
-import Img from "gatsby-image";
+import styled from "styled-components";
 import { FilterPageQuery } from "../../graphql-types";
 import { Page } from "../components/Page";
+import { GameCard } from "../components/GameCard";
+
+const Content = styled.div`
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+`;
 
 type FilterPageProps = {
   data: FilterPageQuery;
 };
 const FilterPage = (props: FilterPageProps) => {
+  const games = props.data.allGame.nodes;
   return (
     <Page>
-      {props.data.allGame.nodes.map((node) => (
-        <p>
-          {node.coverImage?.childImageSharp.fixed && (
-            <Img fixed={node.coverImage.childImageSharp.fixed} />
-          )}
-          {node.title}
-        </p>
-      ))}
+      <Content>
+        {games.map((node) => (
+          <GameCard
+            key={node.id}
+            title={node.title}
+            image={node.coverImage?.childImageSharp?.fixed}
+            originalAspectRatio={
+              node.coverImage?.childImageSharp?.sizes?.aspectRatio
+            }
+          />
+        ))}
+      </Content>
     </Page>
   );
 };
@@ -55,8 +69,11 @@ export const query = graphql`
         title
         coverImage {
           childImageSharp {
-            fixed(width: 200) {
+            fixed(width: 200, height: 267) {
               ...GatsbyImageSharpFixed
+            }
+            sizes {
+              aspectRatio
             }
           }
         }

@@ -30,6 +30,6 @@ export const defaultTheme: DefaultTheme = {
     primary: steppedColor("yellow"),
     secondary: steppedColor("orange"),
     text: steppedColor("#EEE"),
-    background: "#111111",
+    background: "#222",
   },
 };
