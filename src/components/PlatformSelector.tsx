@@ -88,18 +88,18 @@ export const PlatformSelector = () => {
             <NavItem label="Mac" platform="Mac" />
           </SubMenu>
         </NavItem>
-        <NavItem label="Xbox">
-          <SubMenu aria-label="submenu">
-            <NavItem label="Xbox" platform="XBO" />
-            <NavItem label="Game Pass" platform="GamePass" />
-          </SubMenu>
-        </NavItem>
         <NavItem label="Switch" platform="Switch" />
         <NavItem label="Playstation">
           <SubMenu aria-label="submenu">
             <NavItem label="PS3" platform="PS3" />
             <NavItem label="PS4" platform="PS4" />
             <NavItem label="PS Now" platform="PSNow" />
+          </SubMenu>
+        </NavItem>
+        <NavItem label="Xbox">
+          <SubMenu aria-label="submenu">
+            <NavItem label="Xbox" platform="XBO" />
+            <NavItem label="Game Pass" platform="GamePass" />
           </SubMenu>
         </NavItem>
       </NavBar>
