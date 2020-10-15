@@ -19,6 +19,7 @@ declare module "styled-components" {
     colors: {
       primary: SteppableThemeColor;
       secondary: SteppableThemeColor;
+      text: SteppableThemeColor;
       background: string;
     };
   }
@@ -28,6 +29,7 @@ export const defaultTheme: DefaultTheme = {
   colors: {
     primary: steppedColor("yellow"),
     secondary: steppedColor("orange"),
+    text: steppedColor("#EEE"),
     background: "#111111",
   },
 };

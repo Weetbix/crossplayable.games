@@ -1,3 +1,4 @@
+import Color from "color";
 import React, { FC } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { defaultTheme } from "../theme";
@@ -6,6 +7,20 @@ import { PlatformSelector } from "./PlatformSelector";
 const GlobalStyles = createGlobalStyle`
   body {
     background-color: ${(props) => props.theme.colors.background};
+    margin: 0;
+    color: ${(props) => props.theme.colors.text.main};
+    font-family: Helvetica, Arial, sans-serif
+  }
+
+  a, a:visited, a:link { 
+      color: reset;
+  }
+
+  html, body, #___gatsby, #gatsby-focus-wrapper {
+    height: 100%;
+  }
+  div[role="group"][tabindex] {
+    height: 100%;
   }
 `;
 
