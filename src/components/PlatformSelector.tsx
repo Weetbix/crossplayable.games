@@ -26,13 +26,13 @@ const NavBarItem = styled.li`
     text-decoration: none;
     color: ${(props) => props.theme.colors.text.main};
   }
-  :hover ul {
-    display: block;
-  }
-  > span,
   > a {
     display: block;
     padding: 14px 16px;
+  }
+  :hover ul,
+  :focus-within ul {
+    display: block;
   }
 `;
 
@@ -91,8 +91,10 @@ export const PlatformSelector = () => {
                 </Link>
               ) : (
                 [
-                  <span>{navItem}</span>,
-                  <SubMenu>
+                  <a href="#" aria-haspopup="true">
+                    {navItem}
+                  </a>,
+                  <SubMenu aria-label="submenu">
                     {Object.keys(items[navItem]).map((subItem) => {
                       return (
                         <SubMenuItem>
