@@ -44,79 +44,63 @@ const SubMenu = styled.ul`
   width: 100%;
   z-index: 1;
   display: none;
-`;
 
-const SubMenuItem = styled.li`
-  a {
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+  > li {
+    a {
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
   }
 `;
 
-const items = {
-  PC: {
-    Windows: "Windows",
-    Mac: "Mac",
-    Linux: "Linux",
-  },
-  Xbox: {
-    Xbox: "XBO",
-    "Game Pass": "GamePass",
-  },
-  Switch: "Switch",
-  Playstation: {
-    PS3: "PS3",
-    PS4: "PS4",
-    "PS Now": "PSNow",
-  },
+type NavItemProps = {
+  label: string;
+  platform?: string;
+};
+
+const NavItem: React.FC<NavItemProps> = ({ label, platform, children }) => {
+  const { pathname } = useLocation();
+  const currentFilter = filterFromUrl(pathname);
+
+  const link = platform
+    ? urlFromFilter(togglePlatform(currentFilter, platform))
+    : "#";
+  return (
+    <NavBarItem>
+      <Link to={link} aria-haspopup={link === "#"}>
+        {label}
+      </Link>
+      {children}
+    </NavBarItem>
+  );
 };
 
 export const PlatformSelector = () => {
-  const { pathname } = useLocation();
-  const currentFilter = filterFromUrl(pathname);
   return (
     <nav>
       <NavBar>
-        {Object.keys(items).map((navItem) => {
-          return (
-            <NavBarItem>
-              {typeof items[navItem] === "string" ? (
-                <Link
-                  to={urlFromFilter(
-                    togglePlatform(currentFilter, items[navItem])
-                  )}
-                >
-                  {navItem}
-                </Link>
-              ) : (
-                [
-                  <a href="#" aria-haspopup="true">
-                    {navItem}
-                  </a>,
-                  <SubMenu aria-label="submenu">
-                    {Object.keys(items[navItem]).map((subItem) => {
-                      return (
-                        <SubMenuItem>
-                          <Link
-                            to={urlFromFilter(
-                              togglePlatform(
-                                currentFilter,
-                                items[navItem][subItem]
-                              )
-                            )}
-                          >
-                            {subItem}
-                          </Link>
-                        </SubMenuItem>
-                      );
-                    })}
-                  </SubMenu>,
-                ]
-              )}
-            </NavBarItem>
-          );
-        })}
+        <NavItem label="PC">
+          <SubMenu aria-label="submenu">
+            <NavItem label="Windows" platform="Windows" />
+            <NavItem label="Linux" platform="Linux" />
+            <NavItem label="Mac" platform="Mac" />
+          </SubMenu>
+        </NavItem>
+        <NavItem label="Xbox">
+          <SubMenu aria-label="submenu">
+            <NavItem label="Xbox" platform="XBO" />
+            <NavItem label="Game Pass" platform="GamePass" />
+          </SubMenu>
+        </NavItem>
+        <NavItem label="Switch" platform="Switch" />
+        <NavItem label="Playstation">
+          <SubMenu aria-label="submenu">
+            <NavItem label="PS3" platform="PS3" />
+            <NavItem label="PS4" platform="PS4" />
+            <NavItem label="PS Now" platform="PSNow" />
+          </SubMenu>
+        </NavItem>
       </NavBar>
     </nav>
   );
