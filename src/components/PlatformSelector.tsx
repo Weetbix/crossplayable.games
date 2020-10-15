@@ -29,7 +29,8 @@ const NavBarItem = styled.li`
   :hover ul {
     display: block;
   }
-  > span {
+  > span,
+  > a {
     display: block;
     padding: 14px 16px;
   }
@@ -81,15 +82,13 @@ export const PlatformSelector = () => {
           return (
             <NavBarItem>
               {typeof items[navItem] === "string" ? (
-                <span>
-                  <Link
-                    to={urlFromFilter(
-                      togglePlatform(currentFilter, items[navItem])
-                    )}
-                  >
-                    {navItem}
-                  </Link>
-                </span>
+                <Link
+                  to={urlFromFilter(
+                    togglePlatform(currentFilter, items[navItem])
+                  )}
+                >
+                  {navItem}
+                </Link>
               ) : (
                 [
                   <span>{navItem}</span>,
@@ -97,18 +96,16 @@ export const PlatformSelector = () => {
                     {Object.keys(items[navItem]).map((subItem) => {
                       return (
                         <SubMenuItem>
-                          <span>
-                            <Link
-                              to={urlFromFilter(
-                                togglePlatform(
-                                  currentFilter,
-                                  items[navItem][subItem]
-                                )
-                              )}
-                            >
-                              {subItem}
-                            </Link>
-                          </span>
+                          <Link
+                            to={urlFromFilter(
+                              togglePlatform(
+                                currentFilter,
+                                items[navItem][subItem]
+                              )
+                            )}
+                          >
+                            {subItem}
+                          </Link>
                         </SubMenuItem>
                       );
                     })}
