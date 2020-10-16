@@ -7,8 +7,7 @@ variable "domain_name" {
 }
 
 provider "aws" {
-  region  = var.aws_region
-  version = "~> 2.52"
+  region = var.aws_region
 }
 
 terraform {
