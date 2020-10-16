@@ -12,7 +12,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "deploy:s3": "aws s3 sync public s3://crossplayable.games"
   },
   "dependencies": {
     "@types/color": "^3.0.1",
