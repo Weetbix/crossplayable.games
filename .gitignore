@@ -73,3 +73,4 @@ graphql-types.ts
 .terraform
 *.tfstate.backup
 out.plan
+*.tfstate
