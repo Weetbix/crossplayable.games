@@ -30,7 +30,7 @@ declare module "styled-components" {
 
 export const defaultTheme: DefaultTheme = {
   colors: {
-    primary: steppedColor("yellow"),
+    primary: steppedColor("#F8D200"),
     secondary: steppedColor("orange"),
     text: steppedColor("#EEE"),
     background: steppedColor("#222", 0.15),

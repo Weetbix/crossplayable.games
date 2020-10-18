@@ -13,7 +13,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   a, a:visited, a:link { 
-      color: reset;
+      color: inherit;
+      text-decoration: none;
   }
 
   html, body, #___gatsby, #gatsby-focus-wrapper {

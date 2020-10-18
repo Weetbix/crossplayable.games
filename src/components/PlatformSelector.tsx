@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 import { useLocation } from "@reach/router";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { togglePlatform, urlFromFilter, filterFromUrl } from "../filters";
 
 const NavBar = styled.ul`
@@ -16,7 +16,7 @@ const NavBar = styled.ul`
   background-color: ${(props) => props.theme.colors.background.dark};
 `;
 
-const NavBarItem = styled.li`
+const NavBarItem = styled.li<{ selected: boolean }>`
   width: 220px;
   font-size: 20px;
   font-weight: 100;
@@ -24,18 +24,31 @@ const NavBarItem = styled.li`
   text-transform: uppercase;
   position: relative;
 
-  a {
-    text-decoration: none;
-    color: ${(props) => props.theme.colors.text.main};
-  }
+  // Text
   > a {
     display: block;
     padding: 14px 16px;
+    :hover {
+      text-shadow: 0px 0px 2px #fff;
+      transform: scale(1.02);
+      transition: all 0.3s;
+    }
   }
+
+  // Menu opening
   :hover ul,
   :focus-within ul {
-    display: block;
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.1s ease-in-out;
   }
+
+  color: ${(props) => props.theme.colors.text.main};
+  ${({ selected }) =>
+    selected &&
+    css`
+      color: ${(props) => props.theme.colors.primary.light};
+    `}
 `;
 
 const SubMenu = styled.ul`
@@ -46,7 +59,8 @@ const SubMenu = styled.ul`
   width: 100%;
   background-color: ${(props) => props.theme.colors.background.dark};
   z-index: 1;
-  display: none;
+  opacity: 0;
+  visibility: hidden;
 
   > li {
     a {
@@ -66,13 +80,15 @@ const NavItem: React.FC<NavItemProps> = ({ label, platform, children }) => {
   const { pathname } = useLocation();
   const currentFilter = filterFromUrl(pathname);
 
+  const isSelected = currentFilter.includes(platform);
+
   const link = platform
     ? urlFromFilter(togglePlatform(currentFilter, platform))
     : "#";
   return (
-    <NavBarItem>
+    <NavBarItem selected={isSelected}>
       <Link to={link} aria-haspopup={link === "#"}>
-        {label}
+        <span>{label}</span>
       </Link>
       {children}
     </NavBarItem>
@@ -90,7 +106,11 @@ export const PlatformSelector = () => {
             <NavItem label="Mac" platform="Mac" />
           </SubMenu>
         </NavItem>
-        <NavItem label="Switch" platform="Switch" />
+        <NavItem label="Nintendo">
+          <SubMenu aria-label="submenu">
+            <NavItem label="Switch" platform="Switch" />
+          </SubMenu>
+        </NavItem>
         <NavItem label="Playstation">
           <SubMenu aria-label="submenu">
             <NavItem label="PS3" platform="PS3" />
