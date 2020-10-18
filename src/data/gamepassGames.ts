@@ -41,6 +41,10 @@ const getGameDetails = async (gameIds: string[]) => {
 export const getGamePassGames = async () => {
   const AllIds = await getGameIds();
   const games = await executeInChunks(20, AllIds, (ids) => getGameDetails(ids));
+
+  if (games.length < 350)
+    throw new Error("Lower than expected amount of gamepass games found");
+
   return games.map((game) => ({
     title: game.LocalizedProperties[0].ProductTitle,
   }));

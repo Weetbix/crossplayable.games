@@ -100,5 +100,8 @@ export const getGameDetails = async (titles: string[]) => {
   const games = await executeInChunks(MAX_ITEM_LIMIT, titles, (titles) =>
     getBatchOfGameDetals(titles, token)
   );
+  if (games.length < 180)
+    throw new Error("Lower than expected amount of games in gamedatabasefound");
+
   return games.map(mapData);
 };

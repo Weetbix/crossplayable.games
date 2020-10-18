@@ -69,5 +69,8 @@ export const getCrossplayGames = async () => {
     }))
     .filter((game) => !GAMES_TO_EXCLUDE.includes(game.title));
 
+  if (games.length < 200)
+    throw new Error("Lower than expected amount of crossplayable games found");
+
   return games;
 };

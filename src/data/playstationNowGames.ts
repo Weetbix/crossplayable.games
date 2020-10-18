@@ -9,7 +9,14 @@ export const getPlaystationNowGames = async () => {
   const result = await fetch(PSNOW_URL);
   const document = new JSDOM(await result.text()).window.document;
 
-  return Array.from(document.querySelectorAll("#games-block li.game-title"))
+  const games = Array.from(
+    document.querySelectorAll("#games-block li.game-title")
+  )
     .map((titleLi) => titleLi.textContent.trim())
     .map((title) => ({ name: title }));
+
+  if (games.length < 800)
+    throw new Error("Lower than expected amount of PSNow games found");
+
+  return games;
 };
