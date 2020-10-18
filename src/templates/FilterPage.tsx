@@ -2,7 +2,6 @@ import React from "react";
 import { graphql } from "gatsby";
 import styled from "styled-components";
 import { FilterPageQuery } from "../../graphql-types";
-import { Page } from "../components/Page";
 import { GameCard } from "../components/GameCard";
 
 const Content = styled.div`
@@ -19,20 +18,18 @@ type FilterPageProps = {
 const FilterPage = (props: FilterPageProps) => {
   const games = props.data.allGame.nodes;
   return (
-    <Page>
-      <Content>
-        {games.map((node) => (
-          <GameCard
-            key={node.id}
-            title={node.title}
-            image={node.coverImage?.childImageSharp?.fixed}
-            originalAspectRatio={
-              node.coverImage?.childImageSharp?.sizes?.aspectRatio
-            }
-          />
-        ))}
-      </Content>
-    </Page>
+    <Content>
+      {games.map((node) => (
+        <GameCard
+          key={node.id}
+          title={node.title}
+          image={node.coverImage?.childImageSharp?.fixed}
+          originalAspectRatio={
+            node.coverImage?.childImageSharp?.sizes?.aspectRatio
+          }
+        />
+      ))}
+    </Content>
   );
 };
 export default FilterPage;

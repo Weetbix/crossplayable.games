@@ -25,7 +25,7 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export const Page: FC<{}> = ({ children }) => {
+const Page: FC<{}> = ({ children }) => {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyles />
@@ -34,3 +34,4 @@ export const Page: FC<{}> = ({ children }) => {
     </ThemeProvider>
   );
 };
+export default Page;
