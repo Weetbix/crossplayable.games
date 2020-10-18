@@ -36,8 +36,7 @@ const NavBarItem = styled.li<{ selected: boolean }>`
   }
 
   // Menu opening
-  :hover ul,
-  :focus-within ul {
+  :hover ul {
     visibility: visible;
     opacity: 1;
     transition: all 0.1s ease-in-out;
