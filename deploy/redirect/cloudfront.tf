@@ -1,20 +1,21 @@
-
-resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {}
-
 resource "aws_cloudfront_distribution" "prod_distribution" {
   origin {
     # Use the website endpoint for the domain, or the redirect will not work
     domain_name = aws_s3_bucket.website_bucket.website_endpoint
     origin_id   = "S3-${aws_s3_bucket.website_bucket.bucket}"
-    s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
+    custom_origin_config {
+      http_port              = "80"
+      https_port             = "443"
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
     }
   }
 
   # By default, show index.html file
-  enabled         = true
-  is_ipv6_enabled = true
-  aliases         = [var.domain_name]
+  default_root_object = "index.html"
+  enabled             = true
+  is_ipv6_enabled     = true
+  aliases             = [var.domain_name]
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
