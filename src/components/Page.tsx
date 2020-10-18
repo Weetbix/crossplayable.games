@@ -6,7 +6,7 @@ import { PlatformSelector } from "./PlatformSelector";
 
 const GlobalStyles = createGlobalStyle`
   body {
-    background-color: ${(props) => props.theme.colors.background};
+    background-color: ${(props) => props.theme.colors.background.main};
     margin: 0;
     color: ${(props) => props.theme.colors.text.main};
     font-family: Helvetica, Arial, sans-serif

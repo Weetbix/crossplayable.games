@@ -13,6 +13,7 @@ const NavBar = styled.ul`
   justify-content: center;
   text-align: center;
   margin-bottom: 32px;
+  background-color: ${(props) => props.theme.colors.background.dark};
 `;
 
 const NavBarItem = styled.li`
@@ -43,6 +44,7 @@ const SubMenu = styled.ul`
   position: absolute;
   padding: 0;
   width: 100%;
+  background-color: ${(props) => props.theme.colors.background.dark};
   z-index: 1;
   display: none;
 

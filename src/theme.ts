@@ -8,10 +8,13 @@ type SteppableThemeColor = {
   dark: string;
 };
 
-const steppedColor = (color: string): SteppableThemeColor => ({
+const steppedColor = (
+  color: string,
+  stepAmount: number = 0.25
+): SteppableThemeColor => ({
   main: color,
-  light: Color(color).lighten(0.25).hex(),
-  dark: Color(color).darken(0.25).hex(),
+  light: Color(color).lighten(stepAmount).hex(),
+  dark: Color(color).darken(stepAmount).hex(),
 });
 
 declare module "styled-components" {
@@ -20,7 +23,7 @@ declare module "styled-components" {
       primary: SteppableThemeColor;
       secondary: SteppableThemeColor;
       text: SteppableThemeColor;
-      background: string;
+      background: SteppableThemeColor;
     };
   }
 }
@@ -30,6 +33,6 @@ export const defaultTheme: DefaultTheme = {
     primary: steppedColor("yellow"),
     secondary: steppedColor("orange"),
     text: steppedColor("#EEE"),
-    background: "#222",
+    background: steppedColor("#222", 0.15),
   },
 };
