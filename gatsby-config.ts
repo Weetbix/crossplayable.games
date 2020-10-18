@@ -6,7 +6,7 @@ export const plugins = [
   {
     resolve: `gatsby-plugin-layout`,
     options: {
-      component: require.resolve(`./src/components/page.tsx`),
+      component: require.resolve(`./src/components/Page.tsx`),
     },
   },
 ];
