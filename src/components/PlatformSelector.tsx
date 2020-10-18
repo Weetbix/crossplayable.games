@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "gatsby";
-import { useLocation } from "@reach/router";
 import styled, { css } from "styled-components";
-import { togglePlatform, urlFromFilter, filterFromUrl } from "../filters";
+import { useFilter } from "../hooks/useFilter";
+import { togglePlatform, urlFromFilter } from "../filters";
 
 const NavBar = styled.ul`
   margin: 0;
@@ -12,7 +12,7 @@ const NavBar = styled.ul`
   justify-items: center;
   justify-content: center;
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 50px;
   background-color: ${(props) => props.theme.colors.background.dark};
 `;
 
@@ -76,9 +76,7 @@ type NavItemProps = {
 };
 
 const NavItem: React.FC<NavItemProps> = ({ label, platform, children }) => {
-  const { pathname } = useLocation();
-  const currentFilter = filterFromUrl(pathname);
-
+  const currentFilter = useFilter();
   const isSelected = currentFilter.includes(platform);
 
   const link = platform

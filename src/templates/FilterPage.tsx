@@ -2,14 +2,20 @@ import React from "react";
 import { graphql } from "gatsby";
 import styled from "styled-components";
 import { FilterPageQuery } from "../../graphql-types";
+import { FilterDetails } from "../components/FilterDetails";
 import { GameCard } from "../components/GameCard";
 
 const Content = styled.div`
-  width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const GamesWrapper = styled.div`
+  max-width: 700px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 type FilterPageProps = {
@@ -19,16 +25,19 @@ const FilterPage = (props: FilterPageProps) => {
   const games = props.data.allGame.nodes;
   return (
     <Content>
-      {games.map((node) => (
-        <GameCard
-          key={node.id}
-          title={node.title}
-          image={node.coverImage?.childImageSharp?.fixed}
-          originalAspectRatio={
-            node.coverImage?.childImageSharp?.sizes?.aspectRatio
-          }
-        />
-      ))}
+      <FilterDetails numberOfGames={props.data.allGame.totalCount} />
+      <GamesWrapper>
+        {games.map((node) => (
+          <GameCard
+            key={node.id}
+            title={node.title}
+            image={node.coverImage?.childImageSharp?.fixed}
+            originalAspectRatio={
+              node.coverImage?.childImageSharp?.sizes?.aspectRatio
+            }
+          />
+        ))}
+      </GamesWrapper>
     </Content>
   );
 };
@@ -61,6 +70,7 @@ export const query = graphql`
         }
       }
     ) {
+      totalCount
       nodes {
         id
         title
