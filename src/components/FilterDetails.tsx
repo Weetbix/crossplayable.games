@@ -27,13 +27,16 @@ type FilterDetailsProps = {
 
 export const FilterDetails = ({ numberOfGames }: FilterDetailsProps) => {
   const currentFilter = useFilter();
-  const gameString = numberOfGames > 1 ? "games" : "game";
+  const startText =
+    numberOfGames === 0
+      ? "Unfortunately, there are no games"
+      : numberOfGames > 1
+      ? `${numberOfGames} games`
+      : `${numberOfGames} game`;
 
   return (
     <Content>
-      <span>
-        {numberOfGames} {gameString} cross-playable with:
-      </span>
+      <span>{startText} cross-playable with:</span>
       <div>
         {currentFilter.map((platform) => (
           <Platform>{platform}</Platform>
