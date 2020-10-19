@@ -64,6 +64,32 @@ const createFilterPages: GatsbyNode["createPages"] = async ({ actions }) => {
     });
 };
 
+const createGamePages: GatsbyNode["createPages"] = async ({
+  graphql,
+  actions,
+}) => {
+  const { createPage } = actions;
+  const result = (await graphql(`
+    query GetGamePagesBySlug {
+      allGame {
+        group(field: fields___slug) {
+          fieldValue
+        }
+      }
+    }
+  `)) as any;
+
+  result.data.allGame.group.forEach(({ fieldValue: slug }) => {
+    createPage({
+      path: slug,
+      component: path.resolve(`./src/templates/GamePage.tsx`),
+      context: {
+        slug,
+      },
+    });
+  });
+};
+
 const addImagesToGameNodes: GatsbyNode["onCreateNode"] = async ({
   node,
   actions: { createNode },
@@ -89,14 +115,36 @@ const addImagesToGameNodes: GatsbyNode["onCreateNode"] = async ({
   }
 };
 
+const addSlugsToGameNodes: GatsbyNode["onCreateNode"] = async ({
+  node,
+  actions: { createNodeField },
+}) => {
+  if (node.internal.type === "Game") {
+    // Get a "url nice" version of a games name
+    const title: string = (node as any).title
+      .replace("&", "and")
+      .toLowerCase()
+      .replace(/[^a-z0-9 ]/g, " ")
+      .replace(/\s+/g, "-");
+    const slug = `/games/does-${title}-support-crossplay`;
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    });
+  }
+};
+
 export const sourceNodes: GatsbyNode["sourceNodes"] = async (args, options) => {
   await sourceGameNodes(args, options);
 };
 
 export const createPages: GatsbyNode["createPages"] = async (args) => {
   await createFilterPages(args);
+  await createGamePages(args);
 };
 
 export const onCreateNode: GatsbyNode["onCreateNode"] = async (args) => {
   await addImagesToGameNodes(args);
+  await addSlugsToGameNodes(args);
 };

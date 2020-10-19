@@ -1,9 +1,10 @@
 import React from "react";
 import Img, { FixedObject } from "gatsby-image";
 import styled from "styled-components";
+import { Link } from "gatsby";
 
-const Content = styled.div`
-  padding: 16px;
+const StyledLink = styled(Link)`
+  margin: 16px;
   width: 200px;
 
   .gatsby-image-wrapper {
@@ -29,6 +30,7 @@ const ImagePlaceholder = styled.div`
 type GameCardProps = {
   title: string;
   image: FixedObject;
+  link: string;
   originalAspectRatio: number;
 };
 
@@ -44,13 +46,14 @@ export const GameCard = ({
   title,
   image,
   originalAspectRatio,
+  link,
 }: GameCardProps) => (
-  <Content>
+  <StyledLink to={link}>
     {shouldRenderImage(image, originalAspectRatio) ? (
       <Img fixed={image} />
     ) : (
       <ImagePlaceholder />
     )}
     <Title>{title}</Title>
-  </Content>
+  </StyledLink>
 );

@@ -36,6 +36,7 @@ const FilterPage = (props: FilterPageProps) => {
           <GameCard
             key={node.id}
             title={node.title}
+            link={node.fields.slug}
             image={node.coverImage?.childImageSharp?.fixed}
             originalAspectRatio={
               node.coverImage?.childImageSharp?.sizes?.aspectRatio
@@ -79,6 +80,9 @@ export const query = graphql`
       nodes {
         id
         title
+        fields {
+          slug
+        }
         coverImage {
           childImageSharp {
             fixed(width: 200, height: 267) {

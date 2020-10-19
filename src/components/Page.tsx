@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { defaultTheme } from "../theme";
+import { useFilter } from "../hooks/useFilter";
 import { PlatformSelector } from "./PlatformSelector";
 import { Footer } from "./Footer";
 
@@ -29,10 +30,12 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Page: FC<{}> = ({ children }) => {
+  const currentFilter = useFilter();
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyles />
-      <PlatformSelector />
+      {currentFilter && <PlatformSelector />}
       {children}
       <Footer />
     </ThemeProvider>
