@@ -1,8 +1,8 @@
-import Color from "color";
 import React, { FC } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { defaultTheme } from "../theme";
 import { PlatformSelector } from "./PlatformSelector";
+import { Footer } from "./Footer";
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -15,6 +15,9 @@ const GlobalStyles = createGlobalStyle`
   a, a:visited, a:link { 
       color: inherit;
       text-decoration: none;
+  }
+  a:hover {
+    color: ${(props) => props.theme.colors.primary.main}
   }
 
   html, body, #___gatsby, #gatsby-focus-wrapper {
@@ -31,6 +34,7 @@ const Page: FC<{}> = ({ children }) => {
       <GlobalStyles />
       <PlatformSelector />
       {children}
+      <Footer />
     </ThemeProvider>
   );
 };

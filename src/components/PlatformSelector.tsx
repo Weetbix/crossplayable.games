@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 import styled, { css } from "styled-components";
-import { up, down, between, only } from "styled-breakpoints";
+import { up, down } from "styled-breakpoints";
 import { useFilter } from "../hooks/useFilter";
 import { togglePlatform, urlFromFilter } from "../filters";
 
@@ -50,6 +50,7 @@ const NavBarItem = styled.li<{ selected: boolean }>`
     display: block;
     padding: 14px 16px;
     :hover {
+      color: inherit;
       text-shadow: 0px 0px 2px #fff;
       transform: scale(1.02);
       transition: all 0.3s;
