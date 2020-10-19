@@ -25,6 +25,12 @@ declare module "styled-components" {
       text: SteppableThemeColor;
       background: SteppableThemeColor;
     };
+    breakpoints: {
+      sm: string;
+      md: string;
+      lg: string;
+      xl: string;
+    };
   }
 }
 
@@ -34,5 +40,11 @@ export const defaultTheme: DefaultTheme = {
     secondary: steppedColor("orange"),
     text: steppedColor("#EEE"),
     background: steppedColor("#222", 0.15),
+  },
+  breakpoints: {
+    sm: "576px",
+    md: "768px",
+    lg: "992px",
+    xl: "1200px",
   },
 };

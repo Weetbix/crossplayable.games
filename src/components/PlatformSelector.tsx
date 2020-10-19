@@ -1,8 +1,17 @@
 import React from "react";
 import { Link } from "gatsby";
 import styled, { css } from "styled-components";
+import { up, down, between, only } from "styled-breakpoints";
 import { useFilter } from "../hooks/useFilter";
 import { togglePlatform, urlFromFilter } from "../filters";
+
+const MobileHeader = styled.li`
+  ${up("md")} {
+    display: none;
+  }
+  font-size: 10px;
+  margin: 20px;
+`;
 
 const NavBar = styled.ul`
   margin: 0;
@@ -11,21 +20,33 @@ const NavBar = styled.ul`
   display: flex;
   justify-items: center;
   justify-content: center;
-  text-align: center;
   margin-bottom: 50px;
   background-color: ${(props) => props.theme.colors.background.dark};
-`;
 
-const NavBarItem = styled.li<{ selected: boolean }>`
-  width: 220px;
+  text-align: center;
   font-size: 20px;
   font-weight: 100;
   letter-spacing: 5px;
   text-transform: uppercase;
+
+  ${down("sm")} {
+    flex-direction: column;
+    padding-bottom: 20px;
+  }
+`;
+
+const NavBarItem = styled.li<{ selected: boolean }>`
   position: relative;
+
+  ${up("md")} {
+    width: 220px;
+  }
 
   // Text
   > a {
+    ${down("sm")} {
+      display: none;
+    }
     display: block;
     padding: 14px 16px;
     :hover {
@@ -51,20 +72,21 @@ const NavBarItem = styled.li<{ selected: boolean }>`
 `;
 
 const SubMenu = styled.ul`
+  background-color: ${(props) => props.theme.colors.background.dark};
   list-style: none;
-  text-decoration: none;
-  position: absolute;
   padding: 0;
   width: 100%;
-  background-color: ${(props) => props.theme.colors.background.dark};
   z-index: 1;
-  opacity: 0;
-  visibility: hidden;
+
+  ${up("md")} {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+  }
 
   > li {
     a {
       padding: 12px 16px;
-      text-decoration: none;
       display: block;
     }
   }
@@ -96,6 +118,7 @@ export const PlatformSelector = () => {
   return (
     <nav>
       <NavBar>
+        <MobileHeader>Choose your platforms:</MobileHeader>
         <NavItem label="PC">
           <SubMenu aria-label="submenu">
             <NavItem label="Windows" platform="Windows" />
