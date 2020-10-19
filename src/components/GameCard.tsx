@@ -10,6 +10,15 @@ const StyledLink = styled(Link)`
   .gatsby-image-wrapper {
     box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.75);
   }
+
+  transition: all 0.1s ease-in;
+  &:hover {
+    transform: scale(1.03);
+    transition: all 0.1s ease-in;
+    .gatsby-image-wrapper {
+      box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+    }
+  }
 `;
 
 const Title = styled.div`
