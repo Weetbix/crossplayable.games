@@ -38,7 +38,7 @@ const sourceGameNodes: GatsbyNode["sourceNodes"] = async ({
         PSNow: PSNowGames.some((PSNowGame) => PSNowGame.name === game.title),
         GamePass: gamePassGames.some((GPGame) => GPGame.title === game.title),
       },
-      id: createNodeId(game.title),
+      id: createNodeId(`${game.title}${JSON.stringify(game.platforms)}`),
       internal: {
         type: `Game`,
         contentDigest: createContentDigest(crossplayGames),

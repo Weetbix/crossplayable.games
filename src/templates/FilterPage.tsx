@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
+import uniqBy from "lodash/uniqBy";
 import styled from "styled-components";
 import { FilterPageQuery } from "../../graphql-types";
 import { FilterDetails } from "../components/FilterDetails";
@@ -22,7 +23,11 @@ type FilterPageProps = {
   data: FilterPageQuery;
 };
 const FilterPage = (props: FilterPageProps) => {
-  const games = props.data.allGame.nodes;
+  // Due to games having different 'sets' of platforms, we can
+  // have 2 games in the list with the same name, but different
+  // platform sets (Aragami). Here we should only show 1 of those.
+  const games = uniqBy(props.data.allGame.nodes, (game) => game.title);
+
   return (
     <Content>
       <FilterDetails numberOfGames={props.data.allGame.totalCount} />
