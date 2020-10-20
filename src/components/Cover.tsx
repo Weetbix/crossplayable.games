@@ -25,8 +25,8 @@ export type CoverImage = {
 };
 type CoverProps = {
   image: CoverImage;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 };
 
 // Renders the cover image of a game, or the placeholder
