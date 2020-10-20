@@ -90,17 +90,20 @@ const createGamePages: GatsbyNode["createPages"] = async ({
   });
 };
 
-const addImagesToGameNodes: GatsbyNode["onCreateNode"] = async ({
+async function addImageFromUrl(
+  propertyName: string,
+  fieldName: string,
   node,
-  actions: { createNode },
-  store,
+  createNode,
+  createNodeId: (input: string) => string,
   cache,
-  createNodeId,
-  reporter,
-}) => {
-  if (node.internal.type === "Game" && node.coverUrl !== null) {
+  store,
+  reporter
+) {
+  const url = (node as any)[propertyName];
+  if (url) {
     let fileNode = await createRemoteFileNode({
-      url: (node as any).coverUrl as string,
+      url: (node as any)[propertyName] as string,
       parentNodeId: node.id,
       createNode,
       createNodeId,
@@ -110,8 +113,40 @@ const addImagesToGameNodes: GatsbyNode["onCreateNode"] = async ({
     });
     // if the file was created, attach the new node to the parent node
     if (fileNode) {
-      (node as any).coverImage___NODE = fileNode.id;
+      (node as any)[`${fieldName}___NODE`] = fileNode.id;
     }
+  }
+}
+
+const addImagesToGameNodes: GatsbyNode["onCreateNode"] = async ({
+  node,
+  actions: { createNode },
+  store,
+  cache,
+  createNodeId,
+  reporter,
+}) => {
+  if (node.internal.type === "Game") {
+    await addImageFromUrl(
+      "coverUrl",
+      "coverImage",
+      node,
+      createNode,
+      createNodeId,
+      cache,
+      store,
+      reporter
+    );
+    await addImageFromUrl(
+      "backdropUrl",
+      "backdropImage",
+      node,
+      createNode,
+      createNodeId,
+      cache,
+      store,
+      reporter
+    );
   }
 };
 

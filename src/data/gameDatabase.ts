@@ -27,6 +27,9 @@ type IGDBGame = {
   cover: {
     image_id: string;
   };
+  screenshots: Array<{
+    image_id: string;
+  }>;
   genres: Array<{
     name: string;
   }>;
@@ -47,6 +50,7 @@ const getBatchOfGameDetals = async (titles: string[], token: string) => {
         websites.url,
         websites.category,
         cover.image_id,
+        screenshots.image_id,
         genres.name;
     where ${titleFilters};
     `;
@@ -79,16 +83,21 @@ const getBatchOfGameDetals = async (titles: string[], token: string) => {
 // Map a single API result to an object
 const mapData = (apiResult: any) => {
   const game = apiResult as IGDBGame;
-  const coverUrl = game.cover?.image_id
-    ? `https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${game.cover.image_id}.jpg`
-    : null;
+
+  const igdbImageIdToURL = (image_id) =>
+    image_id
+      ? `https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${image_id}.jpg`
+      : null;
 
   return {
     ...game,
     name: undefined,
     cover: undefined,
     title: game.name,
-    coverUrl,
+    coverUrl: igdbImageIdToURL(game.cover?.image_id),
+    backdropUrl: igdbImageIdToURL(
+      game.screenshots?.length && game.screenshots[0].image_id
+    ),
   };
 };
 
