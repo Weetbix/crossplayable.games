@@ -102,18 +102,24 @@ async function addImageFromUrl(
 ) {
   const url = (node as any)[propertyName];
   if (url) {
-    let fileNode = await createRemoteFileNode({
-      url: (node as any)[propertyName] as string,
-      parentNodeId: node.id,
-      createNode,
-      createNodeId,
-      cache,
-      store,
-      reporter,
-    });
-    // if the file was created, attach the new node to the parent node
-    if (fileNode) {
-      (node as any)[`${fieldName}___NODE`] = fileNode.id;
+    try {
+      let fileNode = await createRemoteFileNode({
+        url: (node as any)[propertyName] as string,
+        parentNodeId: node.id,
+        createNode,
+        createNodeId,
+        cache,
+        store,
+        reporter,
+      });
+      // if the file was created, attach the new node to the parent node
+      if (fileNode) {
+        (node as any)[`${fieldName}___NODE`] = fileNode.id;
+      }
+    } catch (e) {
+      console.log("Warning: Unable to fetch remote image");
+      console.log("URL: " + url);
+      console.log(JSON.stringify(e));
     }
   }
 }
