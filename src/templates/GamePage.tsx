@@ -10,12 +10,26 @@ const BackdropWrapper = styled.div`
   position: absolute;
   width: 100%;
   top: 0;
+  z-index: -10;
   div {
     height: 350px;
   }
 `;
 const Backdrop = styled(Img)`
   filter: blur(10px);
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Content = styled.div`
+  max-width: 700px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 type GamePageProps = {
@@ -26,11 +40,15 @@ const GamePage = (props: GamePageProps) => {
 
   return (
     <span>
-      {game.title}
       <BackdropWrapper>
         <Backdrop fluid={game.backdropImage?.childImageSharp?.fluid} />
       </BackdropWrapper>
-      <Cover image={game.coverImage?.childImageSharp} />
+      <ContentWrapper>
+        <Content>
+          <Cover image={game.coverImage?.childImageSharp} />
+          {game.title}
+        </Content>
+      </ContentWrapper>
     </span>
   );
 };
