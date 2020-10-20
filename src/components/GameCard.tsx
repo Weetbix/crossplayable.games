@@ -1,7 +1,8 @@
 import React from "react";
-import Img, { FixedObject } from "gatsby-image";
+import { FixedObject } from "gatsby-image";
 import styled from "styled-components";
 import { Link } from "gatsby";
+import { Cover } from "./Cover";
 
 const StyledLink = styled(Link)`
   margin: 16px;
@@ -30,26 +31,12 @@ const Title = styled.div`
   padding-right: 10px;
 `;
 
-const ImagePlaceholder = styled.div`
-  width: 200px;
-  height: 267px;
-  background-color: #777;
-`;
-
 type GameCardProps = {
   title: string;
   image: FixedObject;
   link: string;
   originalAspectRatio: number;
 };
-
-// Allow images that were originally 10% away from
-// the intended cover ratio.
-const MAX_RATIO_DIFFERENCE = 0.15;
-
-const shouldRenderImage = (image: FixedObject, originalRatio) =>
-  image &&
-  Math.abs(originalRatio - image.width / image.height) < MAX_RATIO_DIFFERENCE;
 
 export const GameCard = ({
   title,
@@ -58,11 +45,7 @@ export const GameCard = ({
   link,
 }: GameCardProps) => (
   <StyledLink to={link}>
-    {shouldRenderImage(image, originalAspectRatio) ? (
-      <Img fixed={image} />
-    ) : (
-      <ImagePlaceholder />
-    )}
+    <Cover image={image} originalAspectRatio={originalAspectRatio} />
     <Title>{title}</Title>
   </StyledLink>
 );
