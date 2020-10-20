@@ -1,8 +1,7 @@
 import React from "react";
-import { FixedObject } from "gatsby-image";
 import styled from "styled-components";
 import { Link } from "gatsby";
-import { Cover } from "./Cover";
+import { Cover, CoverImage } from "./Cover";
 
 const StyledLink = styled(Link)`
   margin: 16px;
@@ -33,19 +32,13 @@ const Title = styled.div`
 
 type GameCardProps = {
   title: string;
-  image: FixedObject;
+  image: CoverImage;
   link: string;
-  originalAspectRatio: number;
 };
 
-export const GameCard = ({
-  title,
-  image,
-  originalAspectRatio,
-  link,
-}: GameCardProps) => (
+export const GameCard = ({ title, image, link }: GameCardProps) => (
   <StyledLink to={link}>
-    <Cover image={image} originalAspectRatio={originalAspectRatio} />
+    <Cover image={image} />
     <Title>{title}</Title>
   </StyledLink>
 );

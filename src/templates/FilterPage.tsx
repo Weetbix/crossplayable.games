@@ -37,10 +37,7 @@ const FilterPage = (props: FilterPageProps) => {
             key={node.id}
             title={node.title}
             link={node.fields.slug}
-            image={node.coverImage?.childImageSharp?.fixed}
-            originalAspectRatio={
-              node.coverImage?.childImageSharp?.sizes?.aspectRatio
-            }
+            image={node.coverImage?.childImageSharp}
           />
         ))}
       </GamesWrapper>

@@ -1,6 +1,7 @@
 import React from "react";
 import Img, { FixedObject } from "gatsby-image";
 import styled from "styled-components";
+import { ImageSharpFixed } from "../../graphql-types";
 
 const ImagePlaceholder = styled.div<{ width: number; height: number }>`
   width: ${(props) => props.width}px;
@@ -16,16 +17,21 @@ const shouldRenderImage = (image: FixedObject, originalRatio) =>
   image &&
   Math.abs(originalRatio - image.width / image.height) < MAX_RATIO_DIFFERENCE;
 
+export type CoverImage = {
+  fixed?: ImageSharpFixed;
+  sizes?: {
+    aspectRatio: number;
+  };
+};
 type CoverProps = {
-  image: FixedObject;
-  originalAspectRatio: number;
+  image: CoverImage;
 };
 
 // Renders the cover image of a game, or the placeholder
 // if the cover image was not an appropriate ratio
-export const Cover = ({ image, originalAspectRatio }: CoverProps) =>
-  shouldRenderImage(image, originalAspectRatio) ? (
-    <Img fixed={image} />
+export const Cover = ({ image }: CoverProps) =>
+  shouldRenderImage(image.fixed, image.sizes.aspectRatio) ? (
+    <Img fixed={image.fixed} />
   ) : (
-    <ImagePlaceholder width={image.width} height={image.height} />
+    <ImagePlaceholder width={image.fixed.width} height={image.fixed.height} />
   );

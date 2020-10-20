@@ -1,20 +1,20 @@
 import React from "react";
 import { graphql } from "gatsby";
-import Img, { FixedObject } from "gatsby-image";
+import Img from "gatsby-image";
 import { GamePageQuery } from "../../graphql-types";
+import { Cover } from "../components/Cover";
 
 type GamePageProps = {
   data: GamePageQuery;
 };
 const GamePage = (props: GamePageProps) => {
+  const game = props.data.allGame.edges[0].node;
+
   return (
     <span>
-      {props.data.allGame.edges[0].node.title}
-      <Img
-        fixed={
-          props.data.allGame.edges[0].node.backdropImage?.childImageSharp?.fixed
-        }
-      />
+      {game.title}
+      <Img fixed={game.backdropImage?.childImageSharp?.fixed} />
+      <Cover image={game.coverImage?.childImageSharp} />
     </span>
   );
 };
