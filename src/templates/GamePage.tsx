@@ -15,21 +15,38 @@ const BackdropWrapper = styled.div`
     height: 350px;
   }
 `;
+
 const Backdrop = styled(Img)`
+  transform: scale(1.1);
   filter: blur(10px);
 `;
 
-const ContentWrapper = styled.div`
+const Content = styled.div`
+  margin-top: 150px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 700px;
+  min-height: 500px;
 `;
 
-const Content = styled.div`
-  max-width: 700px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+const CoverColumn = styled.div``;
+
+const StyledCover = styled(Cover)`
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+`;
+
+const MainColumn = styled.div`
+  flex: 1;
+  padding: 0px 24px;
+
+  h1 {
+    margin-top: 0;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px #000;
+    letter-spacing: 5px;
+    font-weight: 400;
+  }
 `;
 
 type GamePageProps = {
@@ -43,12 +60,18 @@ const GamePage = (props: GamePageProps) => {
       <BackdropWrapper>
         <Backdrop fluid={game.backdropImage?.childImageSharp?.fluid} />
       </BackdropWrapper>
-      <ContentWrapper>
-        <Content>
-          <Cover image={game.coverImage?.childImageSharp} />
-          {game.title}
-        </Content>
-      </ContentWrapper>
+      <Content>
+        <CoverColumn>
+          <StyledCover
+            width={250}
+            height={334}
+            image={game.coverImage?.childImageSharp}
+          />
+        </CoverColumn>
+        <MainColumn>
+          <h1>{game.title}</h1>
+        </MainColumn>
+      </Content>
     </span>
   );
 };
@@ -62,7 +85,7 @@ export const query = graphql`
           title
           coverImage {
             childImageSharp {
-              fixed(width: 200, height: 267) {
+              fixed(width: 250, height: 334) {
                 ...GatsbyImageSharpFixed
               }
               sizes {

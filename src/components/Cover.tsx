@@ -27,13 +27,19 @@ type CoverProps = {
   image: CoverImage;
   width?: number;
   height?: number;
+  className?: string;
 };
 
 // Renders the cover image of a game, or the placeholder
 // if the cover image was not an appropriate ratio
-export const Cover = ({ image, width = 200, height = 267 }: CoverProps) =>
+export const Cover = ({
+  image,
+  width = 200,
+  height = 267,
+  className = null,
+}: CoverProps) =>
   shouldRenderImage(image?.fixed, image?.sizes?.aspectRatio) ? (
-    <Img fixed={image.fixed} />
+    <Img fixed={image.fixed} className={className} />
   ) : (
-    <ImagePlaceholder width={width} height={height} />
+    <ImagePlaceholder width={width} height={height} className={className} />
   );
