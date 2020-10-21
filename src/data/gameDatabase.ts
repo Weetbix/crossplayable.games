@@ -11,29 +11,6 @@ const getAccessToken = async () => {
   return result.access_token;
 };
 
-// The expected return type from the API
-type IGDBGame = {
-  name: string;
-  rating: number;
-  rating_count: number;
-  total_rating: number;
-  total_rating_count: number;
-  storyline: string;
-  summary: string;
-  websites: Array<{
-    url: string;
-    category: number;
-  }>;
-  cover: {
-    image_id: string;
-  };
-  screenshots: Array<{
-    image_id: string;
-  }>;
-  genres: Array<{
-    name: string;
-  }>;
-};
 const getBatchOfGameDetals = async (titles: string[], token: string) => {
   const titleFilters = titles.map((t) => `(name ~ "${t}")`).join("|");
 
@@ -51,7 +28,19 @@ const getBatchOfGameDetals = async (titles: string[], token: string) => {
         websites.category,
         cover.image_id,
         screenshots.image_id,
-        genres.name;
+        genres.name,
+        aggregated_rating,
+        aggregated_rating_count,
+        first_release_date,
+        game_modes.name,
+        involved_companies.publisher,
+        involved_companies.developer,
+        involved_companies.company.name,
+        involved_companies.company.websites.url,
+        involved_companies.company.websites.category,
+        keywords.name,
+        similar_games,
+        themes.name;
     where ${titleFilters};
     `;
 
@@ -82,7 +71,7 @@ const getBatchOfGameDetals = async (titles: string[], token: string) => {
 
 // Map a single API result to an object
 const mapData = (apiResult: any) => {
-  const game = apiResult as IGDBGame;
+  const game = apiResult;
 
   const igdbImageIdToURL = (image_id) =>
     image_id
