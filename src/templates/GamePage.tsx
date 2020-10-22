@@ -1,6 +1,5 @@
 import React from "react";
 import { graphql } from "gatsby";
-import Img from "gatsby-image";
 import styled from "styled-components";
 import { GamePageQuery } from "../../graphql-types";
 import { Cover } from "../components/Cover";
@@ -11,12 +10,13 @@ const BackdropWrapper = styled.div`
   width: 100%;
   top: 0;
   z-index: -10;
-  div {
-    height: 350px;
-  }
+  height: 350px;
 `;
 
-const Backdrop = styled(Img)`
+const Backdrop = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transform: scale(1.1);
   filter: blur(10px);
 `;
@@ -58,7 +58,7 @@ const GamePage = (props: GamePageProps) => {
   return (
     <span>
       <BackdropWrapper>
-        <Backdrop fluid={game.backdropImage?.childImageSharp?.fluid} />
+        <Backdrop src={game.backdropImage?.childImageSharp?.fixed?.src} />
       </BackdropWrapper>
       <Content>
         <CoverColumn>
@@ -95,8 +95,8 @@ export const query = graphql`
           }
           backdropImage {
             childImageSharp {
-              fluid(maxWidth: 500) {
-                ...GatsbyImageSharpFluid_tracedSVG
+              fixed(width: 150) {
+                src
               }
             }
           }
