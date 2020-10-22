@@ -95,7 +95,7 @@ const GamePage = (props: GamePageProps) => {
           <p>
             Genres:
             <ul>
-              {game.genres.map((genre) => (
+              {game.genres?.map((genre) => (
                 <li key={genre.name}>{genre.name}</li>
               ))}
             </ul>
@@ -112,15 +112,15 @@ const GamePage = (props: GamePageProps) => {
             </ul>
           </p>
           <p>
-            External critic scores: {game.aggregated_rating.toFixed(0)} (from{" "}
+            External critic scores: {game.aggregated_rating?.toFixed(0)} (from{" "}
             {game.aggregated_rating_count} total ratings)
           </p>
           <p>
-            IGDB rating: {game.rating.toFixed(0)} (from {game.rating_count}{" "}
+            IGDB rating: {game.rating?.toFixed(0)} (from {game.rating_count}{" "}
             total ratings)
           </p>
           <p>
-            Total rating: {game.total_rating.toFixed(0)} (from{" "}
+            Total rating: {game.total_rating?.toFixed(0)} (from{" "}
             {game.total_rating_count} total ratings)
           </p>
           <p>
@@ -133,7 +133,7 @@ const GamePage = (props: GamePageProps) => {
           </p>
           <p>
             Keywords:
-            {game.keywords.map((keyword) => keyword.name).join(", ")}
+            {game.keywords?.map((keyword) => keyword.name).join(", ")}
           </p>
           <p>
             Platforms:
@@ -148,7 +148,7 @@ const GamePage = (props: GamePageProps) => {
           <p>
             Game modes:
             <ul>
-              {game.game_modes.map((mode) => (
+              {game.game_modes?.map((mode) => (
                 <li key={mode.name}>{mode.name}</li>
               ))}
             </ul>
@@ -156,7 +156,7 @@ const GamePage = (props: GamePageProps) => {
           <p>
             Themes:
             <ul>
-              {game.themes.map((theme) => (
+              {game.themes?.map((theme) => (
                 <li key={theme.name}>{theme.name}</li>
               ))}
             </ul>
@@ -164,7 +164,7 @@ const GamePage = (props: GamePageProps) => {
           <p>
             Websites:
             <ul>
-              {game.websites.map((website) => (
+              {game.websites?.map((website) => (
                 <li key={website.url}>
                   <a href={website.url}>{website.url}</a> (category:{" "}
                   {website.category})
