@@ -40,6 +40,10 @@ const MainColumn = styled.div`
   flex: 1;
   padding: 0px 24px;
 
+  > div {
+    height: 200px;
+  }
+
   h1 {
     margin-top: 0;
     text-transform: uppercase;
@@ -69,22 +73,24 @@ const GamePage = (props: GamePageProps) => {
           />
         </CoverColumn>
         <MainColumn>
-          <h1>{game.title}</h1>
-          <p>
-            Developer:
-            <span>
-              {Array.from(
-                new Set(
-                  game.involved_companies
-                    ?.filter((company) => company.developer)
-                    .map((company) => company.company.name)
-                )
-              ).join(", ")}
-            </span>
-          </p>
-          <p>
-            Released {new Date(game.first_release_date * 1000).toDateString()}
-          </p>
+          <div>
+            <h1>{game.title}</h1>
+            <p>
+              Developer:
+              <span>
+                {Array.from(
+                  new Set(
+                    game.involved_companies
+                      ?.filter((company) => company.developer)
+                      .map((company) => company.company.name)
+                  )
+                ).join(", ")}
+              </span>
+            </p>
+            <p>
+              Released {new Date(game.first_release_date * 1000).toDateString()}
+            </p>
+          </div>
 
           <p>
             Genres:
