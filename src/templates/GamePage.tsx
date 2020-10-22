@@ -70,6 +70,102 @@ const GamePage = (props: GamePageProps) => {
         </CoverColumn>
         <MainColumn>
           <h1>{game.title}</h1>
+          <p>
+            Developer:
+            <span>
+              {Array.from(
+                new Set(
+                  game.involved_companies
+                    ?.filter((company) => company.developer)
+                    .map((company) => company.company.name)
+                )
+              ).join(", ")}
+            </span>
+          </p>
+          <p>
+            Released {new Date(game.first_release_date * 1000).toDateString()}
+          </p>
+
+          <p>
+            Genres:
+            <ul>
+              {game.genres.map((genre) => (
+                <li key={genre.name}>{genre.name}</li>
+              ))}
+            </ul>
+          </p>
+          <p>
+            Publishers:
+            <ul>
+              {" "}
+              {game.involved_companies
+                ?.filter((company) => company.publisher)
+                .map((company) => (
+                  <li key={company.company.name}>{company.company.name}</li>
+                ))}
+            </ul>
+          </p>
+          <p>
+            External critic scores: {game.aggregated_rating.toFixed(0)} (from{" "}
+            {game.aggregated_rating_count} total ratings)
+          </p>
+          <p>
+            IGDB rating: {game.rating.toFixed(0)} (from {game.rating_count}{" "}
+            total ratings)
+          </p>
+          <p>
+            Total rating: {game.total_rating.toFixed(0)} (from{" "}
+            {game.total_rating_count} total ratings)
+          </p>
+          <p>
+            Summary:
+            {game.summary}
+          </p>
+          <p>
+            Storyline:
+            {game.storyline}
+          </p>
+          <p>
+            Keywords:
+            {game.keywords.map((keyword) => keyword.name).join(", ")}
+          </p>
+          <p>
+            Platforms:
+            <ul>
+              {Object.entries(game.platforms)
+                .filter(([, has]) => has)
+                .map(([platformName]) => (
+                  <li key={platformName}>{platformName}</li>
+                ))}
+            </ul>
+          </p>
+          <p>
+            Game modes:
+            <ul>
+              {game.game_modes.map((mode) => (
+                <li key={mode.name}>{mode.name}</li>
+              ))}
+            </ul>
+          </p>
+          <p>
+            Themes:
+            <ul>
+              {game.themes.map((theme) => (
+                <li key={theme.name}>{theme.name}</li>
+              ))}
+            </ul>
+          </p>
+          <p>
+            Websites:
+            <ul>
+              {game.websites.map((website) => (
+                <li key={website.url}>
+                  <a href={website.url}>{website.url}</a> (category:{" "}
+                  {website.category})
+                </li>
+              ))}
+            </ul>
+          </p>
         </MainColumn>
       </Content>
     </span>
@@ -99,6 +195,53 @@ export const query = graphql`
                 src
               }
             }
+          }
+          aggregated_rating
+          aggregated_rating_count
+          first_release_date
+          game_modes {
+            name
+          }
+          genres {
+            name
+          }
+          involved_companies {
+            publisher
+            developer
+            company {
+              name
+              websites {
+                url
+                category
+              }
+            }
+          }
+          keywords {
+            name
+          }
+          platforms {
+            GamePass
+            Linux
+            Mac
+            PS3
+            PS4
+            Switch
+            PSNow
+            XBO
+            Windows
+          }
+          rating
+          rating_count
+          storyline
+          summary
+          themes {
+            name
+          }
+          total_rating
+          total_rating_count
+          websites {
+            category
+            url
           }
         }
       }
