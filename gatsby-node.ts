@@ -153,6 +153,31 @@ const addImagesToGameNodes: GatsbyNode["onCreateNode"] = async ({
       store,
       reporter
     );
+
+    // For now, disable screenshot fetching.
+    // const screenshotArray = (node as any).screenshots ?? [];
+    // for (let i = 0; i < screenshotArray.length; i++) {
+    //   const screenshotItem = screenshotArray[i];
+    //   try {
+    //     let fileNode = await createRemoteFileNode({
+    //       url: screenshotItem.url,
+    //       parentNodeId: node.id,
+    //       createNode,
+    //       createNodeId,
+    //       cache,
+    //       store,
+    //       reporter,
+    //     });
+    //     // if the file was created, attach the new node to the parent node
+    //     if (fileNode) {
+    //       screenshotItem[`image___NODE`] = fileNode.id;
+    //     }
+    //   } catch (e) {
+    //     console.log("Warning: Unable to fetch remote image");
+    //     console.log("URL: " + screenshotItem.url);
+    //     console.log(JSON.stringify(e));
+    //   }
+    // }
   }
 };
 

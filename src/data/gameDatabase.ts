@@ -73,20 +73,27 @@ const getBatchOfGameDetals = async (titles: string[], token: string) => {
 const mapData = (apiResult: any) => {
   const game = apiResult;
 
-  const igdbImageIdToURL = (image_id) =>
+  enum IGDB_IMAGE_SIZE {
+    cover = "cover_big",
+    screenshot = "screenshot_big",
+  }
+  const igdbImageIdToURL = (image_id, type: IGDB_IMAGE_SIZE) =>
     image_id
-      ? `https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${image_id}.jpg`
+      ? `https://images.igdb.com/igdb/image/upload/t_${type}/${image_id}.jpg`
       : null;
+
+  game.screenshots = game.screenshots?.map((screenshot) => ({
+    id: screenshot.id,
+    url: igdbImageIdToURL(screenshot.image_id, IGDB_IMAGE_SIZE.screenshot),
+  }));
 
   return {
     ...game,
     name: undefined,
     cover: undefined,
     title: game.name,
-    coverUrl: igdbImageIdToURL(game.cover?.image_id),
-    backdropUrl: igdbImageIdToURL(
-      game.screenshots?.length && game.screenshots[0].image_id
-    ),
+    coverUrl: igdbImageIdToURL(game.cover?.image_id, IGDB_IMAGE_SIZE.cover),
+    backdropUrl: game.screenshots?.[0].url ?? null,
   };
 };
 
