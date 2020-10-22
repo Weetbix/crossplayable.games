@@ -5,9 +5,9 @@
   "version": "0.1.0",
   "license": "0BSD",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "develop:debug": "node --nolazy node_modules/.bin/gatsby develop --inspect-brk",
+    "build": "GATSBY_CONCURRENT_DOWNLOAD=6 gatsby build",
+    "develop": "GATSBY_CONCURRENT_DOWNLOAD=6 gatsby develop",
+    "develop:debug": "GATSBY_CONCURRENT_DOWNLOAD=6 node --nolazy node_modules/.bin/gatsby develop --inspect-brk",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
