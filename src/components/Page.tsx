@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import ReactHelmet from "react-helmet";
 import { defaultTheme } from "../theme";
 import { useFilter } from "../hooks/useFilter";
 import { PlatformSelector } from "./PlatformSelector";
@@ -34,6 +35,14 @@ const Page: FC<{}> = ({ children }) => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <ReactHelmet>
+        <script
+          async
+          defer
+          data-domain="crossplayable.games"
+          src="https://plausible.cloud.johnhannagan.com/js/plausible.js"
+        ></script>
+      </ReactHelmet>
       <GlobalStyles />
       {currentFilter && <PlatformSelector />}
       {children}
