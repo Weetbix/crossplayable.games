@@ -70,7 +70,7 @@ const GamePage = (props: GamePageProps) => {
         description={`crossplay support for ${
           game.title
         } on ${supportedPlatforms.join(", ")}`}
-        keywords={game.keywords.map((keyword) => keyword.name)}
+        keywords={game.keywords?.map((keyword) => keyword.name)}
         image={game.coverImage?.childImageSharp?.fixed?.src}
       />
       <BackdropWrapper>
