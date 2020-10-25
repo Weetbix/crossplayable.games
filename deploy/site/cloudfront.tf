@@ -27,13 +27,13 @@ resource "aws_cloudfront_distribution" "prod_distribution" {
   }
 
   default_cache_behavior {
-    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "S3-${aws_s3_bucket.website_bucket.bucket}"
 
     # Forward all query strings, cookies and headers
     forwarded_values {
-      query_string = true
+      query_string = false
       cookies {
         forward = "none"
       }
@@ -42,6 +42,7 @@ resource "aws_cloudfront_distribution" "prod_distribution" {
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400
+    compress               = true
   }
 
   # Distributes content to US and Europe
