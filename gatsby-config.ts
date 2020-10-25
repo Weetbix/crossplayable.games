@@ -3,7 +3,7 @@ export const siteMetadata = {
   titleTemplate: "%s · Crossplayable Games",
   description:
     "Catalog of which games support crossplay and on which platforms.",
-  url: "https://crossplayable.games",
+  siteUrl: "https://crossplayable.games",
   image: "/images/meta-image.png",
 };
 
@@ -13,6 +13,7 @@ export const plugins = [
   "gatsby-transformer-sharp",
   "gatsby-plugin-styled-components",
   "gatsby-plugin-react-helmet",
+  "gatsby-plugin-advanced-sitemap",
   {
     resolve: `gatsby-plugin-layout`,
     options: {
