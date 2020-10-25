@@ -1,6 +1,19 @@
 import "styled-components";
 import { DefaultTheme } from "styled-components";
-import Color from "color";
+
+function adjust(color, amount) {
+  return (
+    "#" +
+    color
+      .replace(/^#/, "")
+      .replace(/../g, (color) =>
+        (
+          "0" +
+          Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)
+        ).substr(-2)
+      )
+  );
+}
 
 type SteppableThemeColor = {
   main: string;
@@ -10,11 +23,11 @@ type SteppableThemeColor = {
 
 const steppedColor = (
   color: string,
-  stepAmount: number = 0.25
+  stepAmount: number = 25
 ): SteppableThemeColor => ({
   main: color,
-  light: Color(color).lighten(stepAmount).hex(),
-  dark: Color(color).darken(stepAmount).hex(),
+  light: adjust(color, stepAmount),
+  dark: adjust(color, -stepAmount),
 });
 
 declare module "styled-components" {
@@ -37,9 +50,9 @@ declare module "styled-components" {
 export const defaultTheme: DefaultTheme = {
   colors: {
     primary: steppedColor("#F8D200"),
-    secondary: steppedColor("orange"),
-    text: steppedColor("#EEE"),
-    background: steppedColor("#222", 0.15),
+    secondary: steppedColor("#ffa500"),
+    text: steppedColor("#EEEEEE"),
+    background: steppedColor("#222222", 15),
   },
   breakpoints: {
     sm: "576px",
