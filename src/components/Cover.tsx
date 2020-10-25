@@ -1,6 +1,7 @@
 import React from "react";
 import Img, { FixedObject } from "gatsby-image";
 import styled from "styled-components";
+import { graphql } from "gatsby";
 import { ImageSharpFixed } from "../../graphql-types";
 
 const ImagePlaceholder = styled.div<{ width: number; height: number }>`
@@ -43,3 +44,30 @@ export const Cover = ({
   ) : (
     <ImagePlaceholder width={width} height={height} className={className} />
   );
+
+export const query = graphql`
+  fragment CoverImage on Game {
+    coverImage {
+      childImageSharp {
+        fixed(width: 200, height: 267, quality: 100) {
+          ...GatsbyImageSharpFixed
+        }
+        sizes {
+          aspectRatio
+        }
+      }
+    }
+  }
+  fragment CoverImageLarge on Game {
+    coverImage {
+      childImageSharp {
+        fixed(width: 250, height: 334, quality: 100) {
+          ...GatsbyImageSharpFixed
+        }
+        sizes {
+          aspectRatio
+        }
+      }
+    }
+  }
+`;

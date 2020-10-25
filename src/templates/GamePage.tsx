@@ -191,16 +191,7 @@ export const query = graphql`
       edges {
         node {
           title
-          coverImage {
-            childImageSharp {
-              fixed(width: 250, height: 334, quality: 100) {
-                ...GatsbyImageSharpFixed
-              }
-              sizes {
-                aspectRatio
-              }
-            }
-          }
+          ...CoverImageLarge
           backdropImage {
             childImageSharp {
               fixed(width: 150) {
