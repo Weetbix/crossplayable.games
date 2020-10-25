@@ -144,10 +144,6 @@ const GamePage = (props: GamePageProps) => {
             {game.storyline}
           </p>
           <p>
-            Keywords:
-            {game.keywords?.map((keyword) => keyword.name).join(", ")}
-          </p>
-          <p>
             Platforms:
             <ul>
               {supportedPlatforms.map((platformName) => (
