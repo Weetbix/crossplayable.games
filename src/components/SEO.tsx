@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "@reach/router";
 import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
+import { FavIcon } from "./FavIcon";
 
 const DEFAULT_KEYWORDS = [
   "crossplay",
@@ -78,6 +79,7 @@ const SEO = ({ title, description, meta = [], keywords = [] }: SEOProps) => {
       {meta.map(({ name, content }) => (
         <meta name={name} content={content} key={name} />
       ))}
+      <FavIcon />
     </Helmet>
   );
 };
