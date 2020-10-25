@@ -4,7 +4,7 @@ export const siteMetadata = {
   description:
     "Catalog of which games support crossplay and on which platforms.",
   url: "https://crossplayable.games",
-  // image: "/images/snape.jpg", // Path to your image you placed in the 'static' folder
+  image: "/images/meta-image.png",
 };
 
 export const plugins = [

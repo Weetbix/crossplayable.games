@@ -22,10 +22,17 @@ type SEOProps = {
   title?: string;
   description?: string;
   keywords?: Array<string>;
+  image?: string;
   meta?: Array<{ name: string; content: string }>;
 };
 
-const SEO = ({ title, description, meta = [], keywords = [] }: SEOProps) => {
+const SEO = ({
+  title,
+  description,
+  image,
+  meta = [],
+  keywords = [],
+}: SEOProps) => {
   const { pathname } = useLocation();
   const { site } = useStaticQuery(
     graphql`
@@ -36,7 +43,7 @@ const SEO = ({ title, description, meta = [], keywords = [] }: SEOProps) => {
             titleTemplate
             defaultDescription: description
             siteUrl: url
-            # defaultImage: image
+            defaultImage: image
           }
         }
       }
@@ -48,13 +55,13 @@ const SEO = ({ title, description, meta = [], keywords = [] }: SEOProps) => {
     titleTemplate,
     defaultDescription,
     siteUrl,
-    // defaultImage,
+    defaultImage,
   } = site.siteMetadata;
 
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
-    // image: `${siteUrl}${image || defaultImage}`,
+    image: `${siteUrl}${image || defaultImage}`,
     url: `${siteUrl}${pathname}`,
   };
 
@@ -62,9 +69,9 @@ const SEO = ({ title, description, meta = [], keywords = [] }: SEOProps) => {
     <Helmet title={seo.title} titleTemplate={titleTemplate}>
       <html lang="en" />
       <meta name="description" content={seo.description} />
-      {/* <meta name="image" content={seo.image} /> */}
-      {/* {seo.image && <meta property="og:image" content={seo.image} />} */}
-      {/* {seo.image && <meta name="twitter:image" content={seo.image} />} */}
+      <meta name="image" content={seo.image} />
+      <meta property="og:image" content={seo.image} />
+      <meta name="twitter:image" content={seo.image} />
       <meta property="og:url" content={seo.url} />
       <meta property="og:title" content={seo.title} />
       <meta property="og:description" content={seo.description} />

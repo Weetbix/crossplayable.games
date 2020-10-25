@@ -71,6 +71,7 @@ const GamePage = (props: GamePageProps) => {
           game.title
         } on ${supportedPlatforms.join(", ")}`}
         keywords={game.keywords.map((keyword) => keyword.name)}
+        image={game.coverImage?.childImageSharp?.fixed?.src}
       />
       <BackdropWrapper>
         <Backdrop src={game.backdropImage?.childImageSharp?.fixed?.src} />
