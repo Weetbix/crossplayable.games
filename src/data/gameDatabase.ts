@@ -74,7 +74,7 @@ const mapData = (apiResult: any) => {
   const game = apiResult;
 
   enum IGDB_IMAGE_SIZE {
-    cover = "cover_big",
+    cover = "cover_big_2x",
     screenshot = "screenshot_big",
   }
   const igdbImageIdToURL = (image_id, type: IGDB_IMAGE_SIZE) =>

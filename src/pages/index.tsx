@@ -98,7 +98,7 @@ export const query = graphql`
         }
         coverImage {
           childImageSharp {
-            fixed(width: 200, height: 267) {
+            fixed(width: 200, height: 267, quality: 100) {
               ...GatsbyImageSharpFixed
             }
             sizes {
