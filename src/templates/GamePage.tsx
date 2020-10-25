@@ -42,12 +42,12 @@ const MainColumn = styled.div`
 
   > div {
     height: 200px;
+    text-shadow: 1px 1px 1px #000;
   }
 
   h1 {
     margin-top: 0;
     text-transform: uppercase;
-    text-shadow: 2px 2px 2px #000;
     letter-spacing: 5px;
     font-weight: 400;
   }
