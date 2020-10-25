@@ -66,7 +66,7 @@ const GamePage = (props: GamePageProps) => {
   return (
     <span>
       <SEO
-        title={game.title}
+        title={`does ${game.title} support crossplay?`}
         description={`crossplay support for ${
           game.title
         } on ${supportedPlatforms.join(", ")}`}
