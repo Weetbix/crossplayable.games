@@ -71,8 +71,9 @@ const SEO = ({
       <link rel="canonical" href={seo.url} />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
-      <meta property="og:image" content={seo.image} />
       <meta name="twitter:image" content={seo.image} />
+      <meta property="og:image" content={seo.image} />
+      <meta property="og:image:alt" content={seo.title} />
       <meta property="og:url" content={seo.url} />
       <meta property="og:title" content={seo.title} />
       <meta property="og:description" content={seo.description} />
