@@ -14,6 +14,7 @@ export const plugins = [
   "gatsby-plugin-styled-components",
   "gatsby-plugin-react-helmet",
   "gatsby-plugin-advanced-sitemap",
+  "gatsby-plugin-robots-txt",
   {
     resolve: `gatsby-plugin-layout`,
     options: {
