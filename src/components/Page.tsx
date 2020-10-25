@@ -4,6 +4,7 @@ import { defaultTheme } from "../theme";
 import { useFilter } from "../hooks/useFilter";
 import { PlatformSelector } from "./PlatformSelector";
 import { Footer } from "./Footer";
+import SEO from "./SEO";
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -34,6 +35,7 @@ const Page: FC<{}> = ({ children }) => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <SEO />
       <GlobalStyles />
       {currentFilter && <PlatformSelector />}
       {children}

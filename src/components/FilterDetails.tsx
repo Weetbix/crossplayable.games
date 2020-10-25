@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useFilter } from "../hooks/useFilter";
+import SEO from "./SEO";
 
 const Content = styled.div`
   letter-spacing: 2px;
@@ -36,6 +37,7 @@ export const FilterDetails = ({ numberOfGames }: FilterDetailsProps) => {
 
   return (
     <Content>
+      <SEO title={`Crossplayable games on ${currentFilter.join(", ")}`} />
       <span>{startText} cross-playable with:</span>
       <div>
         {currentFilter.map((platform) => (

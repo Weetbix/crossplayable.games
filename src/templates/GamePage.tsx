@@ -1,8 +1,9 @@
-import React from "react";
 import { graphql } from "gatsby";
+import React from "react";
 import styled from "styled-components";
 import { GamePageQuery } from "../../graphql-types";
 import { Cover } from "../components/Cover";
+import SEO from "../components/SEO";
 
 const BackdropWrapper = styled.div`
   overflow: hidden;
@@ -58,9 +59,19 @@ type GamePageProps = {
 };
 const GamePage = (props: GamePageProps) => {
   const game = props.data.allGame.edges[0].node;
+  const supportedPlatforms = Object.entries(game.platforms)
+    .filter(([, has]) => has)
+    .map(([platformName]) => platformName);
 
   return (
     <span>
+      <SEO
+        title={game.title}
+        description={`crossplay support for ${
+          game.title
+        } on ${supportedPlatforms.join(", ")}`}
+        keywords={game.keywords.map((keyword) => keyword.name)}
+      />
       <BackdropWrapper>
         <Backdrop src={game.backdropImage?.childImageSharp?.fixed?.src} />
       </BackdropWrapper>
@@ -138,11 +149,9 @@ const GamePage = (props: GamePageProps) => {
           <p>
             Platforms:
             <ul>
-              {Object.entries(game.platforms)
-                .filter(([, has]) => has)
-                .map(([platformName]) => (
-                  <li key={platformName}>{platformName}</li>
-                ))}
+              {supportedPlatforms.map((platformName) => (
+                <li key={platformName}>{platformName}</li>
+              ))}
             </ul>
           </p>
           <p>

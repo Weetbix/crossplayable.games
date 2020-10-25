@@ -1,8 +1,18 @@
+export const siteMetadata = {
+  title: "Crossplayable Games",
+  titleTemplate: "%s · Crossplayable Games",
+  description:
+    "Catalog of which games support crossplay and on which platforms.",
+  url: "https://crossplayable.games",
+  // image: "/images/snape.jpg", // Path to your image you placed in the 'static' folder
+};
+
 export const plugins = [
   "gatsby-plugin-graphql-codegen",
   "gatsby-plugin-sharp",
   "gatsby-transformer-sharp",
   "gatsby-plugin-styled-components",
+  "gatsby-plugin-react-helmet",
   {
     resolve: `gatsby-plugin-layout`,
     options: {

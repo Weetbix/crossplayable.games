@@ -4,6 +4,7 @@ import uniqBy from "lodash/uniqBy";
 import styled from "styled-components";
 import { HomePageQuery } from "../../graphql-types";
 import { GameCard } from "../components/GameCard";
+import SEO from "../components/SEO";
 
 const Content = styled.div`
   display: flex;
@@ -27,6 +28,7 @@ const IndexPage = ({ data }: IndexPageProps) => {
 
   return (
     <Content>
+      <SEO title="Home" />
       <p>
         Select multiple platforms to see which games support crossplay on those
         systems
