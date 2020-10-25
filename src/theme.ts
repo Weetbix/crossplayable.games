@@ -52,7 +52,7 @@ export const defaultTheme: DefaultTheme = {
     primary: steppedColor("#F8D200"),
     secondary: steppedColor("#ffa500"),
     text: steppedColor("#EEEEEE"),
-    background: steppedColor("#222222", 15),
+    background: steppedColor("#222222", 5),
   },
   breakpoints: {
     sm: "576px",
