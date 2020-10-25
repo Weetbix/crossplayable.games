@@ -68,6 +68,7 @@ const SEO = ({
   return (
     <Helmet title={seo.title} titleTemplate={titleTemplate}>
       <html lang="en" />
+      <link rel="canonical" href={seo.url} />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
       <meta property="og:image" content={seo.image} />
