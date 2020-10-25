@@ -22,7 +22,8 @@ type IndexPageProps = {
   data: HomePageQuery;
 };
 const IndexPage = ({ data }: IndexPageProps) => {
-  const recentGames = uniqBy(data.allGame.nodes, (game) => game.title);
+  const mostLoved = uniqBy(data.mostLoved.nodes, (game) => game.title);
+  const recentGames = uniqBy(data.recentGames.nodes, (game) => game.title);
 
   return (
     <Content>
@@ -32,6 +33,17 @@ const IndexPage = ({ data }: IndexPageProps) => {
       </p>
       <br />
       <br />
+      <h3>Most Loved Games:</h3>
+      <GamesWrapper>
+        {mostLoved.map((node) => (
+          <GameCard
+            key={node.id}
+            title={node.title}
+            link={node.fields.slug}
+            image={node.coverImage?.childImageSharp}
+          />
+        ))}
+      </GamesWrapper>
       <h3>Most Recent Games:</h3>
       <GamesWrapper>
         {recentGames.map((node) => (
@@ -50,10 +62,33 @@ export default IndexPage;
 
 export const query = graphql`
   query HomePage {
-    allGame(
+    recentGames: allGame(
       sort: { fields: first_release_date, order: DESC }
       limit: 3
       filter: { first_release_date: { ne: null } }
+    ) {
+      nodes {
+        id
+        title
+        fields {
+          slug
+        }
+        coverImage {
+          childImageSharp {
+            fixed(width: 200, height: 267) {
+              ...GatsbyImageSharpFixed
+            }
+            sizes {
+              aspectRatio
+            }
+          }
+        }
+      }
+    }
+    mostLoved: allGame(
+      sort: { fields: total_rating, order: DESC }
+      limit: 3
+      filter: { total_rating: { ne: null }, total_rating_count: { gt: 100 } }
     ) {
       nodes {
         id
