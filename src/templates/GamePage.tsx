@@ -3,7 +3,9 @@ import React from "react";
 import styled from "styled-components";
 import { GamePageQuery } from "../../graphql-types";
 import { Cover } from "../components/Cover";
+import { PlatformTag } from "../components/PlatformTag";
 import SEO from "../components/SEO";
+import { ExpandableText } from "../components/ExpandableText";
 
 const BackdropWrapper = styled.div`
   overflow: hidden;
@@ -23,15 +25,50 @@ const Backdrop = styled.img`
 `;
 
 const Content = styled.div`
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  font-weight: 100;
+
   margin-top: 150px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  max-width: 700px;
+  max-width: 960px;
   min-height: 500px;
+  flex-direction: column;
+
+  h4 {
+    font-weight: 600;
+    margin-bottom: 7.5px;
+    margin-top: 30px;
+  }
+
+  > div {
+    display: flex;
+  }
 `;
 
-const CoverColumn = styled.div``;
+const AdditionalInfo = styled.div`
+  margin-top: -14px;
+  display: flex;
+  flex-wrap: wrap;
+  > div {
+    flex-basis: 50%;
+  }
+
+  ul {
+    list-style: none;
+    li {
+      margin-top: 5px;
+    }
+    padding: 0;
+  }
+`;
+
+const CoverColumn = styled.div`
+  max-width: 250px;
+`;
 
 const StyledCover = styled(Cover)`
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
@@ -77,108 +114,113 @@ const GamePage = (props: GamePageProps) => {
         <Backdrop src={game.backdropImage?.childImageSharp?.fixed?.src} />
       </BackdropWrapper>
       <Content>
-        <CoverColumn>
-          <StyledCover
-            width={250}
-            height={334}
-            image={game.coverImage?.childImageSharp}
-          />
-        </CoverColumn>
-        <MainColumn>
-          <div>
-            <h1>{game.title}</h1>
+        <div>
+          <CoverColumn>
+            <StyledCover
+              width={250}
+              height={334}
+              image={game.coverImage?.childImageSharp}
+            />
             <p>
-              Developer:
-              <span>
-                {Array.from(
-                  new Set(
-                    game.involved_companies
-                      ?.filter((company) => company.developer)
-                      .map((company) => company.company.name)
-                  )
-                ).join(", ")}
-              </span>
+              External critic scores: {game.aggregated_rating?.toFixed(0)} (from{" "}
+              {game.aggregated_rating_count} total ratings)
             </p>
             <p>
-              Released {new Date(game.first_release_date * 1000).toDateString()}
+              IGDB rating: {game.rating?.toFixed(0)} (from {game.rating_count}{" "}
+              total ratings)
             </p>
-          </div>
-
-          <p>
-            Genres:
-            <ul>
-              {game.genres?.map((genre) => (
-                <li key={genre.name}>{genre.name}</li>
-              ))}
-            </ul>
-          </p>
-          <p>
-            Publishers:
-            <ul>
-              {" "}
-              {game.involved_companies
-                ?.filter((company) => company.publisher)
-                .map((company) => (
-                  <li key={company.company.name}>{company.company.name}</li>
-                ))}
-            </ul>
-          </p>
-          <p>
-            External critic scores: {game.aggregated_rating?.toFixed(0)} (from{" "}
-            {game.aggregated_rating_count} total ratings)
-          </p>
-          <p>
-            IGDB rating: {game.rating?.toFixed(0)} (from {game.rating_count}{" "}
-            total ratings)
-          </p>
-          <p>
-            Total rating: {game.total_rating?.toFixed(0)} (from{" "}
-            {game.total_rating_count} total ratings)
-          </p>
-          <p>
-            Summary:
-            {game.summary}
-          </p>
-          <p>
-            Storyline:
-            {game.storyline}
-          </p>
-          <p>
-            Platforms:
-            <ul>
+            <p>
+              Total rating: {game.total_rating?.toFixed(0)} (from{" "}
+              {game.total_rating_count} total ratings)
+            </p>
+          </CoverColumn>
+          <MainColumn>
+            <div>
+              <h1>{game.title}</h1>
+              <p>
+                Developer:
+                <span>
+                  {Array.from(
+                    new Set(
+                      game.involved_companies
+                        ?.filter((company) => company.developer)
+                        .map((company) => company.company.name)
+                    )
+                  ).join(", ")}
+                </span>
+              </p>
+              <p>
+                Released{" "}
+                {new Date(game.first_release_date * 1000).toDateString()}
+              </p>
+            </div>
+            <p>
+              <h4>Platforms</h4>
               {supportedPlatforms.map((platformName) => (
-                <li key={platformName}>{platformName}</li>
+                <PlatformTag key={platformName}>{platformName}</PlatformTag>
               ))}
-            </ul>
-          </p>
-          <p>
-            Game modes:
-            <ul>
-              {game.game_modes?.map((mode) => (
-                <li key={mode.name}>{mode.name}</li>
-              ))}
-            </ul>
-          </p>
-          <p>
-            Themes:
-            <ul>
-              {game.themes?.map((theme) => (
-                <li key={theme.name}>{theme.name}</li>
-              ))}
-            </ul>
-          </p>
-          <p>
-            Websites:
-            <ul>
-              {game.websites?.map((website) => (
-                <li key={website.url}>
-                  <a href={website.url}>{website.url}</a> (category:{" "}
-                  {website.category})
-                </li>
-              ))}
-            </ul>
-          </p>
-        </MainColumn>
+            </p>
+            {game.game_modes && (
+              <p>
+                <h4>Game Modes</h4>
+                <span>
+                  {game.game_modes?.map((mode) => mode.name).join(", ")}
+                </span>
+              </p>
+            )}
+            {game.summary && (
+              <p>
+                <h4>Description</h4>
+                <ExpandableText content={game.summary} maxLength={300} />
+              </p>
+            )}
+            {game.storyline && (
+              <p>
+                <h4>Storyline Summary</h4>
+                <ExpandableText content={game.storyline} maxLength={300} />
+              </p>
+            )}
+            <AdditionalInfo>
+              <div>
+                <h4>Genres</h4>
+                <ul>
+                  {game.genres?.map(({ name }) => (
+                    <li key={name}>{name}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4>Publishers</h4>
+                <ul>
+                  {game.involved_companies
+                    ?.filter((company) => company.publisher)
+                    .map((company) => (
+                      <li key={company.company.name}>{company.company.name}</li>
+                    ))}
+                </ul>
+              </div>
+              <div>
+                <h4>Themes</h4>
+                <ul>
+                  {game.themes?.map((theme) => (
+                    <li key={theme.name}>{theme.name}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4>Websites</h4>
+                <ul>
+                  {game.websites?.map((website) => (
+                    <li key={website.url}>
+                      <a href={website.url}>website</a> (category:{" "}
+                      {website.category})
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </AdditionalInfo>
+          </MainColumn>
+        </div>
       </Content>
     </span>
   );

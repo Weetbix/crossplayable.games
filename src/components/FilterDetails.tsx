@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useFilter } from "../hooks/useFilter";
+import { PlatformTag } from "./PlatformTag";
 import SEO from "./SEO";
 
 const Content = styled.div`
@@ -11,15 +12,6 @@ const Content = styled.div`
   text-align: center;
   color: ${(props) => props.theme.colors.text.dark};
   margin-bottom: 50px;
-`;
-
-const Platform = styled.span`
-  background-color: ${(props) => props.theme.colors.text.main};
-  color: ${(props) => props.theme.colors.background.main};
-  display: inline-block;
-  margin: 8px;
-  padding: 2px 5px;
-  border-radius: 3px;
 `;
 
 type FilterDetailsProps = {
@@ -41,7 +33,7 @@ export const FilterDetails = ({ numberOfGames }: FilterDetailsProps) => {
       <span>{startText} cross-playable with:</span>
       <div>
         {currentFilter.map((platform) => (
-          <Platform>{platform}</Platform>
+          <PlatformTag>{platform}</PlatformTag>
         ))}
       </div>
     </Content>
