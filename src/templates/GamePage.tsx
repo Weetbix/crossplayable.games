@@ -6,6 +6,7 @@ import { Cover } from "../components/Cover";
 import { PlatformTag } from "../components/PlatformTag";
 import SEO from "../components/SEO";
 import { ExpandableText } from "../components/ExpandableText";
+import { down, up } from "styled-breakpoints";
 
 const BackdropWrapper = styled.div`
   overflow: hidden;
@@ -46,6 +47,9 @@ const Content = styled.div`
 
   > div {
     display: flex;
+    ${down("sm")} {
+      flex-direction: column;
+    }
   }
 `;
 
@@ -67,7 +71,10 @@ const AdditionalInfo = styled.div`
 `;
 
 const CoverColumn = styled.div`
-  max-width: 250px;
+  text-align: center;
+  ${up("md")} {
+    max-width: 250px;
+  }
 `;
 
 const StyledCover = styled(Cover)`
