@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { CircularProgressbarWithChildren } from "react-circular-progressbar";
+import { defaultTheme } from "../theme";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const Content = styled.div`
   width: 150px;
   margin-right: auto;
   margin-left: auto;
-
-  .CircularProgressbar-path {
-    stroke: ${(props) => props.theme.colors.primary.main};
-  }
-  .CircularProgressbar-trail {
-    stroke: #000;
-  }
 `;
 
 const RatingText = styled.div`
@@ -38,7 +35,14 @@ export const Rating = ({ rating, totalRatings }: RatingProps) => {
 
   return (
     <Content>
-      <CircularProgressbarWithChildren value={value} strokeWidth={4}>
+      <CircularProgressbarWithChildren
+        value={value}
+        strokeWidth={4}
+        styles={buildStyles({
+          trailColor: "#000000",
+          pathColor: defaultTheme.colors.primary.main,
+        })}
+      >
         {rating ? (
           <>
             <RatingText>{rating.toFixed(0)}</RatingText>
