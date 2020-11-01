@@ -41,7 +41,10 @@ type WebsiteProps = {
 };
 
 const Website = ({ Icon, name, url }: WebsiteProps) => (
-  <WebsiteContainer href={url}>
+  <WebsiteContainer
+    href={url}
+    aria-label={`view the ${name} website for this game`}
+  >
     <Icon size="1.5em" /> {name}
   </WebsiteContainer>
 );

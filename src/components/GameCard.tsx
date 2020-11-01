@@ -25,6 +25,7 @@ const Title = styled.div`
   text-align: center;
   letter-spacing: 2px;
   font-weight: 100;
+  font-size: 16px;
   padding-top: 15px;
   padding-left: 10px;
   padding-right: 10px;

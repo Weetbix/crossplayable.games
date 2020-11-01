@@ -28,11 +28,6 @@ const Backdrop = styled.img`
 `;
 
 const Content = styled.div`
-  font-size: 14px;
-  letter-spacing: 1px;
-  line-height: 1.2;
-  font-weight: 100;
-
   margin-top: 150px;
   margin-left: auto;
   margin-right: auto;

@@ -11,7 +11,11 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${(props) => props.theme.colors.background.main};
     margin: 0;
     color: ${(props) => props.theme.colors.text.main};
-    font-family: Helvetica, Arial, sans-serif
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    font-weight: 100;
   }
 
   a, a:visited, a:link { 
