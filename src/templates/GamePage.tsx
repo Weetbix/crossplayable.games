@@ -1,12 +1,13 @@
 import { graphql } from "gatsby";
 import React from "react";
 import styled from "styled-components";
+import { down, up } from "styled-breakpoints";
 import { GamePageQuery } from "../../graphql-types";
 import { Cover } from "../components/Cover";
 import { PlatformTag } from "../components/PlatformTag";
 import SEO from "../components/SEO";
 import { ExpandableText } from "../components/ExpandableText";
-import { down, up } from "styled-breakpoints";
+import { Rating } from "../components/Rating";
 
 const BackdropWrapper = styled.div`
   overflow: hidden;
@@ -41,6 +42,7 @@ const Content = styled.div`
 
   h4 {
     font-weight: 600;
+    text-transform: uppercase;
     margin-bottom: 7.5px;
     margin-top: 30px;
   }
@@ -74,6 +76,9 @@ const CoverColumn = styled.div`
   text-align: center;
   ${up("md")} {
     max-width: 250px;
+  }
+  > * {
+    margin-bottom: 64px;
   }
 `;
 
@@ -128,18 +133,10 @@ const GamePage = (props: GamePageProps) => {
               height={334}
               image={game.coverImage?.childImageSharp}
             />
-            <p>
-              External critic scores: {game.aggregated_rating?.toFixed(0)} (from{" "}
-              {game.aggregated_rating_count} total ratings)
-            </p>
-            <p>
-              IGDB rating: {game.rating?.toFixed(0)} (from {game.rating_count}{" "}
-              total ratings)
-            </p>
-            <p>
-              Total rating: {game.total_rating?.toFixed(0)} (from{" "}
-              {game.total_rating_count} total ratings)
-            </p>
+            <Rating
+              rating={game.total_rating}
+              totalRatings={game.total_rating_count}
+            />
           </CoverColumn>
           <MainColumn>
             <div>
