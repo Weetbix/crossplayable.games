@@ -14,6 +14,7 @@ const WIKI_NAME_TO_IGDB_NAME_MAP: Record<string, string> = {
   "Lost Planet: Extreme Condition Colonies Edition":
     "Lost Planet: Extreme Condition - Colonies Edition",
   "Minecraft: Java Edition": "Minecraft",
+  "Minecraft: Bedrock Edition": "Minecraft",
   "Need for Speed Heat": "Need for Speed: Heat",
   "Neverwinter Nights (Enhanced Edition)":
     "Neverwinter Nights: Enhanced Edition",
@@ -35,33 +36,33 @@ const IGDB_NAME_TO_WIKI_NAME_MAP: Record<string, string> = Object.keys(
   return map;
 }, {});
 
-// Map an IGDB name back to the name we find on wikipedia
-// Here we should first check the manual override map, if
-// not in there we should find the name in the original titles
-// list so that we can avoid problems with differences in cases.
-const toWikiName = (IGDBName: string, originalTitles: string[]) =>
-  IGDB_NAME_TO_WIKI_NAME_MAP[IGDBName] ??
-  originalTitles.find((t) => t.toLowerCase() === IGDBName.toLowerCase());
-
 // Given a list of wiki game names, fetches all the game details from
 // IGDB and returns them in a map, based on the original wiki game name
 // so we dont need to care about descrepencies in naming.
 export const getGameDetailsMap = async (titles: string[]) => {
   // Get all the game details with their igdb name
-  let games = await getGameDetails(titles.map(toIGDBName));
+  let igdbGames = await getGameDetails(titles.map(toIGDBName));
 
-  // Convert all the igdb names back to wiki names
-  games = games.map((game) => ({
-    ...game,
-    title: toWikiName(game.title, titles),
-  }));
-
-  // Throw an error if we ever couldnt find a game on IGDB. Then
-  // we can manually update the game name map
-  const unmatchedGames = titles
-    .filter((title) => !games.map((game) => game.title).includes(title))
-    .join(",");
-  if (unmatchedGames) throw new Error(unmatchedGames);
+  // Convert all the igdb names back to wiki names.
+  // We cannot simply use an inverse map, as some games map to
+  // one individual igbd game (ie minecraft bedrock/java version)
+  const games = titles.reduce((acc, wikiTitle) => {
+    const igdbGameDetails = igdbGames.find(
+      (game) => game.title.toLowerCase() === toIGDBName(wikiTitle).toLowerCase()
+    );
+    if (igdbGameDetails) {
+      acc.push({
+        ...igdbGameDetails,
+        title: wikiTitle,
+      });
+    } else {
+      throw new Error(
+        "The following game with title from wikipedia could not be found on IGDB: " +
+          wikiTitle
+      );
+    }
+    return acc;
+  }, []);
 
   // return a map by game title
   return keyBy(games, (game) => game.title);
