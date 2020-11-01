@@ -69,6 +69,34 @@ const getBatchOfGameDetals = async (titles: string[], token: string) => {
   return await response.json();
 };
 
+enum IGDB_WEBSITE_CATEGORY {
+  official = 1,
+  wikia = 2,
+  wikipedia = 3,
+  facebook = 4,
+  twitter = 5,
+  twitch = 6,
+  instagram = 8,
+  youtube = 9,
+  iphone = 10,
+  ipad = 11,
+  android = 12,
+  steam = 13,
+  reddit = 14,
+  itch = 15,
+  epicgames = 16,
+  gog = 17,
+  discord = 18,
+}
+
+const mapWebsites = (websites: [{ category: number; url: string }]) => {
+  return websites.reduce((acc, website) => {
+    const categoryString = IGDB_WEBSITE_CATEGORY[website.category];
+    categoryString && (acc[categoryString] = website.url);
+    return acc;
+  }, {});
+};
+
 // Map a single API result to an object
 const mapData = (apiResult: any) => {
   const game = apiResult;
@@ -94,6 +122,7 @@ const mapData = (apiResult: any) => {
     title: game.name,
     coverUrl: igdbImageIdToURL(game.cover?.image_id, IGDB_IMAGE_SIZE.cover),
     backdropUrl: game.screenshots?.[0].url ?? null,
+    websites: mapWebsites(game.websites ?? []),
   };
 };
 

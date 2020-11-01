@@ -8,6 +8,7 @@ import { PlatformTag } from "../components/PlatformTag";
 import SEO from "../components/SEO";
 import { ExpandableText } from "../components/ExpandableText";
 import { Rating } from "../components/Rating";
+import { WebsitesWithIcons } from "../components/WebsitesWithIcons";
 
 const BackdropWrapper = styled.div`
   overflow: hidden;
@@ -137,6 +138,7 @@ const GamePage = (props: GamePageProps) => {
               rating={game.total_rating}
               totalRatings={game.total_rating_count}
             />
+            <WebsitesWithIcons websites={game.websites} />
           </CoverColumn>
           <MainColumn>
             <div>
@@ -211,7 +213,7 @@ const GamePage = (props: GamePageProps) => {
                   ))}
                 </ul>
               </div>
-              <div>
+              {/* <div>
                 <h4>Websites</h4>
                 <ul>
                   {game.websites?.map((website) => (
@@ -221,7 +223,7 @@ const GamePage = (props: GamePageProps) => {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
             </AdditionalInfo>
           </MainColumn>
         </div>
@@ -289,8 +291,23 @@ export const query = graphql`
           total_rating
           total_rating_count
           websites {
-            category
-            url
+            android
+            discord
+            youtube
+            wikipedia
+            wikia
+            twitter
+            twitch
+            steam
+            reddit
+            official
+            itch
+            iphone
+            instagram
+            ipad
+            gog
+            facebook
+            epicgames
           }
         }
       }
