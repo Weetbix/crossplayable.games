@@ -68,11 +68,15 @@ const iconMap = {
 
 type WebsitesWithIconsProps = {
   websites: GameWebsites;
+  className?: string;
 };
 
-export const WebsitesWithIcons = ({ websites }: WebsitesWithIconsProps) => {
+export const WebsitesWithIcons = ({
+  websites,
+  className,
+}: WebsitesWithIconsProps) => {
   return (
-    <Content>
+    <Content className={className}>
       <Center>
         {Object.entries(websites)
           .filter(([key]) => iconMap[key])

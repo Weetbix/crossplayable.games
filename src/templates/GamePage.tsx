@@ -9,6 +9,7 @@ import SEO from "../components/SEO";
 import { ExpandableText } from "../components/ExpandableText";
 import { Rating } from "../components/Rating";
 import { WebsitesWithIcons } from "../components/WebsitesWithIcons";
+import { GameTitle } from "../components/GameTitle";
 
 const BackdropWrapper = styled.div`
   overflow: hidden;
@@ -47,6 +48,18 @@ const Content = styled.div`
     display: flex;
     ${down("sm")} {
       flex-direction: column;
+    }
+  }
+
+  .desktop-only {
+    ${down("sm")} {
+      display: none;
+    }
+  }
+
+  .mobile-only {
+    ${up("md")} {
+      display: none;
     }
   }
 `;
@@ -129,32 +142,28 @@ const GamePage = (props: GamePageProps) => {
               height={334}
               image={game.coverImage?.childImageSharp}
             />
+            <GameTitle
+              className="mobile-only"
+              title={game.title}
+              firstReleaseDate={game.first_release_date}
+              involvedCompanies={game.involved_companies}
+            />
             <Rating
               rating={game.total_rating}
               totalRatings={game.total_rating_count}
             />
-            <WebsitesWithIcons websites={game.websites} />
+            <WebsitesWithIcons
+              websites={game.websites}
+              className="desktop-only"
+            />
           </CoverColumn>
           <MainColumn>
-            <div>
-              <h1>{game.title}</h1>
-              <p>
-                Developer:
-                <span>
-                  {Array.from(
-                    new Set(
-                      game.involved_companies
-                        ?.filter((company) => company.developer)
-                        .map((company) => company.company.name)
-                    )
-                  ).join(", ")}
-                </span>
-              </p>
-              <p>
-                Released{" "}
-                {new Date(game.first_release_date * 1000).toDateString()}
-              </p>
-            </div>
+            <GameTitle
+              className="desktop-only"
+              title={game.title}
+              firstReleaseDate={game.first_release_date}
+              involvedCompanies={game.involved_companies}
+            />
             <p>
               <h4>Platforms</h4>
               {supportedPlatforms.map((platformName) => (
@@ -220,6 +229,10 @@ const GamePage = (props: GamePageProps) => {
                 </ul>
               </div> */}
             </AdditionalInfo>
+            <WebsitesWithIcons
+              websites={game.websites}
+              className="mobile-only"
+            />
           </MainColumn>
         </div>
       </Content>
