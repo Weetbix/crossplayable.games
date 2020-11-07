@@ -2,14 +2,14 @@ import { graphql } from "gatsby";
 import React from "react";
 import styled from "styled-components";
 import { down, up } from "styled-breakpoints";
-import { GamePageQuery } from "../../graphql-types";
-import { Cover } from "../components/Cover";
-import { PlatformTag } from "../components/PlatformTag";
-import SEO from "../components/SEO";
-import { ExpandableText } from "../components/ExpandableText";
-import { Rating } from "../components/Rating";
-import { WebsitesWithIcons } from "../components/WebsitesWithIcons";
-import { GameTitle } from "../components/GameTitle";
+import { GamePageQuery } from "../../../graphql-types";
+import { Cover } from "../../components/Cover";
+import { PlatformTag } from "../../components/PlatformTag";
+import SEO from "../../components/SEO";
+import { ExpandableText } from "../../components/ExpandableText";
+import { Rating } from "./Rating";
+import { WebsitesWithIcons } from "./WebsitesWithIcons";
+import { GameTitle } from "./GameTitle";
 
 const BackdropWrapper = styled.div`
   overflow: hidden;

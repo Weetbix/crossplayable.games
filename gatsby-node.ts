@@ -53,7 +53,7 @@ const createFilterPages: GatsbyNode["createPages"] = async ({ actions }) => {
     .forEach((filter) => {
       actions.createPage({
         path: urlFromFilter(filter),
-        component: path.resolve(`./src/templates/FilterPage.tsx`),
+        component: path.resolve(`./src/templates/FilterPage/index.tsx`),
         context: {
           // Data passed to context is available
           // in page queries as GraphQL variables.
@@ -82,7 +82,7 @@ const createGamePages: GatsbyNode["createPages"] = async ({
   result.data.allGame.group.forEach(({ fieldValue: slug }) => {
     createPage({
       path: slug,
-      component: path.resolve(`./src/templates/GamePage.tsx`),
+      component: path.resolve(`./src/templates/GamePage/index.tsx`),
       context: {
         slug,
       },

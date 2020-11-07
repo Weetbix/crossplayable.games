@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { GameWebsites } from "../../graphql-types";
+import { GameWebsites } from "../../../graphql-types";
 
 import {
   FaYoutube,

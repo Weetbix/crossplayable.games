@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { GameInvolved_Companies } from "../../graphql-types";
+import { GameInvolved_Companies } from "../../../graphql-types";
 
 const Content = styled.div``;
 

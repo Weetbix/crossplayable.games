@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { defaultTheme } from "../theme";
+import { defaultTheme } from "../../theme";
 import {
   CircularProgressbarWithChildren,
   buildStyles,

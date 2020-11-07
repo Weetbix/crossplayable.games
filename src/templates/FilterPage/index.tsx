@@ -2,9 +2,9 @@ import React from "react";
 import { graphql } from "gatsby";
 import uniqBy from "lodash/uniqBy";
 import styled from "styled-components";
-import { FilterPageQuery } from "../../graphql-types";
-import { FilterDetails } from "../components/FilterDetails";
-import { GameCard } from "../components/GameCard";
+import { FilterPageQuery } from "../../../graphql-types";
+import { FilterDetails } from "./FilterDetails";
+import { GameCard } from "../../components/GameCard";
 
 const Content = styled.div`
   display: flex;

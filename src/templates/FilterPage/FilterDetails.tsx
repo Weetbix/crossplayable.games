@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useFilter } from "../hooks/useFilter";
-import { PlatformTag } from "./PlatformTag";
-import SEO from "./SEO";
+import { useFilter } from "../../hooks/useFilter";
+import { PlatformTag } from "../../components/PlatformTag";
+import SEO from "../../components/SEO";
 
 const Content = styled.div`
   letter-spacing: 2px;
