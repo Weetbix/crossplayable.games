@@ -1,5 +1,5 @@
 export const siteMetadata = {
-  title: "Crossplayable Games",
+  title: "Crossplay Games List",
   titleTemplate: "%s · Crossplayable Games",
   description:
     "Catalog of which games support crossplay and on which platforms.",

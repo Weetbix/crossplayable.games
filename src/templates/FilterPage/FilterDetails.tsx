@@ -22,15 +22,20 @@ export const FilterDetails = ({ numberOfGames }: FilterDetailsProps) => {
   const currentFilter = useFilter();
   const startText =
     numberOfGames === 0
-      ? "Unfortunately, there are no games"
+      ? "Unfortunately, there are no games that support"
       : numberOfGames > 1
-      ? `${numberOfGames} games`
-      : `${numberOfGames} game`;
+      ? `${numberOfGames} games support`
+      : `${numberOfGames} game supports`;
 
   return (
     <Content>
-      <SEO title={`Crossplayable games on ${currentFilter.join(", ")}`} />
-      <span>{startText} cross-playable with:</span>
+      <SEO
+        title={`Games with crossplay on ${currentFilter.join(", ")}`}
+        description={`there are ${numberOfGames} games that support crossplay on these systems: ${currentFilter.join(
+          ", "
+        )}`}
+      />
+      <span>{startText} crossplay on these platforms:</span>
       <div>
         {currentFilter.map((platform) => (
           <PlatformTag>{platform}</PlatformTag>
