@@ -10,6 +10,12 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  > p {
+    max-width: 700px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 `;
 
 const GamesWrapper = styled.div`
@@ -28,10 +34,20 @@ const IndexPage = ({ data }: IndexPageProps) => {
 
   return (
     <Content>
-      <SEO title="Home" />
+      <SEO />
       <p>
-        Select multiple platforms to see which games support crossplay on those
-        systems
+        Crossplay enabled games allow you to play online multiplayer with your
+        friends across different platforms. For example, can race your friend on
+        your switch while they play on their playstation.
+      </p>
+      <p>
+        Unfortunately not every game supports crossplay, which means the choices
+        are limite, but you can use this website to find out which games support
+        crossplay and with which platforms.
+      </p>
+      <p>
+        <strong>To start, </strong>select multiple platforms to see which games
+        support crossplay on those systems
       </p>
       <br />
       <br />
