@@ -31,4 +31,5 @@ export const plugins = [
       customDomain: `plausible.cloud.johnhannagan.com/js/plausible.js?original=`,
     },
   },
+  "gatsby-plugin-meta-redirect",
 ];

@@ -90,6 +90,26 @@ const createGamePages: GatsbyNode["createPages"] = async ({
   });
 };
 
+// We're already on google with many xbo routes, which have now
+// been renamed to xbox.
+// Lets try not to kill the SEO and provide permanent redirects
+const createXBOtoXboxRedirects: GatsbyNode["createPages"] = async ({
+  actions,
+}) => {
+  allFilters
+    .filter((filter) => filter.some((platform) => platform === "Xbox"))
+    .forEach((filter) => {
+      const newUrl = urlFromFilter(filter);
+      const oldUrl = newUrl.replace("xbox", "xbo");
+
+      actions.createRedirect({
+        fromPath: oldUrl,
+        toPath: newUrl,
+        isPermanent: true,
+      });
+    });
+};
+
 async function addImageFromUrl(
   propertyName: string,
   fieldName: string,
@@ -206,6 +226,7 @@ export const sourceNodes: GatsbyNode["sourceNodes"] = async (args, options) => {
 };
 
 export const createPages: GatsbyNode["createPages"] = async (args) => {
+  await createXBOtoXboxRedirects(args);
   await createFilterPages(args);
   await createGamePages(args);
 };
