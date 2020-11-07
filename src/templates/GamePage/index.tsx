@@ -2,7 +2,7 @@ import { graphql } from "gatsby";
 import React from "react";
 import styled from "styled-components";
 import { down, up } from "styled-breakpoints";
-import { GamePageQuery } from "../../../graphql-types";
+import { GamePageQuery, GameWebsites } from "../../../graphql-types";
 import { Cover } from "../../components/Cover";
 import { PlatformTag } from "../../components/PlatformTag";
 import SEO from "../../components/SEO";
@@ -112,6 +112,22 @@ const MainColumn = styled.div`
   }
 `;
 
+const getStoresWebsiteList = (websites: GameWebsites) => {
+  const websiteToNameMap = {
+    steam: "Steam",
+    gog: "GOG",
+    android: "Android Play Store",
+    itch: "itch.io",
+    iphone: "Apple Store",
+    epicgames: "Epic Games Store",
+  };
+
+  return Object.entries(websites)
+    .filter(([key]) => websiteToNameMap[key])
+    .filter(([, value]) => value)
+    .map(([key, value]) => ({ title: websiteToNameMap[key], url: value }));
+};
+
 type GamePageProps = {
   data: GamePageQuery;
 };
@@ -120,6 +136,10 @@ const GamePage = (props: GamePageProps) => {
   const supportedPlatforms = Object.entries(game.platforms)
     .filter(([, has]) => has)
     .map(([platformName]) => platformName);
+  const stores = getStoresWebsiteList(game.websites);
+  const publishers = game.involved_companies
+    ?.filter((company) => company.publisher)
+    .map((company) => ({ name: company.company.name }));
 
   return (
     <span>
@@ -193,43 +213,48 @@ const GamePage = (props: GamePageProps) => {
               </p>
             )}
             <AdditionalInfo>
-              <div>
-                <h4>Genres</h4>
-                <ul>
-                  {game.genres?.map(({ name }) => (
-                    <li key={name}>{name}</li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h4>Publishers</h4>
-                <ul>
-                  {game.involved_companies
-                    ?.filter((company) => company.publisher)
-                    .map((company) => (
-                      <li key={company.company.name}>{company.company.name}</li>
+              {game.genres?.length > 0 && (
+                <div>
+                  <h4>Genres</h4>
+                  <ul>
+                    {game.genres?.map(({ name }) => (
+                      <li key={name}>{name}</li>
                     ))}
-                </ul>
-              </div>
-              <div>
-                <h4>Themes</h4>
-                <ul>
-                  {game.themes?.map((theme) => (
-                    <li key={theme.name}>{theme.name}</li>
-                  ))}
-                </ul>
-              </div>
-              {/* <div>
-                <h4>Websites</h4>
-                <ul>
-                  {game.websites?.map((website) => (
-                    <li key={website.url}>
-                      <a href={website.url}>website</a> (category:{" "}
-                      {website.category})
-                    </li>
-                  ))}
-                </ul>
-              </div> */}
+                  </ul>
+                </div>
+              )}
+              {publishers.length > 0 && (
+                <div>
+                  <h4>Publishers</h4>
+                  <ul>
+                    {publishers.map(({ name }) => (
+                      <li key={name}>{name}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {game.themes?.length > 0 && (
+                <div>
+                  <h4>Themes</h4>
+                  <ul>
+                    {game.themes?.map((theme) => (
+                      <li key={theme.name}>{theme.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {stores.length && (
+                <div>
+                  <h4>Stores</h4>
+                  <ul>
+                    {stores.map(({ title, url }) => (
+                      <li key={url}>
+                        <a href={url}>{title}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </AdditionalInfo>
             <WebsitesWithIcons
               websites={game.websites}
