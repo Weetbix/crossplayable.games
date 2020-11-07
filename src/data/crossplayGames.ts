@@ -18,6 +18,7 @@ const PLATFORM_MAP = {
   Steam: "Windows",
   W10: "Windows",
   Other: "Windows",
+  XBO: "Xbox",
 };
 const PLATFORMS_TO_KEEP = [
   "Windows",
@@ -25,7 +26,7 @@ const PLATFORMS_TO_KEEP = [
   "Mac",
   "PS4",
   "PS3",
-  "XBO",
+  "Xbox",
   "Switch",
 ];
 

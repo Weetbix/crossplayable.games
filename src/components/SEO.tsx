@@ -2,7 +2,6 @@ import React from "react";
 import { useLocation } from "@reach/router";
 import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
-import { FavIcon } from "./FavIcon";
 
 const DEFAULT_KEYWORDS = [
   "crossplay",

@@ -141,7 +141,7 @@ export const PlatformSelector = () => {
         </NavItem>
         <NavItem label="Xbox">
           <SubMenu aria-label="submenu">
-            <NavItem label="Xbox" platform="XBO" />
+            <NavItem label="Xbox" platform="Xbox" />
             <NavItem label="Game Pass" platform="GamePass" />
           </SubMenu>
         </NavItem>

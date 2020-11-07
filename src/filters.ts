@@ -8,7 +8,7 @@ export const PLATFORMS = [
   "Mac",
   "PS4",
   "PS3",
-  "XBO",
+  "Xbox",
   "Switch",
   "GamePass",
   "PSNow",
@@ -24,7 +24,7 @@ export const allFilters = combinations(PLATFORMS);
 //
 // We want to generate variables that look like this:
 // LinuxIncludes : [true, false]
-// XBOIncludes : [true]
+// XboxIncludes : [true]
 // etc
 // Which we can use as array to the include filter in the page query
 // Here [true,false] acts as 'dont worry' about this value

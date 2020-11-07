@@ -56,7 +56,7 @@ export const query = graphql`
     $PSNowIncludes: [Boolean]
     $SwitchIncludes: [Boolean]
     $WindowsIncludes: [Boolean]
-    $XBOIncludes: [Boolean]
+    $XboxIncludes: [Boolean]
   ) {
     allGame(
       filter: {
@@ -69,7 +69,7 @@ export const query = graphql`
           PSNow: { in: $PSNowIncludes }
           Switch: { in: $SwitchIncludes }
           Windows: { in: $WindowsIncludes }
-          XBO: { in: $XBOIncludes }
+          Xbox: { in: $XboxIncludes }
         }
       }
     ) {

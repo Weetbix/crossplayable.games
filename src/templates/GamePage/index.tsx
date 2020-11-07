@@ -164,8 +164,10 @@ const GamePage = (props: GamePageProps) => {
               firstReleaseDate={game.first_release_date}
               involvedCompanies={game.involved_companies}
             />
-            <p>
-              <h4>Platforms</h4>
+            <p
+              aria-description={`${game.title} supports crossplay on the these platoforms`}
+            >
+              <h4>Crossplay enabled platforms</h4>
               {supportedPlatforms.map((platformName) => (
                 <PlatformTag key={platformName}>{platformName}</PlatformTag>
               ))}
@@ -286,7 +288,7 @@ export const query = graphql`
             PS4
             Switch
             PSNow
-            XBO
+            Xbox
             Windows
           }
           rating
