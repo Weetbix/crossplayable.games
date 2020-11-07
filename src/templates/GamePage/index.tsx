@@ -225,7 +225,7 @@ const GamePage = (props: GamePageProps) => {
                   </ul>
                 </div>
               )}
-              {publishers.length > 0 && (
+              {publishers?.length > 0 && (
                 <div>
                   <h4>Publishers</h4>
                   <ul>
@@ -245,7 +245,7 @@ const GamePage = (props: GamePageProps) => {
                   </ul>
                 </div>
               )}
-              {stores.length > 0 && (
+              {stores?.length > 0 && (
                 <div>
                   <h4>Stores</h4>
                   <ul>
