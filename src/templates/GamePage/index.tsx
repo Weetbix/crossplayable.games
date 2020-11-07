@@ -72,12 +72,16 @@ const AdditionalInfo = styled.div`
     flex-basis: 50%;
   }
 
+  /* h4 {
+    margin-bottom: 5px;
+  } */
   ul {
     list-style: none;
     li {
-      margin-top: 5px;
+      margin-bottom: 5px;
     }
     padding: 0;
+    margin-top: 0;
   }
 `;
 
@@ -85,9 +89,12 @@ const CoverColumn = styled.div`
   text-align: center;
   ${up("md")} {
     max-width: 250px;
+    > * {
+      margin-bottom: 64px;
+    }
   }
   > * {
-    margin-bottom: 64px;
+    margin-bottom: 32px;
   }
 `;
 
@@ -98,11 +105,6 @@ const StyledCover = styled(Cover)`
 const MainColumn = styled.div`
   flex: 1;
   padding: 0px 24px;
-
-  > div {
-    height: 200px;
-    text-shadow: 1px 1px 1px #000;
-  }
 
   h1 {
     margin-top: 0;
@@ -255,11 +257,11 @@ const GamePage = (props: GamePageProps) => {
                   </ul>
                 </div>
               )}
+              <div className="mobile-only">
+                <h4>Websites</h4>
+                <WebsitesWithIcons websites={game.websites} />
+              </div>
             </AdditionalInfo>
-            <WebsitesWithIcons
-              websites={game.websites}
-              className="mobile-only"
-            />
           </MainColumn>
         </div>
       </Content>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { up } from "styled-breakpoints";
 import { GameWebsites } from "../../../graphql-types";
 
 import {
@@ -19,7 +20,10 @@ import { IconType } from "react-icons/lib";
 const Content = styled.div`
   text-align: left;
   display: flex;
-  justify-content: center;
+
+  ${up("md")} {
+    justify-content: center;
+  }
 `;
 
 const Center = styled.span``;

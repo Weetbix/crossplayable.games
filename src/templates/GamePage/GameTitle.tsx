@@ -1,8 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { up } from "styled-breakpoints";
 import { GameInvolved_Companies } from "../../../graphql-types";
 
-const Content = styled.div``;
+const Content = styled.div`
+  ${up("md")} {
+    height: 200px;
+  }
+  text-shadow: 1px 1px 1px #000;
+`;
 
 type GameTitleProps = {
   title: string;
