@@ -26,7 +26,6 @@ export const Footer = () => {
   return (
     <FooterContainer>
       <FooterItem>Made with ♥ in Berlin</FooterItem>
-      <FooterItem>Privacy</FooterItem>
       <FooterItem>
         <a href="https://github.com/Weetbix/crossplayable.games">Github</a>
       </FooterItem>
