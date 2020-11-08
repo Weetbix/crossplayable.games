@@ -15,6 +15,8 @@ const Content = styled.div`
     max-width: 700px;
     padding-left: 24px;
     padding-right: 24px;
+    line-height: 20px;
+    text-align: justify;
   }
 `;
 
@@ -37,8 +39,8 @@ const IndexPage = ({ data }: IndexPageProps) => {
       <SEO />
       <p>
         Crossplay enabled games allow you to play online multiplayer with your
-        friends across different platforms. For example, can race your friend on
-        your switch while they play on their playstation.
+        friends across different platforms. For example, you can race your
+        friend on your Switch while they play on their Playstation.
       </p>
       <p>
         Unfortunately not every game supports crossplay, which means the choices
