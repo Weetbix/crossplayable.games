@@ -74,3 +74,5 @@ graphql-types.ts
 *.tfstate.backup
 out.plan
 *.tfstate
+
+cypress/videos

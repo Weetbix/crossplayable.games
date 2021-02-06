@@ -54,7 +54,7 @@ const IndexPage = ({ data }: IndexPageProps) => {
       <br />
       <br />
       <h3>Most Loved Games:</h3>
-      <GamesWrapper>
+      <GamesWrapper data-testid="most-loved-games">
         {mostLoved.map((node) => (
           <GameCard
             key={node.id}
@@ -65,7 +65,7 @@ const IndexPage = ({ data }: IndexPageProps) => {
         ))}
       </GamesWrapper>
       <h3>Most Recent Games:</h3>
-      <GamesWrapper>
+      <GamesWrapper data-testid="most-recent-games">
         {recentGames.map((node) => (
           <GameCard
             key={node.id}

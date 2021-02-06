@@ -25,7 +25,7 @@ export const GameTitle = ({
   <Content className={className}>
     <h1>{title}</h1>
     <p>
-      Developer:
+      Developer:&nbsp;
       <span>
         {Array.from(
           new Set(

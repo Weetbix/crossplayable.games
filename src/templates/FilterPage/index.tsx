@@ -30,8 +30,8 @@ const FilterPage = (props: FilterPageProps) => {
 
   return (
     <Content>
-      <FilterDetails numberOfGames={props.data.allGame.totalCount} />
-      <GamesWrapper>
+      <FilterDetails numberOfGames={games.length} />
+      <GamesWrapper data-testid="game-results">
         {games.map((node) => (
           <GameCard
             key={node.id}

@@ -35,7 +35,9 @@ export const FilterDetails = ({ numberOfGames }: FilterDetailsProps) => {
           ", "
         )}`}
       />
-      <span>{startText} crossplay on these platforms:</span>
+      <span data-testid="total-games-support">
+        {startText} crossplay on these platforms:
+      </span>
       <div>
         {currentFilter.map((platform) => (
           <PlatformTag>{platform}</PlatformTag>

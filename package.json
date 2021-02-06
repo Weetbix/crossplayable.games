@@ -12,7 +12,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "test:e2e": "start-server-and-test develop http://localhost:8000 cypress:open",
+    "cypress:open": "cypress open",
     "deploy:s3": "aws s3 sync public s3://crossplayable.games"
   },
   "dependencies": {

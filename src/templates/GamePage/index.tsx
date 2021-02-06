@@ -156,7 +156,7 @@ const GamePage = (props: GamePageProps) => {
       <BackdropWrapper>
         <Backdrop src={game.backdropImage?.childImageSharp?.fixed?.src} />
       </BackdropWrapper>
-      <Content>
+      <Content data-testid="page-content">
         <div>
           <CoverColumn>
             <StyledCover
