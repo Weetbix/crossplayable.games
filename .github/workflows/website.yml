@@ -25,6 +25,12 @@ jobs:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
           TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
 
+      - name: E2E tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: yarn gatsby serve
+          wait-on: http://localhost:9000
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
