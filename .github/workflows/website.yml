@@ -1,11 +1,20 @@
 name: "Website"
 
 on:
+  # On pushes to master
   push:
     branches:
       - main
+
+  # on PR opens
   pull_request:
+
+  # Allow manually running
   workflow_dispatch:
+
+  # Deploy every wednesday
+  schedule:
+    - cron: "0 18 * * WED"
 
 jobs:
   website:
