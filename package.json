@@ -46,7 +46,7 @@
     "@types/styled-components": "^5.1.4",
     "cypress": "^6.5.0",
     "jsdom": "^16.4.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "node-fetch": "^2.6.1",
     "prettier": "2.2.1",
     "start-server-and-test": "^1.12.0",
