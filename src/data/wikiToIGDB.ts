@@ -24,6 +24,7 @@ const WIKI_NAME_TO_IGDB_NAME_MAP: Record<string, string> = {
   Warspear: "Warspear Online",
   "Yakuza: Ishin": "Ryuu ga Gotoku Ishin!",
   "Zombie Tycoon 2": `Zombie Tycoon 2: Brainhov's Revenge`,
+  "Ryū ga Gotoku Ishin": "Ryuu ga Gotoku Ishin!",
 };
 
 const toIGDBName = (wikiName: string) =>
