@@ -24,7 +24,7 @@ const WIKI_NAME_TO_IGDB_NAME_MAP: Record<string, string> = {
   Warspear: "Warspear Online",
   "Yakuza: Ishin": "Ryuu ga Gotoku Ishin!",
   "Zombie Tycoon 2": `Zombie Tycoon 2: Brainhov's Revenge`,
-  "Ryū ga Gotoku Ishin": "Ryuu ga Gotoku Ishin!",
+  "Ryū ga Gotoku Ishin!": "Ryuu ga Gotoku Ishin!",
 };
 
 const toIGDBName = (wikiName: string) =>
@@ -58,8 +58,7 @@ export const getGameDetailsMap = async (titles: string[]) => {
       });
     } else {
       throw new Error(
-        "The following game with title from wikipedia could not be found on IGDB: " +
-          wikiTitle
+        `The following game with title from wikipedia could not be found on IGDB: "${wikiTitle}"`
       );
     }
     return acc;
