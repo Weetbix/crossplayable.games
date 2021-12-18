@@ -12,6 +12,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "test:unit": "jest",
     "test:e2e": "start-server-and-test develop http://localhost:8000 cypress:open",
     "cypress:open": "cypress open",
     "deploy:s3": "aws s3 sync public s3://crossplayable.games"
@@ -41,10 +42,16 @@
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-typescript": "^7.16.5",
+    "@types/jest": "^27.0.3",
     "@types/jsdom": "^16.2.4",
     "@types/react-helmet": "^6.1.0",
     "@types/styled-components": "^5.1.4",
+    "babel-jest": "^27.4.5",
     "cypress": "^6.5.0",
+    "jest": "^27.4.5",
     "jsdom": "^16.4.0",
     "lodash": "^4.17.21",
     "node-fetch": "^2.6.1",
