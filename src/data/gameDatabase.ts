@@ -14,8 +14,12 @@ const getAccessToken = async () => {
 const getBatchOfGameDetals = async (titles: string[], token: string) => {
   const titleFilters = titles.map((t) => `(name ~ "${t}")`).join("|");
 
+  // Limit should be high, although we will only request titles.length
+  // names at one, some games can have multiple records with the same
+  // name and different cases. If we dont increase the limit, then
+  // we can potentially miss a few queried games from the list.
   const query = `
-    limit ${titles.length};
+    limit 500;
     fields
         name,
         rating,
@@ -59,7 +63,7 @@ const getBatchOfGameDetals = async (titles: string[], token: string) => {
         {
           message: "IGDB Query failed",
           status: response.status,
-          response: await response.json(),
+          response: await response.text(),
         },
         null,
         2
@@ -127,7 +131,9 @@ const mapData = (apiResult: any) => {
 };
 
 // Max items to return https://api-docs.igdb.com/#pagination
-const MAX_ITEM_LIMIT = 500;
+// Previously this was set to 500, but now IGDB times out when
+// requesting so many game details at once. Use 100.
+const MAX_ITEM_LIMIT = 100;
 
 export const getGameDetails = async (titles: string[]) => {
   const token = await getAccessToken();
