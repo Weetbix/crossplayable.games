@@ -19,11 +19,16 @@ const PLATFORM_MAP = {
   W10: "Windows",
   Other: "Windows",
   XBO: "Xbox",
+  'XBSX/XBSS': 'Xbox',
+  // "Other" cells, just grab PS3 from here
+  'PS3, Vita': 'PS3',
 };
+
 const PLATFORMS_TO_KEEP = [
   "Windows",
   "Linux",
   "Mac",
+  "PS5",
   "PS4",
   "PS3",
   "Xbox",
@@ -39,9 +44,13 @@ const PlATFORM_DEFAULTS = {
 
 // Get all the plaforms as a boolean map
 const getPlatformsFromRow = (row: HTMLTableRowElement) =>
-  Array.from(row.querySelectorAll("td.table-yes"))
+  // Select all the cells that don't have the NOT class
+  Array.from(row.querySelectorAll('td:not(.table-no)'))
+    // Take their contents
     .map((cell) => cell.textContent.trim())
+    // Map the content to the right name
     .map((platform) => PLATFORM_MAP[platform] ?? platform)
+    // Only keep it if its a platform we care about
     .filter((platform) => PLATFORMS_TO_KEEP.includes(platform))
     .reduce(
       (acc, obj) => ({

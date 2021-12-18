@@ -6,6 +6,7 @@ export const PLATFORMS = [
   "Windows",
   "Linux",
   "Mac",
+  "PS5",
   "PS4",
   "PS3",
   "Xbox",

@@ -313,6 +313,7 @@ export const query = graphql`
             Mac
             PS3
             PS4
+            PS5
             Switch
             PSNow
             Xbox
