@@ -19,12 +19,16 @@ const PLATFORM_MAP = {
   W10: "Windows",
   Other: "Windows",
   XBO: "Xbox",
+  'XBSX/XBSS': 'Xbox',
+  // "Other" cells, just grab PS3 from here
   'PS3, Vita': 'PS3',
 };
+
 const PLATFORMS_TO_KEEP = [
   "Windows",
   "Linux",
   "Mac",
+  "PS5",
   "PS4",
   "PS3",
   "Xbox",

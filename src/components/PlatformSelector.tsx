@@ -136,6 +136,7 @@ export const PlatformSelector = () => {
           <SubMenu aria-label="submenu">
             <NavItem label="PS3" platform="PS3" />
             <NavItem label="PS4" platform="PS4" />
+            <NavItem label="PS5" platform="PS5" />
             <NavItem label="PS Now" platform="PSNow" />
           </SubMenu>
         </NavItem>
