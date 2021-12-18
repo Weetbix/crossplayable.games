@@ -31,8 +31,10 @@ type IndexPageProps = {
   data: HomePageQuery;
 };
 const IndexPage = ({ data }: IndexPageProps) => {
-  const mostLoved = uniqBy(data.mostLoved.nodes, (game) => game.title);
-  const recentGames = uniqBy(data.recentGames.nodes, (game) => game.title);
+  // We take 6 games but we use the most 3 recent and ensure the
+  // names are unique, as sometimes we can have dupes
+  const mostLoved = uniqBy(data.mostLoved.nodes, (game) => game.title).slice(0,3);
+  const recentGames = uniqBy(data.recentGames.nodes, (game) => game.title).slice(0,3);
 
   return (
     <Content>
@@ -84,7 +86,7 @@ export const query = graphql`
   query HomePage {
     recentGames: allGame(
       sort: { fields: first_release_date, order: DESC }
-      limit: 3
+      limit: 6
       filter: { first_release_date: { ne: null } }
     ) {
       nodes {
@@ -98,7 +100,7 @@ export const query = graphql`
     }
     mostLoved: allGame(
       sort: { fields: total_rating, order: DESC }
-      limit: 3
+      limit: 6
       filter: { total_rating: { ne: null }, total_rating_count: { gt: 100 } }
     ) {
       nodes {
