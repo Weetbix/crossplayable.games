@@ -2,6 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 import uniqBy from "lodash/uniqBy";
 import styled from "styled-components";
+import { IoMdHelpCircle } from "react-icons/io";
 import { HomePageQuery } from "../../graphql-types";
 import { GameCard } from "../components/GameCard";
 import SEO from "../components/SEO";
@@ -19,6 +20,20 @@ const Content = styled.div`
     text-align: justify;
   }
 `;
+
+const InstructionalParagraph = styled.div`
+  background-color: ${(props) => props.theme.colors.text.dark};
+  color: ${(props) => props.theme.colors.background.main};
+  max-width: 500px;
+  border-radius: 16px;
+  display: flex;
+  text-align: center;
+  padding: 16px;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  box-shadow: 2px 2px 7px 0px rgb(0 0 0 / 75%);
+`;
+
 
 const GamesWrapper = styled.div`
   max-width: 700px;
@@ -39,6 +54,19 @@ const IndexPage = ({ data }: IndexPageProps) => {
   return (
     <Content>
       <SEO />
+      <InstructionalParagraph>
+        <div>
+          <IoMdHelpCircle size="3em" />
+        </div>
+        <div>
+          <p>
+            <strong>How to use this site?</strong>
+          </p>
+          Use the menus above to select <i>multiple</i> platforms. Crossplayable
+          Games will then show you a list of games that can be played together on
+          those systems.
+        </div>
+      </InstructionalParagraph>
       <p>
         Crossplay enabled games allow you to play online multiplayer with your
         friends across different platforms. For example, you can race your
@@ -46,13 +74,10 @@ const IndexPage = ({ data }: IndexPageProps) => {
       </p>
       <p>
         Unfortunately not every game supports crossplay, which means the choices
-        are limite, but you can use this website to find out which games support
+        are limited, but you can use this website to find out which games support
         crossplay and with which platforms.
       </p>
-      <p>
-        <strong>To start, </strong>select multiple platforms to see which games
-        support crossplay on those systems
-      </p>
+
       <br />
       <br />
       <h3>Most Loved Games:</h3>

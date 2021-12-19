@@ -2,6 +2,7 @@ import { graphql } from "gatsby";
 import React from "react";
 import styled from "styled-components";
 import { down, up } from "styled-breakpoints";
+import { IoMdHome } from "react-icons/io";
 import { GamePageQuery, GameWebsites } from "../../../graphql-types";
 import { Cover } from "../../components/Cover";
 import { PlatformTag } from "../../components/PlatformTag";
@@ -28,8 +29,23 @@ const Backdrop = styled.img`
   filter: blur(10px);
 `;
 
+const HomeLink = styled.a`
+  padding-bottom: 32px;
+  display: flex;
+  align-items: center;
+  > * {
+    margin-right: 16px;
+    filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 0.8));
+  }
+  text-shadow: 1px 1px 1px #000;
+  ${down("sm")} {
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
+
 const Content = styled.div`
-  margin-top: 150px;
+  margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -157,6 +173,9 @@ const GamePage = (props: GamePageProps) => {
         <Backdrop src={game.backdropImage?.childImageSharp?.fixed?.src} />
       </BackdropWrapper>
       <Content data-testid="page-content">
+        <HomeLink href="/">
+          <IoMdHome size="1.5em" />crossplayable.games
+        </HomeLink>
         <div>
           <CoverColumn>
             <StyledCover
