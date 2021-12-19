@@ -8,7 +8,6 @@ export const PlatformTag = styled.span`
   padding: 2px 5px;
   border-radius: 3px;
   letter-spacing: 2px;
-  font-weight: 100;
   font-size: 13px;
   text-transform: uppercase;
 `;

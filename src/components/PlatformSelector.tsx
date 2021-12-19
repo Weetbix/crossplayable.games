@@ -2,8 +2,36 @@ import React from "react";
 import { Link } from "gatsby";
 import styled, { css } from "styled-components";
 import { up, down } from "styled-breakpoints";
+import { IoMdHome } from "react-icons/io";
 import { useFilter } from "../hooks/useFilter";
 import { togglePlatform, urlFromFilter } from "../filters";
+
+const HomeButton = styled.li`
+
+  ${up("md")} {
+    span {
+      display: none;
+    }
+    position: absolute;
+    left: 32px;
+  }
+
+  ${down("sm")} {
+    font-size: 14px;
+    margin-top: 16px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  a {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    > svg {
+      margin-right: 16px;
+    }
+  }
+`;
 
 const MobileHeader = styled.li`
   ${up("md")} {
@@ -23,9 +51,16 @@ const NavBar = styled.ul`
   margin-bottom: 50px;
   background-color: ${(props) => props.theme.colors.background.dark};
 
+  border-bottom: 1px solid;
+  border-image: linear-gradient(
+    90deg,
+    ${(props) => props.theme.colors.background.main},
+    ${(props) => props.theme.colors.primary.main},
+    ${(props) => props.theme.colors.background.main}
+  ) 1;
+
   text-align: center;
   font-size: 20px;
-  font-weight: 100;
   letter-spacing: 5px;
   text-transform: uppercase;
 
@@ -119,7 +154,10 @@ export const PlatformSelector = () => {
   return (
     <nav>
       <NavBar>
-        <MobileHeader>Choose your platforms:</MobileHeader>
+        <HomeButton>
+          <a href="/"><IoMdHome /><span>crossplayable.games</span></a>
+        </HomeButton>
+        <MobileHeader>Combine your platforms:</MobileHeader>
         <NavItem label="PC">
           <SubMenu aria-label="submenu">
             <NavItem label="Windows" platform="Windows" />
