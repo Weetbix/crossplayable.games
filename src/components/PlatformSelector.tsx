@@ -2,8 +2,36 @@ import React from "react";
 import { Link } from "gatsby";
 import styled, { css } from "styled-components";
 import { up, down } from "styled-breakpoints";
+import { IoMdHome } from "react-icons/io";
 import { useFilter } from "../hooks/useFilter";
 import { togglePlatform, urlFromFilter } from "../filters";
+
+const HomeButton = styled.li`
+
+  ${up("md")} {
+    span {
+      display: none;
+    }
+    position: absolute;
+    left: 32px;
+  }
+
+  ${down("sm")} {
+    font-size: 14px;
+    margin-top: 16px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  a {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    > svg {
+      margin-right: 16px;
+    }
+  }
+`;
 
 const MobileHeader = styled.li`
   ${up("md")} {
@@ -126,6 +154,9 @@ export const PlatformSelector = () => {
   return (
     <nav>
       <NavBar>
+        <HomeButton>
+          <a href="/"><IoMdHome /><span>crossplayable.games</span></a>
+        </HomeButton>
         <MobileHeader>Combine your platforms:</MobileHeader>
         <NavItem label="PC">
           <SubMenu aria-label="submenu">
