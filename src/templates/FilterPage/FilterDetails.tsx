@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useFilter } from "../../hooks/useFilter";
-import { PlatformTag } from "../../components/PlatformTag";
+import { RemovablePlatformTag } from "../../components/RemovablePlatformTag";
 import SEO from "../../components/SEO";
 
 const Content = styled.div`
@@ -40,7 +40,7 @@ export const FilterDetails = ({ numberOfGames }: FilterDetailsProps) => {
       </span>
       <div>
         {currentFilter.map((platform) => (
-          <PlatformTag>{platform}</PlatformTag>
+          <RemovablePlatformTag platform={platform} />
         ))}
       </div>
     </Content>
