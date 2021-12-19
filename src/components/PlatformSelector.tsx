@@ -23,6 +23,14 @@ const NavBar = styled.ul`
   margin-bottom: 50px;
   background-color: ${(props) => props.theme.colors.background.dark};
 
+  border-bottom: 1px solid;
+  border-image: linear-gradient(
+    90deg,
+    ${(props) => props.theme.colors.background.main},
+    ${(props) => props.theme.colors.primary.main},
+    ${(props) => props.theme.colors.background.main}
+  ) 1;
+
   text-align: center;
   font-size: 20px;
   letter-spacing: 5px;
@@ -118,7 +126,7 @@ export const PlatformSelector = () => {
   return (
     <nav>
       <NavBar>
-        <MobileHeader>Choose your platforms:</MobileHeader>
+        <MobileHeader>Combine your platforms:</MobileHeader>
         <NavItem label="PC">
           <SubMenu aria-label="submenu">
             <NavItem label="Windows" platform="Windows" />
