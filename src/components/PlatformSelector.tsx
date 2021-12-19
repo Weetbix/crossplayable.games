@@ -25,7 +25,6 @@ const NavBar = styled.ul`
 
   text-align: center;
   font-size: 20px;
-  font-weight: 100;
   letter-spacing: 5px;
   text-transform: uppercase;
 
