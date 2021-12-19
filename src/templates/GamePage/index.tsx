@@ -210,7 +210,7 @@ const GamePage = (props: GamePageProps) => {
             >
               <h4>Crossplay enabled platforms</h4>
               {supportedPlatforms.map((platformName) => (
-                <PlatformTag key={platformName}>{platformName}</PlatformTag>
+                <PlatformTag key={platformName} platform={platformName} />
               ))}
             </p>
             {game.game_modes && (
