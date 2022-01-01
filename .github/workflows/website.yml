@@ -1,5 +1,9 @@
 name: "Website"
 
+permissions:
+  # Allow Dependabot to write PR comments
+  pull-requests: write
+
 on:
   # On pushes to master
   push:
