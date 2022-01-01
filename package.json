@@ -44,7 +44,7 @@
   "devDependencies": {
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.5",
-    "@babel/preset-typescript": "^7.16.5",
+    "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.0.3",
     "@types/jsdom": "^16.2.4",
     "@types/react-helmet": "^6.1.0",
