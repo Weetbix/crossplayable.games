@@ -47,7 +47,7 @@
     "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.0.3",
     "@types/jsdom": "^16.2.14",
-    "@types/react-helmet": "^6.1.0",
+    "@types/react-helmet": "^6.1.5",
     "@types/styled-components": "^5.1.4",
     "babel-jest": "^27.4.5",
     "cypress": "^9.2.0",
