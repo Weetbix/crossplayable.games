@@ -50,7 +50,11 @@ export const query = graphql`
     coverImage {
       childImageSharp {
         fixed(width: 200, height: 267, quality: 75) {
-          ...GatsbyImageSharpFixed
+          base64
+          width
+          height
+          src
+          srcSet
         }
         sizes {
           aspectRatio
@@ -62,7 +66,11 @@ export const query = graphql`
     coverImage {
       childImageSharp {
         fixed(width: 250, height: 334, quality: 100) {
-          ...GatsbyImageSharpFixed
+          base64
+          width
+          height
+          src
+          srcSet
         }
         sizes {
           aspectRatio
