@@ -1,5 +1,5 @@
 const path = require("path");
-import { GatsbyNode } from "gatsby";
+import { CreateNodeArgs, CreatePagesArgs, GatsbyNode, SourceNodesArgs } from "gatsby";
 import { createRemoteFileNode } from "gatsby-source-filesystem";
 import { getCrossplayGames } from "./src/data/crossplayGames";
 import { getGamePassGames } from "./src/data/gamepassGames";
@@ -16,12 +16,12 @@ require("dotenv").config({
   path: `.env.build`,
 });
 
-const sourceGameNodes: GatsbyNode["sourceNodes"] = async ({
+const sourceGameNodes = async ({
   actions: { createNode },
   createNodeId,
   createContentDigest,
   cache,
-}) => {
+} : SourceNodesArgs) => {
   const crossplayGames = await getCrossplayGames();
   const gamePassGames = await getGamePassGames();
   const PSNowGames = await getPlaystationNowGames();
@@ -47,7 +47,7 @@ const sourceGameNodes: GatsbyNode["sourceNodes"] = async ({
   );
 };
 
-const createFilterPages: GatsbyNode["createPages"] = async ({ actions }) => {
+const createFilterPages = async ({ actions } : CreatePagesArgs) => {
   allFilters
     .filter((filter) => filter.length)
     .forEach((filter) => {
@@ -64,10 +64,10 @@ const createFilterPages: GatsbyNode["createPages"] = async ({ actions }) => {
     });
 };
 
-const createGamePages: GatsbyNode["createPages"] = async ({
+const createGamePages = async ({
   graphql,
   actions,
-}) => {
+} : CreatePagesArgs) => {
   const { createPage } = actions;
   const result = (await graphql(`
     query GetGamePagesBySlug {
@@ -93,9 +93,9 @@ const createGamePages: GatsbyNode["createPages"] = async ({
 // We're already on google with many xbo routes, which have now
 // been renamed to xbox.
 // Lets try not to kill the SEO and provide permanent redirects
-const createXBOtoXboxRedirects: GatsbyNode["createPages"] = async ({
+const createXBOtoXboxRedirects = async ({
   actions,
-}) => {
+}: CreatePagesArgs) => {
   allFilters
     .filter((filter) => filter.some((platform) => platform === "Xbox"))
     .forEach((filter) => {
@@ -144,14 +144,14 @@ async function addImageFromUrl(
   }
 }
 
-const addImagesToGameNodes: GatsbyNode["onCreateNode"] = async ({
+const addImagesToGameNodes = async ({
   node,
   actions: { createNode },
   store,
   cache,
   createNodeId,
   reporter,
-}) => {
+} : CreateNodeArgs) => {
   if (node.internal.type === "Game") {
     await addImageFromUrl(
       "coverUrl",
@@ -201,10 +201,10 @@ const addImagesToGameNodes: GatsbyNode["onCreateNode"] = async ({
   }
 };
 
-const addSlugsToGameNodes: GatsbyNode["onCreateNode"] = async ({
+const addSlugsToGameNodes = async ({
   node,
   actions: { createNodeField },
-}) => {
+} : CreateNodeArgs) => {
   if (node.internal.type === "Game") {
     // Get a "url nice" version of a games name
     const title: string = (node as any).title
@@ -222,7 +222,7 @@ const addSlugsToGameNodes: GatsbyNode["onCreateNode"] = async ({
 };
 
 export const sourceNodes: GatsbyNode["sourceNodes"] = async (args, options) => {
-  await sourceGameNodes(args, options);
+  await sourceGameNodes(args);
 };
 
 export const createPages: GatsbyNode["createPages"] = async (args) => {

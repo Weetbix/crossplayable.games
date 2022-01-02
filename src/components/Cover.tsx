@@ -20,7 +20,7 @@ const shouldRenderImage = (image: FixedObject, originalRatio) =>
 
 export type CoverImage = {
   fixed?: ImageSharpFixed;
-  sizes?: {
+  fluid?: {
     aspectRatio: number;
   };
 };
@@ -39,7 +39,7 @@ export const Cover = ({
   height = 267,
   className = null,
 }: CoverProps) =>
-  shouldRenderImage(image?.fixed, image?.sizes?.aspectRatio) ? (
+  shouldRenderImage(image?.fixed, image?.fluid?.aspectRatio) ? (
     <Img fixed={image.fixed} className={className} />
   ) : (
     <ImagePlaceholder width={width} height={height} className={className} />
@@ -56,7 +56,7 @@ export const query = graphql`
           src
           srcSet
         }
-        sizes {
+        fluid {
           aspectRatio
         }
       }
@@ -72,7 +72,7 @@ export const query = graphql`
           src
           srcSet
         }
-        sizes {
+        fluid {
           aspectRatio
         }
       }
