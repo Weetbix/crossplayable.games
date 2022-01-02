@@ -7,7 +7,12 @@ import { ImageSharpFixed } from "../../graphql-types";
 const ImagePlaceholder = styled.div<{ width: number; height: number }>`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
-  background-color: #777;
+  background-color: #f8d200;
+  background-image: url(/images/meta-image.png);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
 `;
 
 // Allow images that were originally 10% away from
