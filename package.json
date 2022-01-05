@@ -49,7 +49,7 @@
     "@types/jsdom": "^16.2.14",
     "@types/react-helmet": "^6.1.5",
     "@types/styled-components": "^5.1.19",
-    "babel-jest": "^27.4.5",
+    "babel-jest": "^27.4.6",
     "cypress": "^9.2.0",
     "jest": "^27.4.7",
     "jsdom": "^19.0.0",
