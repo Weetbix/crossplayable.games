@@ -20,7 +20,7 @@
   "dependencies": {
     "@types/color": "^3.0.2",
     "babel-plugin-styled-components": "^2.0.2",
-    "gatsby": "^4.4.0",
+    "gatsby": "^4.5.0",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-advanced-sitemap": "^2.0.0",
     "gatsby-plugin-graphql-codegen": "^3.1.0",
@@ -30,7 +30,7 @@
     "gatsby-plugin-react-helmet": "^5.4.0",
     "gatsby-plugin-robots-txt": "^1.6.14",
     "gatsby-plugin-sharp": "^4.4.0",
-    "gatsby-plugin-styled-components": "^5.4.0",
+    "gatsby-plugin-styled-components": "^5.5.0",
     "gatsby-source-filesystem": "^4.4.0",
     "gatsby-transformer-sharp": "^4.4.0",
     "react": "^17.0.2",
@@ -38,7 +38,7 @@
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.3.1",
-    "styled-breakpoints": "^10.2.1",
+    "styled-breakpoints": "^10.2.3",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
