@@ -11955,10 +11955,10 @@ style-loader@^2.0.0:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
-styled-breakpoints@^10.2.3:
-  version "10.2.3"
-  resolved "https://registry.yarnpkg.com/styled-breakpoints/-/styled-breakpoints-10.2.3.tgz#ba706dc1ff6de081d13d88a362902cecf3a6d62a"
-  integrity sha512-6gxfj7aGC8cLSNRnnGgYOwD4Pe2RhzfqD/nzBSoKdgg0SX/esYBAxg3Jd4TT3d7ug1TFsrGU213aFaugqWh4qg==
+styled-breakpoints@^11.0.4:
+  version "11.0.4"
+  resolved "https://registry.yarnpkg.com/styled-breakpoints/-/styled-breakpoints-11.0.4.tgz#aa75725488d891bb13b508adcdb49d53c56760ad"
+  integrity sha512-L3zM1WXHivF70JhpTJsZbyTuQ1Y6GNf3AAQmfyyoQu90MSO9LENJyAVwZiKrn9WjZnATBVlB6XEnxRCoNUx3yg==
 
 styled-components@^5.3.3:
   version "5.3.3"
