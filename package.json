@@ -20,7 +20,7 @@
   "dependencies": {
     "@types/color": "^3.0.2",
     "babel-plugin-styled-components": "^2.0.2",
-    "gatsby": "^4.5.4",
+    "gatsby": "^4.5.5",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-advanced-sitemap": "^2.0.0",
     "gatsby-plugin-graphql-codegen": "^3.1.0",
@@ -38,7 +38,7 @@
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.3.1",
-    "styled-breakpoints": "^10.2.3",
+    "styled-breakpoints": "^11.0.4",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {

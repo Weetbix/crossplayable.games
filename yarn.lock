@@ -6526,10 +6526,10 @@ gatsby-worker@^1.5.0:
     "@babel/core" "^7.15.5"
     "@babel/runtime" "^7.15.4"
 
-gatsby@^4.5.4:
-  version "4.5.4"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-4.5.4.tgz#53404b798da0c86057675d03011f072faf85b27c"
-  integrity sha512-uXyYl9nq52xdvP/9lwWFp7eGtjFFgdAjG2xNBvpgNgd1AtH/4kU76khm1mmpXea98mnJrcwKmsSZkIbQO9YWCg==
+gatsby@^4.5.5:
+  version "4.5.5"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-4.5.5.tgz#5e9b24e32e842810b1ce88de6f6f576a3455c33b"
+  integrity sha512-WAT5FLiA6kziWQu1eplqrfBYH1FUeDMfuHPulh2QV0IVmE/AirTCNNIK1RhvY96UjR6qn6xJ1rSgiMqwr6y1sw==
   dependencies:
     "@babel/code-frame" "^7.14.0"
     "@babel/core" "^7.15.5"
@@ -11955,10 +11955,10 @@ style-loader@^2.0.0:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
-styled-breakpoints@^10.2.3:
-  version "10.2.3"
-  resolved "https://registry.yarnpkg.com/styled-breakpoints/-/styled-breakpoints-10.2.3.tgz#ba706dc1ff6de081d13d88a362902cecf3a6d62a"
-  integrity sha512-6gxfj7aGC8cLSNRnnGgYOwD4Pe2RhzfqD/nzBSoKdgg0SX/esYBAxg3Jd4TT3d7ug1TFsrGU213aFaugqWh4qg==
+styled-breakpoints@^11.0.4:
+  version "11.0.4"
+  resolved "https://registry.yarnpkg.com/styled-breakpoints/-/styled-breakpoints-11.0.4.tgz#aa75725488d891bb13b508adcdb49d53c56760ad"
+  integrity sha512-L3zM1WXHivF70JhpTJsZbyTuQ1Y6GNf3AAQmfyyoQu90MSO9LENJyAVwZiKrn9WjZnATBVlB6XEnxRCoNUx3yg==
 
 styled-components@^5.3.3:
   version "5.3.3"
