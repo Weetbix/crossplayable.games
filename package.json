@@ -54,7 +54,7 @@
     "jest": "^27.4.7",
     "jsdom": "^19.0.0",
     "lodash": "^4.17.21",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "prettier": "2.5.1",
     "start-server-and-test": "^1.14.0",
     "ts-node": "^9.0.0",
