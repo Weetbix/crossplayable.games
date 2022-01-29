@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { FilterPageQuery } from "../../../graphql-types";
 import { FilterDetails } from "./FilterDetails";
 import { GameCard } from "../../components/GameCard";
+import { AdSquare } from "../../components/adsense/AdSquare";
 
 const Content = styled.div`
   display: flex;
@@ -28,17 +29,22 @@ const FilterPage = (props: FilterPageProps) => {
   // platform sets (Aragami). Here we should only show 1 of those.
   const games = uniqBy(props.data.allGame.nodes, (game) => game.title);
 
+  const showAds = localStorage.getItem("ads") === 'true';
+
   return (
     <Content>
       <FilterDetails numberOfGames={games.length} />
       <GamesWrapper data-testid="game-results">
-        {games.map((node) => (
-          <GameCard
-            key={node.id}
-            title={node.title}
-            link={node.fields.slug}
-            image={node.coverImage?.childImageSharp}
-          />
+        {games.map((node, i) => (
+          <>
+            {showAds && i !== 0 && i % 7 === 0 && <AdSquare key={`ad-${i}`} />}
+            <GameCard
+              key={node.id}
+              title={node.title}
+              link={node.fields.slug}
+              image={node.coverImage?.childImageSharp}
+            />
+          </>
         ))}
       </GamesWrapper>
     </Content>
