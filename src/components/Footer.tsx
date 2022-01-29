@@ -29,6 +29,9 @@ export const Footer = () => {
       <FooterItem>
         <a href="https://github.com/Weetbix/crossplayable.games">Github</a>
       </FooterItem>
+      <FooterItem>
+        <a href="/privacy-policy">Privacy</a>
+      </FooterItem>
     </FooterContainer>
   );
 };
