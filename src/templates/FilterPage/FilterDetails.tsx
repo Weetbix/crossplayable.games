@@ -39,7 +39,7 @@ export const FilterDetails = ({ numberOfGames }: FilterDetailsProps) => {
       </span>
       <div>
         {currentFilter.map((platform) => (
-          <RemovablePlatformTag platform={platform} />
+          <RemovablePlatformTag platform={platform} key={String(platform)} />
         ))}
       </div>
     </Content>
