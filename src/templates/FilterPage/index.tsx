@@ -34,8 +34,6 @@ const FilterPage = (props: FilterPageProps) => {
   // better shot at auto inserting ads.
   const chunkedGames = chunk(games, 6);
 
-  const showAds = localStorage.getItem("ads") === "true";
-
   return (
     <Content>
       <FilterDetails numberOfGames={games.length} data-testid="game-results" />
@@ -43,17 +41,12 @@ const FilterPage = (props: FilterPageProps) => {
         {chunkedGames.map((chunk) => (
           <GamesWrapper>
             {chunk.map((node, i) => (
-              <>
-                {showAds && i !== 0 && i % 7 === 0 && (
-                  <AdSquare key={`ad-${i}`} />
-                )}
-                <GameCard
-                  key={node.id}
-                  title={node.title}
-                  link={node.fields.slug}
-                  image={node.coverImage?.childImageSharp}
-                />
-              </>
+              <GameCard
+                key={node.id}
+                title={node.title}
+                link={node.fields.slug}
+                image={node.coverImage?.childImageSharp}
+              />
             ))}
           </GamesWrapper>
         ))}
