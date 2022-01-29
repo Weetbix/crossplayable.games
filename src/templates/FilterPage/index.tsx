@@ -36,8 +36,8 @@ const FilterPage = (props: FilterPageProps) => {
 
   return (
     <Content>
-      <FilterDetails numberOfGames={games.length} data-testid="game-results" />
-      <>
+      <FilterDetails numberOfGames={games.length} />
+      <div data-testid="game-results">
         {chunkedGames.map((chunk) => (
           <GamesWrapper>
             {chunk.map((node, i) => (
@@ -50,7 +50,7 @@ const FilterPage = (props: FilterPageProps) => {
             ))}
           </GamesWrapper>
         ))}
-      </>
+      </div>
     </Content>
   );
 };
