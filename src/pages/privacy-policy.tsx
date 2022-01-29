@@ -73,11 +73,6 @@ export default () => {
         <li>
           <a href="https://plausible.io/data-policy">Plausible Analytics</a>.
         </li>
-        <li>
-          <a href="https://www.google.com/policies/privacy/">
-            Google Adsense TODO??
-          </a>
-        </li>
       </ul>
       <h3>Cookies</h3>
       <p>
