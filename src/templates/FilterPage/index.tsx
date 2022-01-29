@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import uniqBy from "lodash/uniqBy";
 import styled from "styled-components";
 import { FilterPageQuery } from "../../../graphql-types";
+import { chunk } from "../../utils";
 import { FilterDetails } from "./FilterDetails";
 import { GameCard } from "../../components/GameCard";
 import { AdSquare } from "../../components/adsense/AdSquare";
@@ -13,7 +14,7 @@ const Content = styled.div`
   align-items: center;
 `;
 
-const GamesWrapper = styled.div`
+const GamesWrapper = styled.p`
   max-width: 700px;
   display: flex;
   flex-wrap: wrap;
@@ -29,24 +30,34 @@ const FilterPage = (props: FilterPageProps) => {
   // platform sets (Aragami). Here we should only show 1 of those.
   const games = uniqBy(props.data.allGame.nodes, (game) => game.title);
 
-  const showAds = localStorage.getItem("ads") === 'true';
+  // Chunk so we can group by paragraph and give adsense a
+  // better shot at auto inserting ads.
+  const chunkedGames = chunk(games, 6);
+
+  const showAds = localStorage.getItem("ads") === "true";
 
   return (
     <Content>
-      <FilterDetails numberOfGames={games.length} />
-      <GamesWrapper data-testid="game-results">
-        {games.map((node, i) => (
-          <>
-            {showAds && i !== 0 && i % 7 === 0 && <AdSquare key={`ad-${i}`} />}
-            <GameCard
-              key={node.id}
-              title={node.title}
-              link={node.fields.slug}
-              image={node.coverImage?.childImageSharp}
-            />
-          </>
+      <FilterDetails numberOfGames={games.length} data-testid="game-results" />
+      <>
+        {chunkedGames.map((chunk) => (
+          <GamesWrapper>
+            {chunk.map((node, i) => (
+              <>
+                {showAds && i !== 0 && i % 7 === 0 && (
+                  <AdSquare key={`ad-${i}`} />
+                )}
+                <GameCard
+                  key={node.id}
+                  title={node.title}
+                  link={node.fields.slug}
+                  image={node.coverImage?.childImageSharp}
+                />
+              </>
+            ))}
+          </GamesWrapper>
         ))}
-      </GamesWrapper>
+      </>
     </Content>
   );
 };
