@@ -6,7 +6,7 @@ import { FilterPageQuery } from "../../../graphql-types";
 import { chunk } from "../../utils";
 import { FilterDetails } from "./FilterDetails";
 import { GameCard } from "../../components/GameCard";
-import { AdSquare } from "../../components/adsense/AdSquare";
+import { AdRectangle } from "../../components/adsense/AdRectangle";
 
 const Content = styled.div`
   display: flex;
@@ -38,6 +38,7 @@ const FilterPage = (props: FilterPageProps) => {
     <Content>
       <FilterDetails numberOfGames={games.length} />
       <div data-testid="game-results">
+        <AdRectangle />
         {chunkedGames.map((chunk) => (
           <GamesWrapper>
             {chunk.map((node, i) => (

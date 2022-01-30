@@ -11,6 +11,7 @@ import { ExpandableText } from "../../components/ExpandableText";
 import { Rating } from "./Rating";
 import { WebsitesWithIcons } from "./WebsitesWithIcons";
 import { GameTitle } from "./GameTitle";
+import { AdRectangle } from "../../components/adsense/AdRectangle"
 
 const BackdropWrapper = styled.div`
   overflow: hidden;
@@ -283,6 +284,7 @@ const GamePage = (props: GamePageProps) => {
             </AdditionalInfo>
           </MainColumn>
         </div>
+        <AdRectangle />
       </Content>
     </span>
   );

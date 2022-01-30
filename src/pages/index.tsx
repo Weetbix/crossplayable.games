@@ -6,6 +6,7 @@ import { IoMdHelpCircle } from "react-icons/io";
 import { HomePageQuery } from "../../graphql-types";
 import { GameCard } from "../components/GameCard";
 import SEO from "../components/SEO";
+import { AdRectangle } from "../components/adsense/AdRectangle";
 
 const Content = styled.div`
   display: flex;
@@ -18,6 +19,12 @@ const Content = styled.div`
     padding-right: 24px;
     line-height: 20px;
     text-align: justify;
+  }
+
+  ins {
+    width: 100%;
+    max-width: 700px;
+    margin: 16px 0;
   }
 `;
 
@@ -34,7 +41,6 @@ const InstructionalParagraph = styled.div`
   box-shadow: 2px 2px 7px 0px rgb(0 0 0 / 75%);
 `;
 
-
 const GamesWrapper = styled.div`
   max-width: 700px;
   display: flex;
@@ -48,12 +54,19 @@ type IndexPageProps = {
 const IndexPage = ({ data }: IndexPageProps) => {
   // We take 6 games but we use the most 3 recent and ensure the
   // names are unique, as sometimes we can have dupes
-  const mostLoved = uniqBy(data.mostLoved.nodes, (game) => game.title).slice(0,3);
-  const recentGames = uniqBy(data.recentGames.nodes, (game) => game.title).slice(0,3);
+  const mostLoved = uniqBy(data.mostLoved.nodes, (game) => game.title).slice(
+    0,
+    3
+  );
+  const recentGames = uniqBy(
+    data.recentGames.nodes,
+    (game) => game.title
+  ).slice(0, 3);
 
   return (
     <Content>
       <SEO />
+      <AdRectangle />
       <InstructionalParagraph>
         <div>
           <IoMdHelpCircle size="3em" />
@@ -63,8 +76,8 @@ const IndexPage = ({ data }: IndexPageProps) => {
             <strong>How to use this site?</strong>
           </p>
           Use the menus above to select <i>multiple</i> platforms. Crossplayable
-          Games will then show you a list of games that can be played together on
-          those systems.
+          Games will then show you a list of games that can be played together
+          on those systems.
         </div>
       </InstructionalParagraph>
       <p>
@@ -74,8 +87,8 @@ const IndexPage = ({ data }: IndexPageProps) => {
       </p>
       <p>
         Unfortunately not every game supports crossplay, which means the choices
-        are limited, but you can use this website to find out which games support
-        crossplay and with which platforms.
+        are limited, but you can use this website to find out which games
+        support crossplay and with which platforms.
       </p>
 
       <br />
