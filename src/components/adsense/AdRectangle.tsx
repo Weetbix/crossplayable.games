@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 export const AdRectangle = () => {
+  useEffect(() => {
+    try {
+      const adsbygoogle = (window as any).adsbygoogle || [];
+      adsbygoogle.push({});
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
   return (
     <>
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2404387537976552"
-        crossOrigin="anonymous"
-      ></script>
+      <Helmet>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2404387537976552"
+          crossOrigin="anonymous"
+        ></script>
+      </Helmet>
       <ins
         className="adsbygoogle"
         style={{ display: "block" }}
@@ -16,7 +28,6 @@ export const AdRectangle = () => {
         data-ad-format="auto"
         data-full-width-responsive="true"
       ></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </>
   );
 };
