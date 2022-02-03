@@ -18,7 +18,7 @@
     "deploy:s3": "aws s3 sync public s3://crossplayable.games"
   },
   "dependencies": {
-    "@types/color": "^3.0.2",
+    "@types/color": "^3.0.3",
     "babel-plugin-styled-components": "^2.0.2",
     "gatsby": "^4.6.1",
     "gatsby-image": "^3.11.0",
