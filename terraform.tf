@@ -24,8 +24,11 @@ terraform {
 
   # AWS Provider v4 has breaking changes that need to be fixed, so use 3 for now
   # https://stackoverflow.com/questions/71078462/terraform-aws-provider-error-value-for-unconfigurable-attribute-cant-configur
-  required_providers {
-    aws  = "~> 3.74.1"
+  required_providers {    
+      aws = {
+          source = "hashicorp/aws"
+          version =  "~> 3.74.2"
+      }
   }
 }
 
