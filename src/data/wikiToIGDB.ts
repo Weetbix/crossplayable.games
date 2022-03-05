@@ -20,6 +20,7 @@ const WIKI_NAME_TO_IGDB_NAME_MAP: Record<string, string> = {
   "Neverwinter Nights (Enhanced Edition)":
   "Neverwinter Nights: Enhanced Edition",
   "Nitroplus Blasterz: Heroine's Infinite Duel": "Nitroplus Blasterz: Heroines Infinite Duel",
+  "Overcooked: All You Can Eat": "Overcooked! All You Can Eat",
   "Pinball FX 3": "Pinball FX3",
   "PlayerUnknown's Battlegrounds": "PUBG: BATTLEGROUNDS",
   "Riptide GP Renegade": "Riptide GP: Renegade",
