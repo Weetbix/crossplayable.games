@@ -20,7 +20,7 @@
   "dependencies": {
     "@types/color": "^3.0.3",
     "babel-plugin-styled-components": "^2.0.2",
-    "gatsby": "^4.7.1",
+    "gatsby": "^4.9.3",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-advanced-sitemap": "^2.0.0",
     "gatsby-plugin-graphql-codegen": "^3.1.1",
@@ -45,7 +45,7 @@
     "@babel/core": "^7.17.2",
     "@babel/preset-env": "^7.16.8",
     "@babel/preset-typescript": "^7.16.7",
-    "@types/jest": "^27.4.0",
+    "@types/jest": "^27.4.1",
     "@types/jsdom": "^16.2.14",
     "@types/react-helmet": "^6.1.5",
     "@types/styled-components": "^5.1.24",
