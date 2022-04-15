@@ -8,9 +8,11 @@ const WIKI_NAME_TO_IGDB_NAME_MAP: Record<string, string> = {
   "Digimon Story: Cyber Sleuth": "Digimon Story Cyber Sleuth",
   "Digimon Story: Cyber Sleuth – Hacker's Memory": `Digimon Story: Cyber Sleuth - Hacker's Memory`,
   "Duke Nukem 3D Megaton Edition": "Duke Nukem 3D: Megaton Edition",
+  "Everybody's Golf 6": "Everybody's Golf",
   "Final Fantasy XIV: A Realm Reborn": "FINAL FANTASY XIV Online",
   "Fortnite Battle Royale": "Fortnite",
   "God Eater 2 Rage Burst": "God Eater 2: Rage Burst",
+  "Guilty Gear Strive": "Guilty Gear: Strive",
   "Guns of Icarus: Alliance": "Guns of Icarus Alliance",
   "Lost Planet: Extreme Condition Colonies Edition":
   "Lost Planet: Extreme Condition - Colonies Edition",
@@ -50,6 +52,8 @@ export const getGameDetailsMap = async (titles: string[]) => {
   // Get all the game details with their igdb name
   let igdbGames = await getGameDetails(titles.map(toIGDBName));
 
+  const gamesNotFoundOnIGDB = [];
+
   // Convert all the igdb names back to wiki names.
   // We cannot simply use an inverse map, as some games map to
   // one individual igbd game (ie minecraft bedrock/java version)
@@ -63,12 +67,19 @@ export const getGameDetailsMap = async (titles: string[]) => {
         title: wikiTitle,
       });
     } else {
-      throw new Error(
-        `The following game with title from wikipedia could not be found on IGDB: "${wikiTitle}"`
-      );
+      gamesNotFoundOnIGDB.push(wikiTitle);
     }
     return acc;
   }, []);
+
+  if(gamesNotFoundOnIGDB.length > 0) {
+    const gameList = gamesNotFoundOnIGDB
+      .map(wikiTitle => `"${wikiTitle}"`)
+      .join(', ');
+    throw new Error(
+      `The following games with title from wikipedia could not be found on IGDB: ${gameList}`
+    );
+  }
 
   // return a map by game title
   return keyBy(games, (game) => game.title);
