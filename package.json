@@ -28,7 +28,7 @@
     "gatsby-plugin-meta-redirect": "^1.1.1",
     "gatsby-plugin-plausible": "^0.0.7",
     "gatsby-plugin-react-helmet": "^5.12.1",
-    "gatsby-plugin-robots-txt": "^1.7.0",
+    "gatsby-plugin-robots-txt": "^1.7.1",
     "gatsby-plugin-sharp": "^4.12.1",
     "gatsby-plugin-styled-components": "^5.10.0",
     "gatsby-source-filesystem": "^4.12.1",
