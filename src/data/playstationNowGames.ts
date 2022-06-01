@@ -30,8 +30,6 @@ const fetchGamePage = async (pageNumber) => {
     .map((title) => ({ name: title }));
 };
 
-const PSNOW_URL = "https://ps.playstation.com/psnow/data_sync";
-
 export const getPlaystationNowGames = async () => {
   let page = 1;
   let allGames = [];
