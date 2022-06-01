@@ -132,8 +132,8 @@ const mapData = (apiResult: any) => {
 
 // Max items to return https://api-docs.igdb.com/#pagination
 // Previously this was set to 500, but now IGDB times out when
-// requesting so many game details at once. Use 100.
-const MAX_ITEM_LIMIT = 100;
+// requesting so many game details at once. Use 50.
+const MAX_ITEM_LIMIT = 50;
 
 export const getGameDetails = async (titles: string[]) => {
   const token = await getAccessToken();
