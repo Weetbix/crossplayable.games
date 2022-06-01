@@ -14,10 +14,17 @@ const getTitleFromRow = (row: HTMLTableRowElement) =>
   getTitleFromRow(row.previousElementSibling as HTMLTableRowElement);
 
 const PLATFORM_MAP = {
+  // Windows based plaforms
   GOG: "Windows",
   Steam: "Windows",
-  W10: "Windows",
+  MS: "Windows",
+  Epic: "Windows",
+  Origin: "Windows",
+  GFWL: "Windows",
+  'Battle.net': "Windows",
+  'Epic, Origin': "Windows",
   Other: "Windows",
+  // Xbox based platforms
   XBO: "Xbox",
   'XBSX/XBSS': 'Xbox',
   // "Other" cells, just grab PS3 from here
