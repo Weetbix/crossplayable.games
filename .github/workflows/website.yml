@@ -98,9 +98,9 @@ jobs:
 
         # Apply but, on main only, not PRs
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name !== 'pull_request'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: terraform apply -auto-approve
 
       - name: Deploy to S3
-        if: github.ref == 'refs/heads/main' && github.event_name !== 'pull_request'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: yarn deploy:s3
