@@ -2,16 +2,16 @@ const TOTAL_GAMES_REGEX = /^(\d*) games support crossplay on these platforms.*/;
 
 context("Filter pages", () => {
   const cases = [
-    ["Windows", 135, "/windows"],
-    ["Linux", 26, "/linux"],
-    ["Mac", 44, "/mac"],
-    ["Switch", 54, "/switch"],
+    ["Windows", 190, "/windows"],
+    ["Linux", 33, "/linux"],
+    ["Mac", 52, "/mac"],
+    ["Switch", 72, "/switch"],
     ["PS3", 44, "/ps3"],
-    ["PS4", 115, "/ps4"],
-    ["PS5", 115, "/ps5"],
+    ["PS4", 144, "/ps4"],
+    ["PS5", 142, "/ps5"],
     ["PS Now", 11, "/psnow"],
-    ["Xbox", 75, "/xbox"],
-    ["Gamepass", 16, "/gamepass"],
+    ["Xbox", 121, "/xbox"],
+    ["Gamepass", 29, "/gamepass"],
 
     // Test cases for multiple platforms combined
     ["2x combination", 47, "switch/windows"],
