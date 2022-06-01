@@ -37,7 +37,7 @@
     "react-circular-progressbar": "^2.0.4",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
-    "react-icons": "^4.3.1",
+    "react-icons": "^4.4.0",
     "styled-breakpoints": "^11.1.0",
     "styled-components": "^5.3.5"
   },
@@ -54,7 +54,7 @@
     "jest": "^28.0.3",
     "jsdom": "^19.0.0",
     "lodash": "^4.17.21",
-    "node-fetch": "^2.6.7",
+    "node-fetch": "^3.2.5",
     "prettier": "2.6.2",
     "start-server-and-test": "^1.14.0",
     "ts-node": "^9.0.0",
