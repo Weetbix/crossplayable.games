@@ -40,7 +40,7 @@ export const getPlaystationNowGames = async () => {
     page++;
   } while (games.length);
 
-  const EXPECTED_AMOUNT = 550;
+  const EXPECTED_AMOUNT = 170;
   if (allGames.length < EXPECTED_AMOUNT)
     throw new Error(
       `Lower than expected amount of PSNow games found (${
