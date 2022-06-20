@@ -11,6 +11,7 @@ const WIKI_NAME_TO_IGDB_NAME_MAP: Record<string, string> = {
   "Everybody's Golf 6": "Everybody's Golf",
   "Final Fantasy XIV: A Realm Reborn": "FINAL FANTASY XIV Online",
   "Fortnite Battle Royale": "Fortnite",
+  "Fall Guys: Ultimate Knockout": "Fall Guys",
   "God Eater 2 Rage Burst": "God Eater 2: Rage Burst",
   "Guilty Gear Strive": "Guilty Gear: Strive",
   "Guns of Icarus: Alliance": "Guns of Icarus Alliance",
