@@ -10,7 +10,6 @@ context("Game pages", () => {
       cy.contains("Linux");
       cy.contains("Mac");
       cy.contains("Switch");
-      cy.contains("PSNow");
       cy.contains("Xbox");
       cy.contains("Windows");
     });
