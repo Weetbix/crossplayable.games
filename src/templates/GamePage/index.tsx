@@ -336,7 +336,7 @@ export const query = graphql`
             PS4
             PS5
             Switch
-            PSNow
+            PlaystationPlus
             Xbox
             Windows
           }

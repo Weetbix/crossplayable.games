@@ -36,6 +36,6 @@ export const RemovablePlatformTag = ({ platform }) => {
     : "#";
 
   return <Wrapper>
-    <a href={link}>{platform}<MdCancel /></a>
+    <a href={link}>{platform.replace(/([A-Z])([a-z])/g, ' $1$2')}<MdCancel /></a>
   </Wrapper>;
 }

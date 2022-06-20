@@ -24,6 +24,6 @@ export const PlatformTag = ({platform}) => {
   const link = urlFromFilter([platform]);
 
   return <Wrapper href={link}>
-      {platform}
+      {platform.replace(/([A-Z])([a-z])/g, ' $1$2')}
     </Wrapper>;
 }

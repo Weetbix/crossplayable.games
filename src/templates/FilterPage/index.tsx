@@ -65,7 +65,7 @@ export const query = graphql`
     $PS3Includes: [Boolean]
     $PS4Includes: [Boolean]
     $PS5Includes: [Boolean]
-    $PSNowIncludes: [Boolean]
+    $PlaystationPlusIncludes: [Boolean]
     $SwitchIncludes: [Boolean]
     $WindowsIncludes: [Boolean]
     $XboxIncludes: [Boolean]
@@ -79,7 +79,7 @@ export const query = graphql`
           PS3: { in: $PS3Includes }
           PS4: { in: $PS4Includes }
           PS5: { in: $PS5Includes }
-          PSNow: { in: $PSNowIncludes }
+          PlaystationPlus: { in: $PlaystationPlusIncludes }
           Switch: { in: $SwitchIncludes }
           Windows: { in: $WindowsIncludes }
           Xbox: { in: $XboxIncludes }

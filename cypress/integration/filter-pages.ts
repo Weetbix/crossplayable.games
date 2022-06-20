@@ -9,7 +9,7 @@ context("Filter pages", () => {
     ["PS3", 44, "/ps3"],
     ["PS4", 144, "/ps4"],
     ["PS5", 142, "/ps5"],
-    ["PS Now", 4, "/psnow"],
+    ["Playstation Plus", 20, "/playstationplus"],
     ["Xbox", 121, "/xbox"],
     ["Gamepass", 29, "/gamepass"],
 

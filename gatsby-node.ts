@@ -3,7 +3,7 @@ import { CreateNodeArgs, CreatePagesArgs, GatsbyNode, SourceNodesArgs } from "ga
 import { createRemoteFileNode } from "gatsby-source-filesystem";
 import { getCrossplayGames } from "./src/data/crossplayGames";
 import { getGamePassGames } from "./src/data/gamepassGames";
-import { getPlaystationNowGames } from "./src/data/playstationNowGames";
+import { getPlaystationPlusGames } from "./src/data/playstationPlusGames";
 import { getGameDetailsMap } from "./src/data/wikiToIGDB";
 
 import {
@@ -24,7 +24,7 @@ const sourceGameNodes = async ({
 } : SourceNodesArgs) => {
   const crossplayGames = await getCrossplayGames();
   const gamePassGames = await getGamePassGames();
-  const PSNowGames = await getPlaystationNowGames();
+  const PSPlusGames = await getPlaystationPlusGames();
   const extraGameData = await getGameDetailsMap(
     crossplayGames.map((game) => game.title)
   );
@@ -35,7 +35,7 @@ const sourceGameNodes = async ({
       ...(extraGameData[game.title] ?? {}),
       platforms: {
         ...game.platforms,
-        PSNow: PSNowGames.some((PSNowGame) => PSNowGame.name === game.title),
+        PlaystationPlus: PSPlusGames.some((PSPlusGame) => PSPlusGame.name === game.title),
         GamePass: gamePassGames.some((GPGame) => GPGame.title === game.title),
       },
       id: createNodeId(`${game.title}${JSON.stringify(game.platforms)}`),

@@ -175,7 +175,7 @@ export const PlatformSelector = () => {
             <NavItem label="PS3" platform="PS3" />
             <NavItem label="PS4" platform="PS4" />
             <NavItem label="PS5" platform="PS5" />
-            <NavItem label="PS Now" platform="PSNow" />
+            <NavItem label="Playstation Plus" platform="PlaystationPlus" />
           </SubMenu>
         </NavItem>
         <NavItem label="Xbox">

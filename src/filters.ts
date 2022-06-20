@@ -12,7 +12,7 @@ export const PLATFORMS = [
   "Xbox",
   "Switch",
   "GamePass",
-  "PSNow",
+  "PlaystationPlus",
 ];
 
 // Generate unique combinations, so we can statically generate
