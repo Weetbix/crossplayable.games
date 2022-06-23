@@ -52,8 +52,8 @@ const FilterPage = (props: FilterPageProps) => {
             ))}
           </GamesWrapper>
         ))}
-        <MeAppAd />
       </div>
+      <MeAppAd />
     </Content>
   );
 };

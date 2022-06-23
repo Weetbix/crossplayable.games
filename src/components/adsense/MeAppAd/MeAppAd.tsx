@@ -59,7 +59,7 @@ export const MeAppAd = () => {
                 <picture>
                     <source 
                         srcSet={`${mobile2x} 2x, ${mobile1x}`}
-                        media="(max-width: 600px)"
+                        media="(max-width: 700px)"
                     />
                     <img
                         srcSet={`${horizontal2x} 2x`}
