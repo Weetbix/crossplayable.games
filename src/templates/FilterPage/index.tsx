@@ -7,6 +7,7 @@ import { chunk } from "../../utils";
 import { FilterDetails } from "./FilterDetails";
 import { GameCard } from "../../components/GameCard";
 import { AdRectangle } from "../../components/adsense/AdRectangle";
+import { MeAppAd } from "../../components/adsense/MeAppAd/MeAppAd";
 
 const Content = styled.div`
   display: flex;
@@ -51,6 +52,7 @@ const FilterPage = (props: FilterPageProps) => {
             ))}
           </GamesWrapper>
         ))}
+        <MeAppAd />
       </div>
     </Content>
   );
