@@ -6,15 +6,6 @@ import horizontal2x from './img/me-banner-desktop@2x.png'
 import mobile1x from './img/me-banner-mobile.png'
 import mobile2x from './img/me-banner-mobile@2x.png'
 
-const Wrapper = styled.div`
-    display: flex;
-
-    picture {
-        margin-left: auto;
-        margin-right: auto;
-    }
-`;
-
 const LINKS = {
     Desktop: 'https://www.know-yourself.me/',
     iOS: 'https://apps.apple.com/us/app/me-know-yourself/id1620948275?itsct=apps_box_badge&itscg=30200',
@@ -54,22 +45,20 @@ export const MeAppAd = () => {
     }
 
     return (
-        <Wrapper>
-            <a href={LINKS[plaform]} onClick={handleLinkClick}>
-                <picture>
-                    <source 
-                        srcSet={`${mobile2x} 2x, ${mobile1x}`}
-                        media="(max-width: 700px)"
-                    />
-                    <img
-                        srcSet={`${horizontal2x} 2x`}
-                        src={horizontal1x}
-                        alt="Me App banner"
-                        loading="lazy"
-                        onLoad={() => window.plausible?.('Me App: Viewed', { props: { plaform }})}
-                    />
-                </picture>
-            </a>
-        </Wrapper>
+        <a href={LINKS[plaform]} onClick={handleLinkClick}>
+            <picture>
+                <source 
+                    srcSet={`${mobile2x} 2x, ${mobile1x}`}
+                    media="(max-width: 700px)"
+                />
+                <img
+                    srcSet={`${horizontal2x} 2x`}
+                    src={horizontal1x}
+                    alt="Me App banner"
+                    loading="lazy"
+                    onLoad={() => window.plausible?.('Me App: Viewed', { props: { plaform }})}
+                />
+            </picture>
+        </a>
     );
 };
