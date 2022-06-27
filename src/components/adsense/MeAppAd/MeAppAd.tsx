@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from 'styled-components'
 
 import horizontal1x from './img/me-banner-desktop.png'
@@ -32,6 +32,8 @@ export const MeAppAd = () => {
         setPlatform(getPlatformFromUserAgent());
     });
 
+    const adRef = useRef();
+
     const handleLinkClick = (e) => {
         e.preventDefault();
 
@@ -44,9 +46,24 @@ export const MeAppAd = () => {
         );
     }
 
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    window.plausible?.('Me App: Viewed', { props: { plaform }})
+                    observer.disconnect();
+                }
+            },
+        );
+        if (adRef.current) {
+          observer.observe(adRef.current);
+        }
+        return () => observer.disconnect();
+    }, [adRef, plaform]);
+
     return (
         <a href={LINKS[plaform]} onClick={handleLinkClick}>
-            <picture>
+            <picture ref={adRef}>
                 <source 
                     srcSet={`${mobile2x} 2x, ${mobile1x}`}
                     media="(max-width: 700px)"
@@ -56,7 +73,6 @@ export const MeAppAd = () => {
                     src={horizontal1x}
                     alt="Me App banner"
                     loading="lazy"
-                    onLoad={() => window.plausible?.('Me App: Viewed', { props: { plaform }})}
                 />
             </picture>
         </a>
