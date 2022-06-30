@@ -8,8 +8,8 @@ import mobile2x from './img/me-banner-mobile@2x.png'
 
 const LINKS = {
     Desktop: 'https://www.know-yourself.me/',
-    iOS: 'https://apps.apple.com/us/app/me-know-yourself/id1620948275?itsct=apps_box_badge&itscg=30200',
-    Android: 'https://play.google.com/store/apps/details?id=me.knowyourself.app.me'
+    iOS: 'https://apps.apple.com/app/apple-store/id1620948275?pt=117812216&ct=cpg&mt=8',
+    Android: 'https://play.google.com/store/apps/details?id=me.knowyourself.app.me&referrer=utm_source%3Dcpg%26utm_medium%3Dbanner%26utm_content%3Dbanner-1'
 }
 
 const getPlatformFromUserAgent = () => {
