@@ -2,7 +2,7 @@ export const siteMetadata = {
   title: "Crossplay Games List",
   titleTemplate: "%s · Crossplayable Games",
   description:
-    "Catalog of which games support crossplay and on which platforms.",
+    "Find games which support crossplay or cross play on multiple plaforms like xbox, playstation, PC and switch.",
   siteUrl: "https://crossplayable.games",
   image: "/images/meta-image.png",
 };

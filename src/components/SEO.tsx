@@ -5,6 +5,8 @@ import { useStaticQuery, graphql } from "gatsby";
 
 const DEFAULT_KEYWORDS = [
   "crossplay",
+  "cross play",
+  "cross",
   "games",
   "gaming",
   "catalog",

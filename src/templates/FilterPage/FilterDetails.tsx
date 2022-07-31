@@ -29,7 +29,7 @@ export const FilterDetails = ({ numberOfGames }: FilterDetailsProps) => {
   return (
     <Content>
       <SEO
-        title={`Games with crossplay on ${currentFilter.join(", ")}`}
+        title={`Games with crossplay on ${currentFilter.join(", ")} - cross play games`}
         description={`there are ${numberOfGames} games that support crossplay on these systems: ${currentFilter.join(
           ", "
         )}`}

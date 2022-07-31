@@ -83,7 +83,7 @@ const IndexPage = ({ data }: IndexPageProps) => {
       <p>
         Crossplay enabled games allow you to play online multiplayer with your
         friends across different platforms. For example, you can race your
-        friend on your Switch while they play on their Playstation.
+        friend on your Switch while they play on their Playstation or Xbox.
       </p>
       <p>
         Unfortunately not every game supports crossplay, which means the choices
@@ -93,7 +93,7 @@ const IndexPage = ({ data }: IndexPageProps) => {
 
       <br />
       <br />
-      <h3>Most Loved Games:</h3>
+      <h3>Most Loved Cross Play Games:</h3>
       <GamesWrapper data-testid="most-loved-games">
         {mostLoved.map((node) => (
           <GameCard
@@ -104,7 +104,7 @@ const IndexPage = ({ data }: IndexPageProps) => {
           />
         ))}
       </GamesWrapper>
-      <h3>Most Recent Games:</h3>
+      <h3>Most Recent Cross Play Games:</h3>
       <GamesWrapper data-testid="most-recent-games">
         {recentGames.map((node) => (
           <GameCard
