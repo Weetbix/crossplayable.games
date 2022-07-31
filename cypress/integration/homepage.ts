@@ -4,7 +4,7 @@ context("Homepage", () => {
   });
 
   it("should render the most loved games", () => {
-    cy.contains("Most Loved Games");
+    cy.contains("Most Loved Cross Play Games");
 
     cy.get('[data-testid="most-loved-games"')
       .find("a")
@@ -12,7 +12,7 @@ context("Homepage", () => {
   });
 
   it("should render the most recent games", () => {
-    cy.contains("Most Recent Games");
+    cy.contains("Most Recent Cross Play Games");
 
     cy.get('[data-testid="most-recent-games"')
       .find("a")
