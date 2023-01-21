@@ -11,7 +11,7 @@ context("Filter pages", () => {
     ["PS5", 142, "/ps5"],
     ["Playstation Plus", 20, "/playstationplus"],
     ["Xbox", 121, "/xbox"],
-    ["Gamepass", 29, "/gamepass"],
+    ["Gamepass", 25, "/gamepass"],
 
     // Test cases for multiple platforms combined
     ["2x combination", 47, "switch/windows"],
