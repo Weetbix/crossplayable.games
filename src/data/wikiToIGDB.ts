@@ -5,7 +5,6 @@ import { keyBy } from "lodash";
 // on the IGDB, so here we provide conversion maps for the few that dont.
 const WIKI_NAME_TO_IGDB_NAME_MAP: Record<string, string> = {
   "Black Desert Online": "Black Desert",
-  "Digimon Story: Cyber Sleuth": "Digimon Story Cyber Sleuth",
   "Digimon Story: Cyber Sleuth – Hacker's Memory": `Digimon Story: Cyber Sleuth - Hacker's Memory`,
   "Duke Nukem 3D Megaton Edition": "Duke Nukem 3D: Megaton Edition",
   "Everybody's Golf 6": "Everybody's Golf",
@@ -29,7 +28,7 @@ const WIKI_NAME_TO_IGDB_NAME_MAP: Record<string, string> = {
   "Realm Royale": "Realm Royale Reforged",
   "Riptide GP Renegade": "Riptide GP: Renegade",
   "Risk (game)": "RISK",
-  "Ryū ga Gotoku Ishin!": "Yakuza Ishin!",
+  "Ryū ga Gotoku Ishin!": "Ryuu ga Gotoku Ishin!",
   "StarCraft II": "StarCraft II: Trilogy",
   "Trine 4": "Trine 4: The Nightmare Prince",
   Warspear: "Warspear Online",
