@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useFilter } from "../../hooks/useFilter";
 import { RemovablePlatformTag } from "../../components/RemovablePlatformTag";
 import SEO from "../../components/SEO";
+import { PLATFORMS, findFilter, urlFromFilter } from "../../filters";
 
 const Content = styled.div`
   letter-spacing: 2px;
@@ -11,6 +12,10 @@ const Content = styled.div`
   text-align: center;
   color: ${(props) => props.theme.colors.text.dark};
   margin-bottom: 50px;
+
+  select {
+    margin-left: 8px;
+  }
 `;
 
 type FilterDetailsProps = {
@@ -26,10 +31,23 @@ export const FilterDetails = ({ numberOfGames }: FilterDetailsProps) => {
       ? `${numberOfGames} games support`
       : `${numberOfGames} game supports`;
 
+  const handleAddPlatformSelect = (event) => {
+    window.plausible?.("Platform Dropdown: filter page", {
+      props: { platform: event.target.value },
+      callback: () => {
+        window.location.href = urlFromFilter(
+          findFilter([...currentFilter, event.target.value])
+        );
+      },
+    });
+  };
+
   return (
     <Content>
       <SEO
-        title={`Games with crossplay on ${currentFilter.join(", ")} - cross play games`}
+        title={`Games with crossplay on ${currentFilter.join(
+          ", "
+        )} - cross play games`}
         description={`there are ${numberOfGames} games that support crossplay on these systems: ${currentFilter.join(
           ", "
         )}`}
@@ -41,6 +59,18 @@ export const FilterDetails = ({ numberOfGames }: FilterDetailsProps) => {
         {currentFilter.map((platform) => (
           <RemovablePlatformTag platform={platform} key={String(platform)} />
         ))}
+        <select defaultValue="" onChange={handleAddPlatformSelect}>
+          <option value="" disabled>
+            Add another platform
+          </option>
+          {PLATFORMS.filter(
+            (platform) => !currentFilter.includes(platform)
+          ).map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
       </div>
     </Content>
   );
