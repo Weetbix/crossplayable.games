@@ -17,7 +17,7 @@ export const getPlaystationPlusGames = async () => {
 
   const gameTitles = [
     // Big collection A-Zs
-    ...Array.from(document.querySelectorAll(`.tabs-content p.txt-style-base`)),
+    ...Array.from(document.querySelectorAll(`.tabs__content p.txt-style-base`)),
     // Special "The PlayStation Plus Collection" section at the bottom
     ...Array.from(document.querySelectorAll(`.cmp-experiencefragment--the-playstation-plus-collection p`)),
     ]
