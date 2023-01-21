@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { graphql } from "gatsby";
 import uniqBy from "lodash/uniqBy";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import { HomePageQuery } from "../../graphql-types";
 import { GameCard } from "../components/GameCard";
 import SEO from "../components/SEO";
 import { AdRectangle } from "../components/adsense/AdRectangle";
+import { PLATFORMS, findFilter, urlFromFilter } from "../filters";
 
 const Content = styled.div`
   display: flex;
@@ -36,7 +37,6 @@ const InstructionalParagraph = styled.div`
   display: flex;
   text-align: center;
   padding: 16px;
-  padding-bottom: 32px;
   margin-bottom: 32px;
   box-shadow: 2px 2px 7px 0px rgb(0 0 0 / 75%);
 `;
@@ -46,6 +46,12 @@ const GamesWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+`;
+
+const SimplePlatformDropdownWrapper = styled.p`
+  select {
+    margin: 8px;
+  }
 `;
 
 type IndexPageProps = {
@@ -63,6 +69,23 @@ const IndexPage = ({ data }: IndexPageProps) => {
     (game) => game.title
   ).slice(0, 3);
 
+  const [platform1, setPlatform1] = useState("");
+  const [platform2, setPlatform2] = useState("");
+
+  const handleChangePlatform = (platform, value) => {
+    if (platform === 1) {
+      setPlatform1(value);
+    } else {
+      setPlatform2(value);
+    }
+  };
+
+  useEffect(() => {
+    if (platform1 !== "" && platform2 !== "") {
+      window.location.href = urlFromFilter(findFilter([platform1, platform2]));
+    }
+  }, [platform1, platform2]);
+
   return (
     <Content>
       <SEO />
@@ -75,9 +98,41 @@ const IndexPage = ({ data }: IndexPageProps) => {
           <p>
             <strong>How to use this site?</strong>
           </p>
-          Use the menus above to select <i>multiple</i> platforms. Crossplayable
-          Games will then show you a list of games that can be played together
-          on those systems.
+          <p>
+            Use the menus above to select <i>multiple</i> platforms.
+            Crossplayable Games will then show you a list of games that can be
+            played together on those systems.
+          </p>
+          <SimplePlatformDropdownWrapper>
+            Alternatively, select two platforms here and hit go:
+            <select
+              value={platform1}
+              onChange={(e) => handleChangePlatform(1, e.target.value)}
+            >
+              <option value="" disabled>
+                Select platform 1
+              </option>
+              {PLATFORMS.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+            ↔
+            <select
+              value={platform2}
+              onChange={(e) => handleChangePlatform(2, e.target.value)}
+            >
+              <option value="" disabled>
+                Select platform 2
+              </option>
+              {PLATFORMS.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </SimplePlatformDropdownWrapper>
         </div>
       </InstructionalParagraph>
       <p>

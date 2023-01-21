@@ -38,7 +38,7 @@ export const inVariablesFromFilter = (filter: Filter) =>
 
 // The target does not neccesarily match one from our filter list, as the order
 // or permutations could be different. So now we must match against that.
-const findFilter = (target: Filter): Filter =>
+export const findFilter = (target: Filter): Filter =>
   allFilters.find(
     (filter) =>
       filter.length === target.length &&
