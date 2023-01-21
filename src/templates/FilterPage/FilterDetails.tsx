@@ -32,12 +32,12 @@ export const FilterDetails = ({ numberOfGames }: FilterDetailsProps) => {
       : `${numberOfGames} game supports`;
 
   const handleAddPlatformSelect = (event) => {
-    window.plausible?.("Platform Dropdown: filter page", {
-      props: { platform: event.target.value },
+    const newFilter = findFilter([...currentFilter, event.target.value]);
+
+    window.plausible?.("Platform Dropdown: filters page", {
+      props: { target: newFilter.join(", ") },
       callback: () => {
-        window.location.href = urlFromFilter(
-          findFilter([...currentFilter, event.target.value])
-        );
+        window.location.href = urlFromFilter(newFilter);
       },
     });
   };
