@@ -82,7 +82,13 @@ const IndexPage = ({ data }: IndexPageProps) => {
 
   useEffect(() => {
     if (platform1 !== "" && platform2 !== "") {
-      window.location.href = urlFromFilter(findFilter([platform1, platform2]));
+      window.plausible?.("Platform Dropdown: index page", {
+        props: { platform1, platform2 },
+        callback: () =>
+          (window.location.href = urlFromFilter(
+            findFilter([platform1, platform2])
+          )),
+      });
     }
   }, [platform1, platform2]);
 
