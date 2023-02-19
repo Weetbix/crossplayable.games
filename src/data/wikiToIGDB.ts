@@ -14,6 +14,7 @@ const WIKI_NAME_TO_IGDB_NAME_MAP: Record<string, string> = {
   "God Eater 2 Rage Burst": "God Eater 2: Rage Burst",
   "Guilty Gear Strive": "Guilty Gear: Strive",
   "Guns of Icarus: Alliance": "Guns of Icarus Alliance",
+  "Hover": "Hover!",
   "Lost Planet: Extreme Condition Colonies Edition":
   "Lost Planet: Extreme Condition - Colonies Edition",
   "MechWarrior 5": "MechWarrior 5: Mercenaries",
